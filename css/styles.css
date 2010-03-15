@@ -20,3 +20,11 @@
 {
 	backgroundColor:"0xFFFFFF";
 }
+
+.ui
+{
+	backgroundColor:"0xAAAAAA";
+	color:"0x000000";
+	height:"72px";
+	width:"800px";
+}

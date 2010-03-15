@@ -1,0 +1,7 @@
+<map>
+	<s x='0' y='0'>grass</s>
+	<s x='1' y='0'>water</s>
+	<s x='0' y='1'>hill</s>
+	<s x='1' y='1'>mountain</s>
+	<s x='2' y='4'>grass</s>
+</map>

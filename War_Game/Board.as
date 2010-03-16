@@ -24,13 +24,14 @@ package War_game
 			opaqueBackground = "0xFFFFFF";
 			map_tool = "grass";
 			
+			/*
 			map.toString = function():String {
 				var s:String = "";
 				for (var key:Object in this) {
 				   s += "{" + key.toString() + map[key].toString() + "}\n";
 				}
 				return s;
-			}
+			}*/
 			
 			//The map
 			load_xml("maps/test.xml");
@@ -43,6 +44,7 @@ package War_game
 					make_sector(indexX, indexY, "empty");
 				}
 			}
+			
 			
 		}
 		
@@ -73,6 +75,17 @@ package War_game
 			}
 		}
 		
+		public function export_map():XML 
+		{
+			var s:String = "<map>\n";
+			for (var key:Object in map){
+				   s += "\t<s x='" + key.x.toString() + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
+			}
+			s += "</map>\n";
+			var x:XML = new XML(s);
+			return x;
+		}
+		
 		private function make_sector(x:int, y:int, type:String):void
 		{
 			//if (map[new Location(x, y)])
@@ -80,7 +93,7 @@ package War_game
 			
 			var location:Location = new Location(x, y);
 			var sector:Sector = new Sector(type, location);
-			map[String(location)] = sector;
+			map[location] = sector;
 			
 			sector.addEventListener(flash.events.Event.COMPLETE, function():void {
 				if (y % 2 == 0)
@@ -103,10 +116,10 @@ package War_game
 					
 					if (map_tool != "empty")
 					{
-						if (map[String(new Location(x, y))] != null)
+						if (map[event.currentTarget.location] != null)
 						{
 							trace("found");
-							delete map[String(new Location(x, y))];
+							delete map[event.currentTarget.location];
 						}
 						else
 							trace("Not found at " + x + " " + y);

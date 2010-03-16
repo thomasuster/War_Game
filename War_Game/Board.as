@@ -16,15 +16,11 @@ package War_game
 		private const sizeX:int = 10;
 		private const sizeY:int = 10;
 		public var map_tool:String;
-		private var zone:Array = new Array(sizeX);
-		
 		private var map:Dictionary = new Dictionary();
 		
 
 		public function Board()
 		{
-			//width = 600;
-			//height = 600;
 			opaqueBackground = "0xFFFFFF";
 			map_tool = "grass";
 			
@@ -36,68 +32,17 @@ package War_game
 				return s;
 			}
 			
-			
-			//The Zone
-			zone.forEach(
-			function (item:*, indexX:int, array:Array):void{
-				item = new Array(sizeY);
-				item.forEach(
-				function (sector:*, indexY:int, array:Array):void {
-					var location:Location = new Location(indexX, indexY);
-					sector = new Sector("empty", location);
-					sector.addEventListener(flash.events.Event.COMPLETE,function():void{
-						//trace("sector.width" + sector.width);
-						if (indexY % 2 == 0)
-							sector.x = indexX * sector.contentWidth;
-						else
-							sector.x = indexX * sector.contentWidth + sector.contentWidth/2;
-						
-						sector.y = indexY/2 * sector.contentHeight*3/2;
-						
-					});
-					sector.load("images/empty.png");
-					addChild(sector);
-					
-					sector.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouse_move);
-					function mouse_move(event:MouseEvent):void
-					{
-						/*
-						trace(event.bubbles);
-						event.stopPropagation();
-						trace(event.bubbles);
-						*/
-						if (event.buttonDown)
-						{
-							var x:int = event.currentTarget.location.x;
-							var y:int = event.currentTarget.location.y;
-							
-							if (map_tool != "empty")
-							{
-								//if(map[new Location(x, y)] != null)
-								//	map[new Location(x, y)].visible = false;
-								//else
-								//trace(map[new Location(x, y)]);
-								//trace(map.toString());
-								if (map[new Location(x, y)])
-								{
-									trace("found");
-								}
-								else
-									trace("Not found at " + x + " " + y);
-								//make_sectore(x, y, map_tool);
-								
-									
-									
-								//trace("making secotr of type" + map_tool);
-							}
-						}
-						
-					}
-				});
-			});
-			
 			//The map
 			load_xml("maps/test.xml");
+			
+			//Empty Spots
+			for (var indexX:int = 0; indexX < sizeX; indexX++)
+			{
+				for (var indexY:int = 0; indexY < sizeY; indexY++)
+				{
+					make_sector(indexX, indexY, "empty");
+				}
+			}
 			
 		}
 		
@@ -124,14 +69,18 @@ package War_game
 				var type:String = String(sector_data);
 				//trace(x + " " + y + " " + type);
 				
-				make_sectore(x, y, type);
+				make_sector(x, y, type);
 			}
 		}
 		
-		private function make_sectore(x:int, y:int, type:String):void
+		private function make_sector(x:int, y:int, type:String):void
 		{
-			var sector:Sector = new Sector(type);
-			map[new Location(x, y)] = sector;
+			//if (map[new Location(x, y)])
+				//return;
+			
+			var location:Location = new Location(x, y);
+			var sector:Sector = new Sector(type, location);
+			map[String(location)] = sector;
 			
 			sector.addEventListener(flash.events.Event.COMPLETE, function():void {
 				if (y % 2 == 0)
@@ -143,7 +92,31 @@ package War_game
 				//trace(x + " " + y);
 				addChild(sector);
 			});
+			
+			sector.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouse_move);
+			function mouse_move(event:MouseEvent):void
+			{
+				if (event.buttonDown)
+				{
+					var x:int = event.currentTarget.location.x;
+					var y:int = event.currentTarget.location.y;
+					
+					if (map_tool != "empty")
+					{
+						if (map[String(new Location(x, y))] != null)
+						{
+							trace("found");
+							delete map[String(new Location(x, y))];
+						}
+						else
+							trace("Not found at " + x + " " + y);
+							
+						make_sector(x, y, map_tool);
+					}
+				}
+			}
+			
 			sector.load("images/" + type +".png");
-		}
+		}		
 	}
 }

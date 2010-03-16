@@ -15,6 +15,7 @@ package War_game
 		//Zone
 		private const sizeX:int = 10;
 		private const sizeY:int = 10;
+		public var map_tool:String;
 		private var zone:Array = new Array(sizeX);
 		
 		private var map:Dictionary = new Dictionary();
@@ -22,7 +23,19 @@ package War_game
 
 		public function Board()
 		{
+			//width = 600;
+			//height = 600;
 			opaqueBackground = "0xFFFFFF";
+			map_tool = "grass";
+			
+			map.toString = function():String {
+				var s:String = "";
+				for (var key:Object in this) {
+				   s += "{" + key.toString() + map[key].toString() + "}\n";
+				}
+				return s;
+			}
+			
 			
 			//The Zone
 			zone.forEach(
@@ -45,12 +58,40 @@ package War_game
 					sector.load("images/empty.png");
 					addChild(sector);
 					
-					sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, mouse_down);
-					function mouse_down(event:MouseEvent):void
+					sector.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouse_move);
+					function mouse_move(event:MouseEvent):void
 					{
-						x = event.currentTarget.location.x;
-						y = event.currentTarget.location.y;
-						make_sectore(x, y, "mountain");
+						/*
+						trace(event.bubbles);
+						event.stopPropagation();
+						trace(event.bubbles);
+						*/
+						if (event.buttonDown)
+						{
+							var x:int = event.currentTarget.location.x;
+							var y:int = event.currentTarget.location.y;
+							
+							if (map_tool != "empty")
+							{
+								//if(map[new Location(x, y)] != null)
+								//	map[new Location(x, y)].visible = false;
+								//else
+								//trace(map[new Location(x, y)]);
+								//trace(map.toString());
+								if (map[new Location(x, y)])
+								{
+									trace("found");
+								}
+								else
+									trace("Not found at " + x + " " + y);
+								//make_sectore(x, y, map_tool);
+								
+									
+									
+								//trace("making secotr of type" + map_tool);
+							}
+						}
+						
 					}
 				});
 			});
@@ -81,7 +122,7 @@ package War_game
 				var x:int = Number(sector_data.@x);
 				var y:int = Number(sector_data.@y);
 				var type:String = String(sector_data);
-				trace(x + " " + y + " " + type);
+				//trace(x + " " + y + " " + type);
 				
 				make_sectore(x, y, type);
 			}
@@ -90,8 +131,7 @@ package War_game
 		private function make_sectore(x:int, y:int, type:String):void
 		{
 			var sector:Sector = new Sector(type);
-			var location:Location = new Location(x, y);
-			//map[location] = sector;
+			map[new Location(x, y)] = sector;
 			
 			sector.addEventListener(flash.events.Event.COMPLETE, function():void {
 				if (y % 2 == 0)
@@ -100,7 +140,7 @@ package War_game
 					sector.x = x * sector.contentWidth + sector.contentWidth/2;
 				
 				sector.y = y / 2 * sector.contentHeight * 3 / 2;
-				trace(x + " " + y);
+				//trace(x + " " + y);
 				addChild(sector);
 			});
 			sector.load("images/" + type +".png");

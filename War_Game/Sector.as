@@ -14,5 +14,10 @@ package War_game
 			type = new_type;
 			location = new_location;
 		}
+		
+		public override function toString():String
+		{
+			return type;
+		}
 	}
 }

@@ -9,5 +9,9 @@
 			x = new_x;
 			y = new_y;
 		}
+		public function toString():String
+		{
+			return x + " " + y;
+		}
 	}
 }

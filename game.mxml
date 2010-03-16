@@ -18,7 +18,7 @@
 	<mx:Label id="currency" text="$400.00"/>
 	
 	<mx:Label id="expiration" text="Expires in 23 hours"/>
-	<mx:Button label="End Turn" click=""/>
+	<mx:Button label="End Turn" click="end_turn(event)"/>
 
 	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
 		dataProvider="{game_collection}" />
@@ -38,24 +38,13 @@
 	
 	<mx:Script>
         <![CDATA[
+		import War_game.Board;
+		public var board:Board;
 		
 		private function init():void {
-			//import examples.LoaderExample;
-			//var loada:LoaderExample = new LoaderExample();
-			//canvas.addChild(loada);
-			//loada.x = 0;
-			//loada.y = 0;
-			//p.text = "loada.x = " + loada.x + " loada.y = " + loada.y;
-			//p.text = "asd";
 			
-			/*import War_game.Sector;
-			var sector:Sector = new Sector();
-			sector.load("images/grass.png");
-			canvas.addChild(sector);*/
 			
-			import War_game.Board;
-			
-			var board:Board = new Board();
+			board = new Board();
 			addChild(board);
 			
 			import flash.events.MouseEvent;

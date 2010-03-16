@@ -18,23 +18,30 @@ package War_game
 		public var map_tool:String;
 		private var map:Dictionary = new Dictionary();
 		
-
+		public function map_toString():String
+		{
+			var s:String = "";
+			var total:int = 0;
+			for (var key:Object in map) {
+				if(map[key].toString() != "empty")
+				{
+						s += "{" + key.toString() + " " + map[key].toString() + "}\n";
+						total++;
+				}
+			}
+			return s + "\nTotal: " + total + "\n";
+		}
+		
 		public function Board()
 		{
 			opaqueBackground = "0xFFFFFF";
 			map_tool = "grass";
 			
-			/*
-			map.toString = function():String {
-				var s:String = "";
-				for (var key:Object in this) {
-				   s += "{" + key.toString() + map[key].toString() + "}\n";
-				}
-				return s;
-			}*/
+			
 			
 			//The map
-			load_xml("maps/test.xml");
+			//load_xml("maps/test.xml");
+			load_xml("maps/pleasanton.xml");
 			
 			//Empty Spots
 			for (var indexX:int = 0; indexX < sizeX; indexX++)
@@ -78,8 +85,9 @@ package War_game
 		public function export_map():XML 
 		{
 			var s:String = "<map>\n";
-			for (var key:Object in map){
-				   s += "\t<s x='" + key.x.toString() + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
+			for (var key:Object in map) {
+				if(map[key].type != "empty")
+				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
 			}
 			s += "</map>\n";
 			var x:XML = new XML(s);
@@ -106,8 +114,9 @@ package War_game
 				addChild(sector);
 			});
 			
-			sector.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouse_move);
-			function mouse_move(event:MouseEvent):void
+			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, draw_sector);
+			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, draw_sector);
+			function draw_sector(event:MouseEvent):void
 			{
 				if (event.buttonDown)
 				{
@@ -119,7 +128,13 @@ package War_game
 						if (map[event.currentTarget.location] != null)
 						{
 							trace("found");
+							
+							//if (map[event.currentTarget.location].type == map_tool)
+								//return;
+							trace(map_toString())
+							map[event.currentTarget.location] = null;
 							delete map[event.currentTarget.location];
+							trace(map_toString())
 						}
 						else
 							trace("Not found at " + x + " " + y);

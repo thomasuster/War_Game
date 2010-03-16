@@ -16,6 +16,7 @@
 	<mx:Box direction = "horizontal" styleName = "ui" width="800" height="100">
 	<!-- <mx:Label id="p" text=""/>-->
 	<mx:Label id="currency" text="$400.00"/>
+	
 	<mx:Label id="expiration" text="Expires in 23 hours"/>
 	<mx:Button label="End Turn" click=""/>
 
@@ -24,14 +25,16 @@
 		
 	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
 		dataProvider="{map_collection}" />
+		
+	<mx:Label id="mouse_x_ui" text=""/>
+	<mx:Label id="mouse_y_ui" text=""/>
 			
 			
 			
 	</mx:Box>
 	
-	<mx:Canvas id = "canvas" styleName = "canvas" width="800" height="800">
-		<!-- <mx:Script source="temp.as" />-->
-	</mx:Canvas>
+	<!--<mx:Canvas id = "canvas" styleName = "canvas" width="800" height="800">
+	</mx:Canvas>-->
 	
 	<mx:Script>
         <![CDATA[
@@ -51,8 +54,19 @@
 			canvas.addChild(sector);*/
 			
 			import War_game.Board;
+			
 			var board:Board = new Board();
-			canvas.addChild(board);
+			addChild(board);
+			
+			import flash.events.MouseEvent;
+			//Movment Listener
+			board.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouseMove);
+			function mouseMove(event:MouseEvent):void
+			{
+				//trace(event.localX);	
+				mouse_x_ui.text = String(board.contentMouseX);
+				mouse_y_ui.text = String(board.contentMouseY);
+			}
 			
 			
 		}

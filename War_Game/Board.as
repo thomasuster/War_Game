@@ -8,32 +8,30 @@ package War_game
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
-	
+	import flash.events.MouseEvent;
+
 	public class Board extends Canvas
 	{
+		//Zone
+		private const sizeX:int = 10;
+		private const sizeY:int = 10;
+		private var zone:Array = new Array(sizeX);
+		
 		private var map:Dictionary = new Dictionary();
 		
+
 		public function Board()
 		{
-			//xml
-			load_xml("maps/test.xml");
+			opaqueBackground = "0xFFFFFF";
 			
-			
-			
-			 
-			
-			
-			//opaqueBackground = 0xFF0000;
-			
-			
-			/*
-			map.forEach(
+			//The Zone
+			zone.forEach(
 			function (item:*, indexX:int, array:Array):void{
 				item = new Array(sizeY);
-				
 				item.forEach(
-				function (sector:*, indexY:int, array:Array):void{
-					sector = new Sector();
+				function (sector:*, indexY:int, array:Array):void {
+					var location:Location = new Location(indexX, indexY);
+					sector = new Sector("empty", location);
 					sector.addEventListener(flash.events.Event.COMPLETE,function():void{
 						//trace("sector.width" + sector.width);
 						if (indexY % 2 == 0)
@@ -44,18 +42,22 @@ package War_game
 						sector.y = indexY/2 * sector.contentHeight*3/2;
 						
 					});
-					sector.load("images/grass.png");
-					//sector.width = 80;
-					//sector.height = 80;
-					
-					
-
-					
+					sector.load("images/empty.png");
 					addChild(sector);
+					
+					sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, mouse_down);
+					function mouse_down(event:MouseEvent):void
+					{
+						x = event.currentTarget.location.x;
+						y = event.currentTarget.location.y;
+						make_sectore(x, y, "mountain");
+					}
 				});
 			});
-			*/
-					
+			
+			//The map
+			load_xml("maps/test.xml");
+			
 		}
 		
 		public function load_xml(xml_url:String):void 
@@ -82,26 +84,26 @@ package War_game
 				trace(x + " " + y + " " + type);
 				
 				make_sectore(x, y, type);
-				function make_sectore(x:int, y:int, type:String):void
-				{
-					var sector:Sector = new Sector(type);
-					var location:Location = new Location(x, y);
-					//map[location] = sector;
-					
-					sector.addEventListener(flash.events.Event.COMPLETE, function():void {
-						if (y % 2 == 0)
-							sector.x = x * sector.contentWidth;
-						else
-							sector.x = x * sector.contentWidth + sector.contentWidth/2;
-						
-						sector.y = y / 2 * sector.contentHeight * 3 / 2;
-						trace(x + " " + y);
-						addChild(sector);
-					});
-					sector.load("images/" + type +".png");
-				}
-				
 			}
+		}
+		
+		private function make_sectore(x:int, y:int, type:String):void
+		{
+			var sector:Sector = new Sector(type);
+			var location:Location = new Location(x, y);
+			//map[location] = sector;
+			
+			sector.addEventListener(flash.events.Event.COMPLETE, function():void {
+				if (y % 2 == 0)
+					sector.x = x * sector.contentWidth;
+				else
+					sector.x = x * sector.contentWidth + sector.contentWidth/2;
+				
+				sector.y = y / 2 * sector.contentHeight * 3 / 2;
+				trace(x + " " + y);
+				addChild(sector);
+			});
+			sector.load("images/" + type +".png");
 		}
 	}
 }

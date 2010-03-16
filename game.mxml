@@ -9,18 +9,21 @@
 
 	<mx:Style source="css/styles.css" />
 	
-	<mx:Script source="Menu_bar.as" />
+	<mx:Script source="Menus.as" />
 	<!--<mx:Script source="examples/loader_example.as" />-->
 	
 	
-	<mx:Box styleName = "ui" width="800" height="100">
-	 <!-- <mx:Label id="p" text=""/>-->
-	 <mx:Label id="currency" text="$400.00"/>
-	 <mx:Label id="expiration" text="Expires in 23 hours"/>
-	 <mx:Button label="End Turn" click=""/>
-	 
-	 <mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
-            dataProvider="{menuBarCollection}" />
+	<mx:Box direction = "horizontal" styleName = "ui" width="800" height="100">
+	<!-- <mx:Label id="p" text=""/>-->
+	<mx:Label id="currency" text="$400.00"/>
+	<mx:Label id="expiration" text="Expires in 23 hours"/>
+	<mx:Button label="End Turn" click=""/>
+
+	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
+		dataProvider="{game_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
+		dataProvider="{map_collection}" />
 			
 			
 			

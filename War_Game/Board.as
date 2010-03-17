@@ -1,7 +1,7 @@
 package War_game
 {
 	import flash.ui.KeyLocation;
-	import mx.containers.Canvas;
+	import mx.core.UIComponent;
 	import War_game.Sector;
 	import War_game.Location;
 	import flash.events.Event;
@@ -9,14 +9,55 @@ package War_game
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 	import flash.events.MouseEvent;
+	import flash.display.Bitmap;
+    import flash.display.BitmapData;
+    import flash.display.Loader;
+	import Standard.Image_resource;
 
-	public class Board extends Canvas
+	public class Board extends UIComponent
 	{
 		//Zone
-		private const sizeX:int = 10;
-		private const sizeY:int = 10;
+		private const sizeX:int = 23;
+		private const sizeY:int = 20;
 		public var map_tool:String;
 		private var map:Dictionary = new Dictionary();
+		private var image_resource:Image_resource = new Image_resource();
+		
+		public function Board()
+		{
+			opaqueBackground = "0xFFFFFF";
+			map_tool = "grass";
+			
+			
+			image_resource.addEventListener("loaded", completeHandler);
+			image_resource.load_image("empty", "images/empty.png");
+			image_resource.load_image("grass", "images/grass.png");
+			image_resource.load_image("water", "images/water.png");
+			image_resource.load_image("mountain", "images/mountain.png");
+			image_resource.load_image("hill", "images/hill.png");
+			
+			function completeHandler(event:Event):void
+			{
+				if(image_resource.has_image("empty"))
+				{
+					//Empty Spots
+					for (var indexX:int = 0; indexX < sizeX; indexX++)
+					{
+						for (var indexY:int = 0; indexY < sizeY; indexY++)
+						{
+							make_sector(indexX, indexY, "empty");
+						}
+					}
+				}
+			}	
+			//The map
+			//load_xml("maps/test.xml");
+			//load_xml("maps/pleasanton.xml");
+			
+			
+			
+			
+		}
 		
 		public function map_toString():String
 		{
@@ -32,28 +73,7 @@ package War_game
 			return s + "\nTotal: " + total + "\n";
 		}
 		
-		public function Board()
-		{
-			opaqueBackground = "0xFFFFFF";
-			map_tool = "grass";
-			
-			
-			
-			//The map
-			//load_xml("maps/test.xml");
-			load_xml("maps/pleasanton.xml");
-			
-			//Empty Spots
-			for (var indexX:int = 0; indexX < sizeX; indexX++)
-			{
-				for (var indexY:int = 0; indexY < sizeY; indexY++)
-				{
-					make_sector(indexX, indexY, "empty");
-				}
-			}
-			
-			
-		}
+		
 		
 		public function load_xml(xml_url:String):void 
 		{
@@ -96,28 +116,26 @@ package War_game
 		
 		private function make_sector(x:int, y:int, type:String):void
 		{
-			//if (map[new Location(x, y)])
-				//return;
-			
+			//Init
 			var location:Location = new Location(x, y);
-			var sector:Sector = new Sector(type, location);
+			var sector:Sector = new Sector(image_resource.duplicate_image(type), type, location);
 			map[location] = sector;
 			
-			sector.addEventListener(flash.events.Event.COMPLETE, function():void {
-				if (y % 2 == 0)
-					sector.x = x * sector.contentWidth;
-				else
-					sector.x = x * sector.contentWidth + sector.contentWidth/2;
-				
-				sector.y = y / 2 * sector.contentHeight * 3 / 2;
-				//trace(x + " " + y);
-				addChild(sector);
-			});
+			//Position
+			if (y % 2 == 0)
+				sector.x = x * sector.width;
+			else
+				sector.x = x * sector.width + sector.width/2;
+			sector.y = y / 2 * sector.height * 3 / 2;
 			
+			this.addChild(sector);
+			
+			//Map editing
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, draw_sector);
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, draw_sector);
 			function draw_sector(event:MouseEvent):void
 			{
+				trace("hello world");
 				if (event.buttonDown)
 				{
 					var x:int = event.currentTarget.location.x;
@@ -144,7 +162,9 @@ package War_game
 				}
 			}
 			
-			sector.load("images/" + type +".png");
+			
+			
+			
 		}		
 	}
 }

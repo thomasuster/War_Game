@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application 
-	width="800" height="900"
+	width="800" height="800"
 	styleName="application"
 	horizontalScrollPolicy="off"
 	verticalScrollPolicy="off"
@@ -35,8 +35,8 @@
 			
 	</mx:Box>
 	
-	<!--<mx:Canvas id = "canvas" styleName = "canvas" width="800" height="800">
-	</mx:Canvas>-->
+	<mx:Canvas id = "canvas" styleName = "canvas" width="800" height="800">
+	</mx:Canvas>
 	
 	<mx:Script>
         <![CDATA[
@@ -47,7 +47,7 @@
 			
 			
 			board = new Board();
-			addChild(board);
+			canvas.addChild(board);
 			
 			import flash.events.MouseEvent;
 			//Movment Listener

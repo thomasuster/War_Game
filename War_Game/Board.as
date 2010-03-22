@@ -20,11 +20,13 @@ package War_game
 		private const sizeX:int = 23;
 		private const sizeY:int = 20;
 		public var map_tool:String;
-		private var map:Dictionary = new Dictionary();
-		private var image_resource:Image_resource = new Image_resource();
+		private var map:Dictionary;
+		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
+			map = new Dictionary()
+			image_resource = new Image_resource(5);
 			opaqueBackground = "0xFFFFFF";
 			map_tool = "grass";
 			
@@ -49,10 +51,12 @@ package War_game
 						}
 					}
 				}
+				
+				//The map
+				load_xml("maps/test.xml");
+				//load_xml("maps/pleasanton.xml");
 			}	
-			//The map
-			//load_xml("maps/test.xml");
-			//load_xml("maps/pleasanton.xml");
+			
 			
 			
 			
@@ -128,8 +132,6 @@ package War_game
 				sector.x = x * sector.width + sector.width/2;
 			sector.y = y / 2 * sector.height * 3 / 2;
 			
-			this.addChild(sector);
-			
 			//Map editing
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, draw_sector);
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, draw_sector);
@@ -162,6 +164,7 @@ package War_game
 				}
 			}
 			
+			this.addChild(sector);
 			
 			
 			

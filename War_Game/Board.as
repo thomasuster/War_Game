@@ -1,5 +1,7 @@
 package War_game
 {
+	import flash.display.DisplayObject;
+	import flash.filters.ConvolutionFilter;
 	import flash.ui.KeyLocation;
 	import mx.core.UIComponent;
 	import War_game.Sector;
@@ -19,25 +21,25 @@ package War_game
 		//Zone
 		private const sizeX:int = 23;
 		private const sizeY:int = 20;
-		public var map_tool:String;
+		
+		public var mode:String;
+		public var tool:String;
+		
 		private var map:Dictionary;
+		private var units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
-			map = new Dictionary()
-			image_resource = new Image_resource(6);
+			map = new Dictionary();
+			units = new Dictionary();
+			image_resource = new Image_resource("images.xml");
 			opaqueBackground = "0xFFFFFF";
-			map_tool = "grass";
+			tool = "grass";
 			
 			
 			image_resource.addEventListener("loaded", completeHandler);
-			image_resource.load_image("empty", "images/empty.png");
-			image_resource.load_image("grass", "images/grass.png");
-			image_resource.load_image("forest", "images/forest.png");
-			image_resource.load_image("water", "images/water.png");
-			image_resource.load_image("mountain", "images/mountain.png");
-			image_resource.load_image("hill", "images/hill.png");
+			
 			
 			function completeHandler(event:Event):void
 			{
@@ -119,44 +121,75 @@ package War_game
 			return x;
 		}
 		
+		/*private function make_init(x:int, y:int, type:String):Object
+		{
+			
+			var hash:Object = new Object();
+			//Init
+			hash["location"] = new Location(x, y);
+			 
+			
+			//Position
+			if (y % 2 == 0)
+				hash["x"] = x * 34;
+			else
+				hash["x"] = x * 34 + 34/2;
+			hash["y"] = y / 2 * 40 * 3 / 2;
+			return hash;
+			
+		}*/
+		private function make_unit(x:int, y:int, type:String):void
+		{
+			var location:Location = new Location(x, y);
+			var unit:Unit = new Unit(image_resource.duplicate_image(type),location);
+			units[location] = unit;
+			this.addChild(unit);
+			trace("Added a " + type);
+		}
+		
 		private function make_sector(x:int, y:int, type:String):void
 		{
 			//Init
 			var location:Location = new Location(x, y);
-			var sector:Sector = new Sector(image_resource.duplicate_image(type), type, location);
+			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
 			map[location] = sector;
 			
 			//Position
+			/*
 			if (y % 2 == 0)
 				sector.x = x * sector.width;
 			else
 				sector.x = x * sector.width + sector.width/2;
-			sector.y = y / 2 * sector.height * 3 / 2;
+			sector.y = y / 2 * sector.height * 3 / 2;*/
 			
 			//Map editing
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, change_sector);
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, change_sector);
 			function change_sector(event:MouseEvent):void
 			{
-				if (event.buttonDown)
-				{
+				if (!event.buttonDown)
+					return;
+					
 					var x:int = event.currentTarget.location.x;
 					var y:int = event.currentTarget.location.y;
 					
-					if (map_tool != "empty")
-					{
-						if (map[event.currentTarget.location] != null)
+				switch (mode)
+				{
+					case "sector":
+						if (tool != "empty")
 						{
-							map[event.currentTarget.location].type = map_tool;
-							map[event.currentTarget.location].image(image_resource.duplicate_image(map_tool));
-							//trace(map_toString())
-							//map[event.currentTarget.location] = null;
-							//delete map[event.currentTarget.location];
-							//trace(map_toString())
+							if (map[event.currentTarget.location] != null)
+							{
+								map[event.currentTarget.location].type = tool;
+								map[event.currentTarget.location].image(image_resource.duplicate_image(tool));
+							}
+							else
+								trace("Not found at " + x + " " + y);
 						}
-						else
-							trace("Not found at " + x + " " + y);
-					}
+						break;
+					case "unit":
+						make_unit(x, y, tool);
+						break;
 				}
 			}
 			

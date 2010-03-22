@@ -1,0 +1,21 @@
+<images>
+	<directory url = "images/sectors/">
+		<i name = "empty">empty.png</i>
+		<i name = "grass">grass.png</i>
+		<i name = "forest">forest.png</i>
+		<i name = "water">water.png</i>
+		<i name = "mountain">mountain.png</i>
+		<i name = "hill">hill.png</i>
+	</directory>
+	
+	<directory url = "images/units/">
+		<i name = "engineer">engineer.png</i>
+		<i name = "at_team">at_team.png</i>
+		<i name = "infantry">infantry.png</i>
+		<i name = "mg_team">mg_team.png</i>
+		<i name = "morter">morter.png</i>
+		<i name = "officer">officer.png</i>
+		<i name = "sniper">sniper.png</i>
+		<i name = "special_forces">special_forces.png</i>
+	</directory>
+</images>

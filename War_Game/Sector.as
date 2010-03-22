@@ -22,6 +22,15 @@ package War_game
 			this.addChild(bitmap);
 		}
 		
+		public function image(new_bitmapData:BitmapData):void
+		{
+			bitmap.bitmapData = new_bitmapData;
+			//trace("Changed");
+			//this.removeChild(bitmap);
+			//bitmap = new Bitmap(new_bitmapData);
+			//this.addChild(bitmap);
+			//bitmap.bitmapData = new_bitmapData;
+		}
 		public override function toString():String
 		{
 			return type;

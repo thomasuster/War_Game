@@ -133,11 +133,10 @@ package War_game
 			sector.y = y / 2 * sector.height * 3 / 2;
 			
 			//Map editing
-			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, draw_sector);
-			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, draw_sector);
-			function draw_sector(event:MouseEvent):void
+			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, change_sector);
+			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, change_sector);
+			function change_sector(event:MouseEvent):void
 			{
-				trace("hello world");
 				if (event.buttonDown)
 				{
 					var x:int = event.currentTarget.location.x;
@@ -147,19 +146,15 @@ package War_game
 					{
 						if (map[event.currentTarget.location] != null)
 						{
-							trace("found");
-							
-							//if (map[event.currentTarget.location].type == map_tool)
-								//return;
-							trace(map_toString())
-							map[event.currentTarget.location] = null;
-							delete map[event.currentTarget.location];
-							trace(map_toString())
+							map[event.currentTarget.location].type = map_tool;
+							map[event.currentTarget.location].image(image_resource.duplicate_image(map_tool));
+							//trace(map_toString())
+							//map[event.currentTarget.location] = null;
+							//delete map[event.currentTarget.location];
+							//trace(map_toString())
 						}
 						else
 							trace("Not found at " + x + " " + y);
-							
-						make_sector(x, y, map_tool);
 					}
 				}
 			}

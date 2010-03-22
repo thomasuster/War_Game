@@ -64,9 +64,9 @@ private function menuHandler(event:MenuEvent):void
 {
 	//trace(event.item.@data);
 	var s:String = event.item.@data;
-	CursorManager.removeAllCursors();
+	//CursorManager.removeAllCursors();
 	//var ClassReference:Class = getDefinitionByName("grass") as Class;
-	CursorManager.setCursor(this[s]);
+	//CursorManager.setCursor(this[s]);
 	board.map_tool = s;
 	//CursorManager.setCursor(eval(event.item));
 }

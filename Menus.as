@@ -24,6 +24,7 @@ private var map_menu:XMLList =
 	<>
 		<menuitem label="Map Menu" data="top">
 			<menuitem label="Grass" data="grass"/>
+			<menuitem label="Forest" data="forest"/>
 			<menuitem label="Hills" data="hill"/>
 			<menuitem label="Mountain" data="mountain"/>
 			<menuitem label="Water" data="water"/>

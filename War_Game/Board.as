@@ -26,7 +26,7 @@ package War_game
 		public function Board()
 		{
 			map = new Dictionary()
-			image_resource = new Image_resource(5);
+			image_resource = new Image_resource(6);
 			opaqueBackground = "0xFFFFFF";
 			map_tool = "grass";
 			
@@ -34,6 +34,7 @@ package War_game
 			image_resource.addEventListener("loaded", completeHandler);
 			image_resource.load_image("empty", "images/empty.png");
 			image_resource.load_image("grass", "images/grass.png");
+			image_resource.load_image("forest", "images/forest.png");
 			image_resource.load_image("water", "images/water.png");
 			image_resource.load_image("mountain", "images/mountain.png");
 			image_resource.load_image("hill", "images/hill.png");
@@ -53,8 +54,8 @@ package War_game
 				}
 				
 				//The map
-				load_xml("maps/test.xml");
-				//load_xml("maps/pleasanton.xml");
+				//load_xml("maps/test.xml");
+				load_xml("maps/river.xml");
 			}	
 			
 			

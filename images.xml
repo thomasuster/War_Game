@@ -1,4 +1,8 @@
 <images>
+	<directory url = "images/ui/">
+		<i name = "screen">screen.png</i>
+	</directory>
+	
 	<directory url = "images/sectors/">
 		<i name = "empty">empty.png</i>
 		<i name = "grass">grass.png</i>

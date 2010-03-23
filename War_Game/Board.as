@@ -1,9 +1,11 @@
 package War_game
 {
+	import adobe.utils.XMLUI;
 	import flash.display.DisplayObject;
 	import flash.filters.ConvolutionFilter;
 	import flash.ui.KeyLocation;
 	import mx.core.UIComponent;
+	import War_game.Board_object;
 	import War_game.Sector;
 	import War_game.Location;
 	import flash.events.Event;
@@ -28,12 +30,14 @@ package War_game
 		private var active_unit:Unit;
 		
 		private var map:Dictionary;
+		private var screens:Dictionary;
 		private var units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
 			map = new Dictionary();
+			screens = new Dictionary();
 			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
 			active_unit = null;
@@ -46,27 +50,10 @@ package War_game
 			
 			function completeHandler(event:Event):void
 			{
-				if(image_resource.has_image("empty"))
-				{
-					//Empty Spots
-					for (var indexX:int = 0; indexX < sizeX; indexX++)
-					{
-						for (var indexY:int = 0; indexY < sizeY; indexY++)
-						{
-							make_sector(indexX, indexY, "empty");
-						}
-					}
-				}
-				
 				//The map
 				//load_xml("maps/test.xml");
 				load_xml("maps/river.xml");
 			}	
-			
-			
-			
-			
-			
 		}
 		
 		public function map_toString():String
@@ -101,14 +88,33 @@ package War_game
 		
 		public function load_map(xml:XML):void 
 		{
+			var original_map:Object = new Object();
 			for each (var sector_data:XML in xml.s)
 			{
 				var x:int = Number(sector_data.@x);
 				var y:int = Number(sector_data.@y);
 				var type:String = String(sector_data);
-				//trace(x + " " + y + " " + type);
-				
-				make_sector(x, y, type);
+				original_map[x + " " +y] = type;
+			}
+			
+			//Empty Spots
+			for (var indexX:int = 0; indexX < sizeX; indexX++)
+			{
+				for (var indexY:int = 0; indexY < sizeY; indexY++)
+				{
+					//init
+					var location:Location = new Location(indexX, indexY);
+					
+					if(original_map[indexX + " " + indexY] == null)
+						make_sector(location, "empty");
+					else
+						make_sector(location, original_map[indexX + " " + indexY]);
+						
+					//screen
+					var screen:Board_object = new Board_object(image_resource.duplicate_image("screen"), location);
+					screens[location] = screen;
+					this.addChild(screen);
+				}
 			}
 		}
 		
@@ -148,10 +154,9 @@ package War_game
 			//units[active_unit.location] = active_unit;
 		}
 		
-		private function make_sector(x:int, y:int, type:String):void
+		private function make_sector(location:Location, type:String):void
 		{
 			//Init
-			var location:Location = new Location(x, y);
 			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
 			map[location] = sector;
 			

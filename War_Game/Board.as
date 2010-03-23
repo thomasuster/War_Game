@@ -6,7 +6,7 @@ package War_game
 	import flash.ui.KeyLocation;
 	import mx.core.UIComponent;
 	import War_game.Board_object;
-	import War_game.Screen;
+	import War_game.Screens;
 	import War_game.Sector;
 	import War_game.Location;
 	import flash.events.Event;
@@ -29,16 +29,15 @@ package War_game
 		public var tool:String;
 		
 		private var active_unit:Unit;
-		
+		private var screens:Screens;
 		private var map:Dictionary;
-		private var screens:Dictionary;
 		private var units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
 			map = new Dictionary();
-			screens = new Dictionary();
+			screens = new Screens();
 			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
 			active_unit = null;
@@ -112,11 +111,10 @@ package War_game
 						make_sector(location, original_map[indexX + " " + indexY]);
 						
 					//screen
-					var screen:Screen = new Screen(image_resource.duplicate_image("screen"), location);
-					screens[location] = screen;
-					this.addChild(screen);
+					screens.insert(image_resource.duplicate_image("screen"),location);
 				}
 			}
+			this.addChild(screens);
 		}
 		
 		public function export_map():XML 
@@ -145,6 +143,7 @@ package War_game
 			{
 				mode = "move_unit"
 				active_unit = unit;
+				screens.visible = true;
 			}
 		}
 		
@@ -191,6 +190,7 @@ package War_game
 						break;
 					case "move_unit":
 						trace("Called" + x + " " + y);
+						//screens.visible = true;
 						move_unit(event.currentTarget.location);
 						break;
 				}

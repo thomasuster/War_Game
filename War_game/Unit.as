@@ -5,6 +5,7 @@ package War_game
 	
 	public class Unit extends Board_object
 	{
+		[Bindable]
 		private var number:int;
 		public function Unit(new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{

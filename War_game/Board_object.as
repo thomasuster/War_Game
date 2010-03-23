@@ -16,15 +16,19 @@ package War_game
 			location = new_location;
 			this.addChild(bitmap);
 			
-			var x:int = location.x;
-			var y:int = location.y;
+			set_location(new_location);
+		}
+		
+		public function set_location(new_location:Location):void 
+		{
+			var x:int = new_location.x;
+			var y:int = new_location.y;
 			//Position
 			if (y % 2 == 0)
 				this.x = x * this.width;
 			else
 				this.x = x * this.width + this.width/2;
 			this.y = y / 2 * this.height * 3 / 2;
-			
 		}
 		
 		public function image(new_bitmapData:BitmapData):void

@@ -25,6 +25,8 @@ package War_game
 		public var mode:String;
 		public var tool:String;
 		
+		private var active_unit:Unit;
+		
 		private var map:Dictionary;
 		private var units:Dictionary;
 		private var image_resource:Image_resource;
@@ -34,6 +36,7 @@ package War_game
 			map = new Dictionary();
 			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
+			active_unit = null;
 			opaqueBackground = "0xFFFFFF";
 			tool = "grass";
 			
@@ -121,23 +124,6 @@ package War_game
 			return x;
 		}
 		
-		/*private function make_init(x:int, y:int, type:String):Object
-		{
-			
-			var hash:Object = new Object();
-			//Init
-			hash["location"] = new Location(x, y);
-			 
-			
-			//Position
-			if (y % 2 == 0)
-				hash["x"] = x * 34;
-			else
-				hash["x"] = x * 34 + 34/2;
-			hash["y"] = y / 2 * 40 * 3 / 2;
-			return hash;
-			
-		}*/
 		private function make_unit(x:int, y:int, type:String):void
 		{
 			var location:Location = new Location(x, y);
@@ -145,6 +131,21 @@ package War_game
 			units[location] = unit;
 			this.addChild(unit);
 			trace("Added a " + type);
+			
+			//Unit moving
+			unit.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, move);
+			function move(event:MouseEvent):void
+			{
+				mode = "move_unit"
+				active_unit = unit;
+			}
+		}
+		
+		private function move_unit(location:Location):void
+		{
+			//delete units[active_unit.location];
+			active_unit.set_location(location);
+			//units[active_unit.location] = active_unit;
 		}
 		
 		private function make_sector(x:int, y:int, type:String):void
@@ -154,14 +155,6 @@ package War_game
 			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
 			map[location] = sector;
 			
-			//Position
-			/*
-			if (y % 2 == 0)
-				sector.x = x * sector.width;
-			else
-				sector.x = x * sector.width + sector.width/2;
-			sector.y = y / 2 * sector.height * 3 / 2;*/
-			
 			//Map editing
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, change_sector);
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, change_sector);
@@ -170,8 +163,8 @@ package War_game
 				if (!event.buttonDown)
 					return;
 					
-					var x:int = event.currentTarget.location.x;
-					var y:int = event.currentTarget.location.y;
+				var x:int = event.currentTarget.location.x;
+				var y:int = event.currentTarget.location.y;
 					
 				switch (mode)
 				{
@@ -189,6 +182,10 @@ package War_game
 						break;
 					case "unit":
 						make_unit(x, y, tool);
+						break;
+					case "move_unit":
+						trace("Called" + x + " " + y);
+						move_unit(event.currentTarget.location);
 						break;
 				}
 			}

@@ -5,6 +5,7 @@ package War_game
 	
 	public class Unit extends Board_object
 	{
+		private var number:int;
 		public function Unit(new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);

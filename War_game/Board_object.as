@@ -7,7 +7,7 @@ package War_game
 	
 	public class Board_object extends Sprite
 	{
-		private var bitmap:Bitmap;
+		protected var bitmap:Bitmap;
 		public var location:Location;
 		
 		public function Board_object(new_bitmapData:BitmapData = null, new_location:Location=null):void

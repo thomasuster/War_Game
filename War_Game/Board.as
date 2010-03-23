@@ -6,6 +6,7 @@ package War_game
 	import flash.ui.KeyLocation;
 	import mx.core.UIComponent;
 	import War_game.Board_object;
+	import War_game.Screen;
 	import War_game.Sector;
 	import War_game.Location;
 	import flash.events.Event;
@@ -111,7 +112,7 @@ package War_game
 						make_sector(location, original_map[indexX + " " + indexY]);
 						
 					//screen
-					var screen:Board_object = new Board_object(image_resource.duplicate_image("screen"), location);
+					var screen:Screen = new Screen(image_resource.duplicate_image("screen"), location);
 					screens[location] = screen;
 					this.addChild(screen);
 				}

@@ -32,7 +32,7 @@ package War_game
 				for each(var a:XML in unit.@*)
 				{
 					stats[String(a.name())] = String(a.toXMLString());
-					trace (a.name() + " : " + a.toXMLString());
+					//trace (a.name() + " : " + a.toXMLString());
 				}
 				
 			}

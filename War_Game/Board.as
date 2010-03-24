@@ -37,7 +37,7 @@ package War_game
 		public function Board()
 		{
 			map = new Dictionary();
-			screens = new Screens();
+			screens = new Screens(sizeX, sizeY);
 			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
 			active_unit = null;
@@ -129,9 +129,8 @@ package War_game
 			return x;
 		}
 		
-		private function make_unit(x:int, y:int, type:String):void
+		private function make_unit(location:Location, type:String):void
 		{
-			var location:Location = new Location(x, y);
 			var unit:Unit = new Unit(image_resource.duplicate_image(type),location);
 			units[location] = unit;
 			this.addChild(unit);
@@ -144,6 +143,8 @@ package War_game
 				mode = "move_unit"
 				active_unit = unit;
 				screens.visible = true;
+				//int(Unit.stats["range"])
+				screens.reveal_circle(location, 1);
 			}
 		}
 		
@@ -186,7 +187,7 @@ package War_game
 						}
 						break;
 					case "unit":
-						make_unit(x, y, tool);
+						make_unit(event.currentTarget.location, tool);
 						break;
 					case "move_unit":
 						trace("Called" + x + " " + y);

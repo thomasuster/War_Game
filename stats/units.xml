@@ -10,6 +10,6 @@
 	<unit name="Light Tank"type="Vehicle"number="1"tier="2"Weapon="Cannon"range="3"optimum_range="2"bullet_defense="10"shell_defense="5"></unit>
 	<unit name="HalfTrack"type="Vehicle"number="1"tier="2"Weapon="Machine Gun"range="3"optimum_range="1"bullet_defense="5"shell_defense="2"></unit>
 	<unit name="Jeep"type="Vehicle"number="1"tier="1"Weapon="Light Machine Gun"range="3"optimum_range="1"bullet_defense="3"shell_defense="1"></unit>
-	<unit name="Tank"type="Vehicle"number="1"tier="3"Weapon="Cannon"range="4"optimum_range="3"bullet_defense="15"shell_defense="7"></unit>
+	<unit name="Tank"type="Vehicle"number="1"tier="3"Weapon="Cannon"range="4"optimum_range="3"bullet_defense="20"shell_defense="7"></unit>
 	<unit name="Artillary"type="Vehicle"number="1"tier="3"Weapon="Howitzer"range="10"optimum_range="8"bullet_defense="5"shell_defense="3"></unit>
 </units>

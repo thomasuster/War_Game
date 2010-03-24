@@ -28,6 +28,9 @@
 	
 	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
 		dataProvider="{unit_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="temp_menu_Handler(event);" 
+		dataProvider="{temp_collection}" />
 	
 	<mx:Button label="Export Map" click="export_map(event)"/>
 		

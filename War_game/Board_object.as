@@ -21,6 +21,7 @@ package War_game
 		
 		public function set_location(new_location:Location):void 
 		{
+			location = new_location;
 			var x:int = new_location.x;
 			var y:int = new_location.y;
 			//Position

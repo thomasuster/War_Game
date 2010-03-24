@@ -27,6 +27,7 @@ package War_game
 		
 		public var mode:String;
 		public var tool:String;
+		public var radius:int;
 		
 		private var active_unit:Unit;
 		private var screens:Screens;
@@ -36,6 +37,7 @@ package War_game
 		
 		public function Board()
 		{
+			radius = 1;
 			map = new Dictionary();
 			screens = new Screens(sizeX, sizeY);
 			units = new Dictionary();
@@ -143,16 +145,22 @@ package War_game
 				mode = "move_unit"
 				active_unit = unit;
 				screens.visible = true;
+				screens.addEventListener(flash.events.MouseEvent.MOUSE_DOWN,hide);
+				function hide(event:MouseEvent):void
+				{
+					screens.visible = false;
+					screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
+				}
 				//int(Unit.stats["range"])
-				screens.reveal_circle(location, 1);
+				screens.reveal_circle(active_unit.location, radius);
 			}
 		}
 		
 		private function move_unit(location:Location):void
 		{
-			//delete units[active_unit.location];
+			delete units[active_unit.location];
 			active_unit.set_location(location);
-			//units[active_unit.location] = active_unit;
+			units[active_unit.location] = active_unit;
 		}
 		
 		private function make_sector(location:Location, type:String):void

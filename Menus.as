@@ -43,10 +43,25 @@ private var unit_menu:XMLList =
 			<menuitem label="Special Forces" data="special_forces"/>
 		</menuitem>
 	</>;
-	
+
+[Bindable]
+public var temp_collection:XMLListCollection;
+private var temp_menu:XMLList =
+	<>
+		<menuitem label="Temp Menu" data="top">
+			<menuitem label="1" data="1"/>
+			<menuitem label="2" data="2"/>
+			<menuitem label="3" data="3"/>
+			<menuitem label="4" data="4"/>
+			<menuitem label="5" data="5"/>
+			<menuitem label="6" data="6"/>
+			<menuitem label="7" data="7"/>
+			<menuitem label="8" data="8"/>
+		</menuitem>
+	</>;
 
 
-	
+/*	
 [Embed(source="images/sectors/grass.png")]
 [Bindable]
 public var grass:Class;
@@ -66,12 +81,14 @@ public var mountain:Class;
 [Embed(source="images/sectors/water.png")]
 [Bindable]
 public var water:Class;
+*/
 
 // Event handler to initialize the MenuBar control.
 private function initCollections():void {
 	game_collection = new XMLListCollection(game_menu);
 	map_collection = new XMLListCollection(map_menu);
 	unit_collection = new XMLListCollection(unit_menu);
+	temp_collection = new XMLListCollection(temp_menu);
 }
 
 // Event handler for the MenuBar control's itemClick event.
@@ -93,8 +110,16 @@ private function unit_menu_Handler(event:MenuEvent):void
 	var s:String = event.item.@data;
 	board.mode = "unit";
 	board.tool = s;
+	board.tool
 	trace("working");
 	
+	
+}
+
+// Event handler for the unit_menu control's itemClick event.
+private function temp_menu_Handler(event:MenuEvent):void 
+{
+	board.radius = int(event.item.@data);
 }
 
 private function end_turn(event:MouseEvent):void 

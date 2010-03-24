@@ -5,7 +5,7 @@ package Standard
     import flash.display.Loader;
     import flash.events.*;
     import flash.net.URLRequest;
-	import flash.events.Event
+	import flash.events.Event;
 	import Standard.XML_utility;
 
     public class Image_resource extends EventDispatcher

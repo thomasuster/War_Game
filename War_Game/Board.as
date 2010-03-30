@@ -31,14 +31,17 @@ package War_game
 		
 		private var active_unit:Unit;
 		private var screens:Screens;
-		private var map:Dictionary;
+		private var map:Array;
 		private var units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
 			radius = 1;
-			map = new Dictionary();
+			map = new Array(sizeX);
+			for (var x:int = 0; x < sizeX; x++)
+				map[x] = new Array(sizeY);
+				
 			screens = new Screens(sizeX, sizeY);
 			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
@@ -62,13 +65,14 @@ package War_game
 		{
 			var s:String = "";
 			var total:int = 0;
+			/*
 			for (var key:Object in map) {
 				if(map[key].toString() != "empty")
 				{
 						s += "{" + key.toString() + " " + map[key].toString() + "}\n";
 						total++;
 				}
-			}
+			}*/
 			return s + "\nTotal: " + total + "\n";
 		}
 		
@@ -119,16 +123,38 @@ package War_game
 			this.addChild(screens);
 		}
 		
+		/*
+		public function available_moves(location:Location, distance:int):Dictionary 
+		{
+			var moves:Dictionary = new Dictionary();
+			return _available_moves(location, distance, moves);
+		}
+		
+		public function _available_moves(location:Location, distance:int, moves:Dictionary):Dictionary 
+		{
+			var loc:Location = map[location.x][location.y].location;
+			moves[loc] = loc;
+			for (var x:int = loc.x-1; x < loc.x+1; x++)
+				for (var y:int = loc.y-1; y < loc.y+1; y++)
+		}*/
+		
 		public function export_map():XML 
 		{
 			var s:String = "<map>\n";
+			
+			for (var x:int = 0; x < sizeX; x++)
+				for (var y:int = 0; y < sizeY; y++)
+					if(map[x][y].type != "empty")
+						s += "\t<s x='" + map[x][y].x + "' y='" + map[x][y].y + "'>" + map[x][y].type + "</s>\n";
+			
+			/*
 			for (var key:Object in map) {
 				if(map[key].type != "empty")
 				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
-			}
+			}*/
 			s += "</map>\n";
-			var x:XML = new XML(s);
-			return x;
+			var xml:XML = new XML(s);
+			return xml;
 		}
 		
 		private function make_unit(location:Location, type:String):void
@@ -167,7 +193,7 @@ package War_game
 		{
 			//Init
 			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
-			map[location] = sector;
+			map[location.x][location.y] = sector;
 			
 			//Map editing
 			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, change_sector);
@@ -185,10 +211,10 @@ package War_game
 					case "sector":
 						if (tool != "empty")
 						{
-							if (map[event.currentTarget.location] != null)
+							if (map[location.x][location.y] != null)
 							{
-								map[event.currentTarget.location].type = tool;
-								map[event.currentTarget.location].image(image_resource.duplicate_image(tool));
+								map[location.x][location.y].type = tool;
+								map[location.x][location.y].image(image_resource.duplicate_image(tool));
 							}
 							else
 								trace("Not found at " + x + " " + y);

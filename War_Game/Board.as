@@ -9,6 +9,7 @@ package War_game
 	import War_game.Screens;
 	import War_game.Sector;
 	import War_game.Location;
+	import War_game.Map;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -16,8 +17,8 @@ package War_game
 	import flash.events.MouseEvent;
 	import flash.display.Bitmap;
     import flash.display.BitmapData;
-    import flash.display.Loader;
 	import Standard.Image_resource;
+    
 
 	public class Board extends UIComponent
 	{
@@ -31,96 +32,64 @@ package War_game
 		
 		private var active_unit:Unit;
 		private var screens:Screens;
-		private var map:Array;
+		private var map:Map;
 		private var units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		public function Board()
 		{
 			radius = 1;
-			map = new Array(sizeX);
-			for (var x:int = 0; x < sizeX; x++)
-				map[x] = new Array(sizeY);
-				
-			screens = new Screens(sizeX, sizeY);
-			units = new Dictionary();
 			image_resource = new Image_resource("images.xml");
+			map = new Map(sizeX, sizeY, image_resource);
+			screens = new Screens(sizeX, sizeY, image_resource);
+			units = new Dictionary();
+			
 			active_unit = null;
 			opaqueBackground = "0xFFFFFF";
 			tool = "grass";
 			
 			
 			image_resource.addEventListener("loaded", completeHandler);
-			
-			
 			function completeHandler(event:Event):void
 			{
 				//The map
-				//load_xml("maps/test.xml");
-				load_xml("maps/river.xml");
-			}	
-		}
-		
-		public function map_toString():String
-		{
-			var s:String = "";
-			var total:int = 0;
-			/*
-			for (var key:Object in map) {
-				if(map[key].toString() != "empty")
-				{
-						s += "{" + key.toString() + " " + map[key].toString() + "}\n";
-						total++;
-				}
-			}*/
-			return s + "\nTotal: " + total + "\n";
-		}
-		
-		
-		
-		public function load_xml(xml_url:String):void 
-		{
-			var myXML:XML = new XML();
-			var myXMLURL:URLRequest = new URLRequest(xml_url);
-			var myLoader:URLLoader = new URLLoader(myXMLURL);
-			myLoader.addEventListener("complete", xmlLoaded);
-			function xmlLoaded(event:Event):void
-			{
-				myXML = XML(myLoader.data);
-				trace("Data loaded.");
-				load_map(myXML); //Decouple me
+				map.load_xml("maps/river.xml");
+				screens.populate();
 			}
-		}
-		
-		public function load_map(xml:XML):void 
-		{
-			var original_map:Object = new Object();
-			for each (var sector_data:XML in xml.s)
-			{
-				var x:int = Number(sector_data.@x);
-				var y:int = Number(sector_data.@y);
-				var type:String = String(sector_data);
-				original_map[x + " " +y] = type;
-			}
-			
-			//Empty Spots
-			for (var indexX:int = 0; indexX < sizeX; indexX++)
-			{
-				for (var indexY:int = 0; indexY < sizeY; indexY++)
-				{
-					//init
-					var location:Location = new Location(indexX, indexY);
-					
-					if(original_map[indexX + " " + indexY] == null)
-						make_sector(location, "empty");
-					else
-						make_sector(location, original_map[indexX + " " + indexY]);
-						
-					//screen
-					screens.insert(image_resource.duplicate_image("screen"),location);
-				}
-			}
+			this.addChild(map);
 			this.addChild(screens);
+		}
+		
+		public function export_map():XML 
+		{
+			return map.export_map();
+		}
+		private function use_tool(location:Location):void
+		{
+			/*
+			switch (mode)
+			{
+				case "sector":
+					if (tool != "empty")
+					{
+						if (map[location.x][location.y] != null)
+						{
+							map[location.x][location.y].type = tool;
+							map[location.x][location.y].image(image_resource.duplicate_image(tool));
+						}
+						else
+							trace("Not found at " + x + " " + y);
+					}
+					break;
+				case "unit":
+					make_unit(event.currentTarget.location, tool);
+					break;
+				case "move_unit":
+					trace("Called" + x + " " + y);
+					//screens.visible = true;
+					move_unit(event.currentTarget.location);
+					break;
+			}*/
 		}
 		
 		/*
@@ -138,25 +107,8 @@ package War_game
 				for (var y:int = loc.y-1; y < loc.y+1; y++)
 		}*/
 		
-		public function export_map():XML 
-		{
-			var s:String = "<map>\n";
-			
-			for (var x:int = 0; x < sizeX; x++)
-				for (var y:int = 0; y < sizeY; y++)
-					if(map[x][y].type != "empty")
-						s += "\t<s x='" + map[x][y].x + "' y='" + map[x][y].y + "'>" + map[x][y].type + "</s>\n";
-			
-			/*
-			for (var key:Object in map) {
-				if(map[key].type != "empty")
-				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
-			}*/
-			s += "</map>\n";
-			var xml:XML = new XML(s);
-			return xml;
-		}
 		
+				
 		private function make_unit(location:Location, type:String):void
 		{
 			var unit:Unit = new Unit(image_resource.duplicate_image(type),location);
@@ -188,53 +140,5 @@ package War_game
 			active_unit.set_location(location);
 			units[active_unit.location] = active_unit;
 		}
-		
-		private function make_sector(location:Location, type:String):void
-		{
-			//Init
-			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
-			map[location.x][location.y] = sector;
-			
-			//Map editing
-			sector.addEventListener(flash.events.MouseEvent.MOUSE_OVER	, change_sector);
-			sector.addEventListener(flash.events.MouseEvent.MOUSE_DOWN	, change_sector);
-			function change_sector(event:MouseEvent):void
-			{
-				if (!event.buttonDown)
-					return;
-					
-				var x:int = event.currentTarget.location.x;
-				var y:int = event.currentTarget.location.y;
-					
-				switch (mode)
-				{
-					case "sector":
-						if (tool != "empty")
-						{
-							if (map[location.x][location.y] != null)
-							{
-								map[location.x][location.y].type = tool;
-								map[location.x][location.y].image(image_resource.duplicate_image(tool));
-							}
-							else
-								trace("Not found at " + x + " " + y);
-						}
-						break;
-					case "unit":
-						make_unit(event.currentTarget.location, tool);
-						break;
-					case "move_unit":
-						trace("Called" + x + " " + y);
-						//screens.visible = true;
-						move_unit(event.currentTarget.location);
-						break;
-				}
-			}
-			
-			this.addChild(sector);
-			
-			
-			
-		}		
 	}
 }

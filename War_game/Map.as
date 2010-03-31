@@ -162,9 +162,12 @@ package War_game
 			{
 				var dis:int = new int(distance-1);
 				
-				if (moves[String(l)] == null)
+				if (moves[String(l)] == null || true)
+				{
 					_available_moves(l, dis, moves);
+				}
 			}
+			
 		}
 		
 		public function get_circle(location:Location, r:int):Array

@@ -9,6 +9,13 @@
 			x = new_x;
 			y = new_y;
 		}
+		
+		public static function un_pickle(s:String):Array 
+		{
+			var a:Array = s.split(" ");
+			return a;
+		}
+		
 		public function toString():String
 		{
 			return x + " " + y;

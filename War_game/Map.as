@@ -1,5 +1,7 @@
 package War_game
 {
+	import flash.sampler.NewObjectSample;
+	import flash.ui.KeyLocation;
 	import Math;
 	
 	import flash.events.Event;
@@ -145,6 +147,13 @@ package War_game
 		{
 			var moves:Object = new Object();
 			_available_moves(location, distance, moves);
+			
+			for (var l:String in moves)
+			{
+				var a:Array = Location.un_pickle(l);
+				var location:Location = new Location(a[0], a[1]);
+				moves[l] = location;
+			}
 			return moves;
 		}
 		
@@ -153,18 +162,28 @@ package War_game
 		*/
 		public function _available_moves(location:Location, distance:int, moves:Object):void 
 		{	
-			if (distance <= 0)
+			if (distance < 0)
 				return;
 			
-			moves[String(location)] = location;
+			var sector:Sector = map[location.x][location.y];
+			var difficulty:int = int(Sector.sector_stats[sector.type]["infantry_moves"]);
+			var new_distance:int = new int(distance-difficulty);
+			
+			//Special unmovable case
+			if (difficulty == -1)
+				return;
+			
+			moves[String(location)] = distance;
+			
+			trace("Hi");
 			var circle:Array = get_circle(location, 1);
 			for each (var l:Location in circle)
 			{
-				var dis:int = new int(distance-1);
-				
-				if (moves[String(l)] == null || true)
+				if (moves[String(l)] == null
+				|| (moves[String(l)] != null && moves[String(l)] < new_distance)
+				)
 				{
-					_available_moves(l, dis, moves);
+					_available_moves(l, new_distance, moves);
 				}
 			}
 			

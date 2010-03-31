@@ -106,7 +106,7 @@ package War_game
 							circle.push(new Location(x,y));
 						}
 				}	
-				trace(s);
+				//trace(s);
 			}
 			return circle;
 		}

@@ -14,13 +14,28 @@ package War_game
 			
 		}
 		
+		/**
+		 * populates a hash of a hash for getting stats
+		 * @param	xml
+		 */
 		private function process_xml(xml:XML):void
 		{
-			for each (var unit:XML in xml.*)
+			for each (var row:XML in xml.*)
 			{
-				for each(var a:XML in unit.@*)
+				var name:String;
+				for each(var a:XML in row.@*)
 				{
-					hash[String(a.name())] = String(a.toXMLString());
+					if (String(a.name()) == "name")
+					{
+						name = String(a.toXMLString());
+						hash[name] = new Object();
+						//trace(name);
+					}
+					else
+					{
+						hash[name][String(a.name())] = String(a.toXMLString());
+						//trace(String(a.name()) + " -> " + String(a.toXMLString()));
+					}
 				}
 				
 			}

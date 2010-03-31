@@ -153,16 +153,17 @@ package War_game
 		*/
 		public function _available_moves(location:Location, distance:int, moves:Object):void 
 		{	
+			if (distance <= 0)
+				return;
+			
+			moves[String(location)] = location;
 			var circle:Array = get_circle(location, 1);
 			for each (var l:Location in circle)
 			{
-				trace("distance = " + distance);
-				trace("!moves[String(l)] = " + String(!moves[String(l)]));
+				var dis:int = new int(distance-1);
+				
 				if (moves[String(l)] == null)
-					moves[String(l)] = l;
-					
-				if (distance >= 1)
-					_available_moves(l, distance-1, moves);
+					_available_moves(l, dis, moves);
 			}
 		}
 		

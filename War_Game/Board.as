@@ -110,7 +110,7 @@ package War_game
 				
 		private function make_unit(location:Location, type:String):void
 		{
-			var unit:Unit = new Unit(image_resource.duplicate_image(type),location);
+			var unit:Unit = new Unit(type, image_resource.duplicate_image(type),location);
 			units[location] = unit;
 			this.addChild(unit);
 			trace("Added a " + type);
@@ -130,14 +130,14 @@ package War_game
 				}
 				//int(Unit.stats["range"])
 				//trace("radius = " + radius);
-				var available_moves:Object = map.available_moves(active_unit.location, radius);
+				trace(active_unit.unit_name + " -> ");
+				var available_moves:Object = 
+					map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
 			
 				screens.conceal();
 				
-				trace("bah");
 				for each (var l:Location in available_moves)
 					screens.reveal(l);
-				trace("bang");
 				
 				
 				//screens.reveal_circle(active_unit.location, radius);

@@ -12,10 +12,13 @@ package War_game
 		private static const stats_xml:Class;
 		public static var stats:Stats;
 		public static var unit_stats:Object;
+		public var unit_name:String;
 		
-		public function Unit(new_bitmapData:BitmapData = null, new_location:Location=null):void
+		public function Unit(_unit_name:String="empty", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);
+			unit_name = _unit_name;
+			//trace("unit_name = " + unit_name);
 			
 			//Static Stats
 			if (stats == null)

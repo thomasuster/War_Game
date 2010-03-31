@@ -138,7 +138,33 @@ package War_game
 		}		
 		
 		
+		/**
+		* Returns a Hash of available moves
+		*/
+		public function available_moves(location:Location, distance:int):Object 
+		{
+			var moves:Object = new Object();
+			_available_moves(location, distance, moves);
+			return moves;
+		}
 		
+		/**
+		* Helper function, Returns a Hash of available moves
+		*/
+		public function _available_moves(location:Location, distance:int, moves:Object):void 
+		{	
+			var circle:Array = get_circle(location, 1);
+			for each (var l:Location in circle)
+			{
+				trace("distance = " + distance);
+				trace("!moves[String(l)] = " + String(!moves[String(l)]));
+				if (moves[String(l)] == null)
+					moves[String(l)] = l;
+					
+				if (distance >= 1)
+					_available_moves(l, distance-1, moves);
+			}
+		}
 		
 		public function get_circle(location:Location, r:int):Array
 		{

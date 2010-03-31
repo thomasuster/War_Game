@@ -21,6 +21,7 @@ package War_game
 		public function Screens(_sizeX:int, _sizeY:int, _image_resource:Image_resource):void
 		{
 			image_resource = _image_resource;
+			revealed = new Array();
 			hexagon_grid = new Hexagon_grid(_sizeX,_sizeY);
 			screens = hexagon_grid.grid;
 			this.visible = false;
@@ -54,6 +55,7 @@ package War_game
 		public function reveal(location:Location):void 
 		{
 			screens[location.x][location.y].reveal();
+			revealed.push(location);
 		}
 		public function conceal():void 
 		{
@@ -61,6 +63,7 @@ package War_game
 				screens[l.x][l.y].conceal();
 		}
 		
+		/*
 		public function reveal_circle(location:Location, r:int):void 
 		{
 			conceal();
@@ -70,6 +73,6 @@ package War_game
 			for each (var l:Location in revealed)
 				screens[l.x][l.y].reveal();
 			
-		}
+		}*/
 	}
 }

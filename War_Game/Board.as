@@ -64,9 +64,6 @@ package War_game
 				map.load_xml("maps/river.xml");
 				screens.populate();
 			}
-			
-			
-			
 			this.addChild(map);
 			this.addChild(screens);
 		}
@@ -107,23 +104,6 @@ package War_game
 					break;
 			}
 		}
-		
-		/*
-		public function available_moves(location:Location, distance:int):Dictionary 
-		{
-			var moves:Dictionary = new Dictionary();
-			return _available_moves(location, distance, moves);
-		}
-		
-		public function _available_moves(location:Location, distance:int, moves:Dictionary):Dictionary 
-		{
-			var loc:Location = map[location.x][location.y].location;
-			moves[loc] = loc;
-			for (var x:int = loc.x-1; x < loc.x+1; x++)
-				for (var y:int = loc.y-1; y < loc.y+1; y++)
-		}*/
-		
-		
 				
 		private function make_unit(location:Location, type:String):void
 		{
@@ -146,7 +126,17 @@ package War_game
 					screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
 				}
 				//int(Unit.stats["range"])
-				screens.reveal_circle(active_unit.location, radius);
+				var available_moves:Object = map.available_moves(active_unit.location, radius);
+			
+				screens.conceal();
+				
+				for each (var l:Location in available_moves)
+					screens.reveal(l);
+				
+				
+				
+				//screens.reveal_circle(active_unit.location, radius);
+				
 			}
 		}
 		

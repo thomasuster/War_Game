@@ -1,15 +1,11 @@
 package War_game
 {
 	import adobe.utils.XMLUI;
+	
+	import mx.core.UIComponent;
+	
 	import flash.display.DisplayObject;
 	import flash.filters.ConvolutionFilter;
-	import flash.ui.KeyLocation;
-	import mx.core.UIComponent;
-	import War_game.Board_object;
-	import War_game.Screens;
-	import War_game.Sector;
-	import War_game.Location;
-	import War_game.Map;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -17,7 +13,19 @@ package War_game
 	import flash.events.MouseEvent;
 	import flash.display.Bitmap;
     import flash.display.BitmapData;
+	
 	import Standard.Image_resource;
+	
+	import War_game.Board_object;
+	import War_game.Screens;
+	import War_game.Sector;
+	import War_game.Location;
+	import War_game.Map;
+	import War_game.Sector_event;
+	
+	
+	
+	
     
 
 	public class Board extends UIComponent
@@ -39,15 +47,15 @@ package War_game
 		public function Board()
 		{
 			radius = 1;
-			image_resource = new Image_resource("images.xml");
-			map = new Map(sizeX, sizeY, image_resource);
-			screens = new Screens(sizeX, sizeY, image_resource);
-			units = new Dictionary();
-			
 			active_unit = null;
 			opaqueBackground = "0xFFFFFF";
 			tool = "grass";
-			
+
+			image_resource = new Image_resource("images.xml");
+			map = new Map(sizeX, sizeY, image_resource);
+			map.addEventListener(Sector_event.CLICKED, use_tool);
+			screens = new Screens(sizeX, sizeY, image_resource);
+			units = new Dictionary();
 			
 			image_resource.addEventListener("loaded", completeHandler);
 			function completeHandler(event:Event):void
@@ -56,6 +64,9 @@ package War_game
 				map.load_xml("maps/river.xml");
 				screens.populate();
 			}
+			
+			
+			
 			this.addChild(map);
 			this.addChild(screens);
 		}
@@ -64,32 +75,37 @@ package War_game
 		{
 			return map.export_map();
 		}
-		private function use_tool(location:Location):void
+		
+		private function use_tool(event:Sector_event):void
 		{
-			/*
+			trace("kar");
+			var x:int = event.sector.location.x;
+			var y:int = event.sector.location.y;
+			
 			switch (mode)
 			{
 				case "sector":
 					if (tool != "empty")
 					{
-						if (map[location.x][location.y] != null)
+						if (map[x][y] != null)
 						{
-							map[location.x][location.y].type = tool;
-							map[location.x][location.y].image(image_resource.duplicate_image(tool));
+							map[x][y].type = tool;
+							map[x][y].image(image_resource.duplicate_image(tool));
 						}
 						else
 							trace("Not found at " + x + " " + y);
 					}
 					break;
 				case "unit":
-					make_unit(event.currentTarget.location, tool);
+					//make_unit(event.sector.location, tool);
+					make_unit(event.sector.location, tool);
 					break;
 				case "move_unit":
 					trace("Called" + x + " " + y);
 					//screens.visible = true;
-					move_unit(event.currentTarget.location);
+					move_unit(event.sector.location);
 					break;
-			}*/
+			}
 		}
 		
 		/*

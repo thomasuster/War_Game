@@ -75,7 +75,7 @@ package War_game
 		
 		private function use_tool(event:Sector_event):void
 		{
-			trace("kar");
+			//trace("kar");
 			var x:int = event.sector.location.x;
 			var y:int = event.sector.location.y;
 			
@@ -84,6 +84,8 @@ package War_game
 				case "sector":
 					if (tool != "empty")
 					{
+						map.make_sector(event.sector.location, tool);
+						/*
 						if (map[x][y] != null)
 						{
 							map[x][y].type = tool;
@@ -91,6 +93,7 @@ package War_game
 						}
 						else
 							trace("Not found at " + x + " " + y);
+						*/
 					}
 					break;
 				case "unit":
@@ -98,7 +101,7 @@ package War_game
 					make_unit(event.sector.location, tool);
 					break;
 				case "move_unit":
-					trace("Called" + x + " " + y);
+					//trace("Moved to " + x + " " + y);
 					//screens.visible = true;
 					move_unit(event.sector.location);
 					break;
@@ -126,13 +129,15 @@ package War_game
 					screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
 				}
 				//int(Unit.stats["range"])
+				//trace("radius = " + radius);
 				var available_moves:Object = map.available_moves(active_unit.location, radius);
 			
 				screens.conceal();
 				
+				trace("bah");
 				for each (var l:Location in available_moves)
 					screens.reveal(l);
-				
+				trace("bang");
 				
 				
 				//screens.reveal_circle(active_unit.location, radius);

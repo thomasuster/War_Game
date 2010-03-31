@@ -67,7 +67,7 @@ package War_game
 			function xmlLoaded(event:Event):void
 			{
 				myXML = XML(myLoader.data);
-				trace("Data loaded.");
+				//trace("Data loaded.");
 				load_map(myXML); //Decouple me
 			}
 		}
@@ -107,7 +107,7 @@ package War_game
 			for (var x:int = 0; x < sizeX; x++)
 				for (var y:int = 0; y < sizeY; y++)
 					if(map[x][y].type != "empty")
-						s += "\t<s x='" + map[x][y].x + "' y='" + map[x][y].y + "'>" + map[x][y].type + "</s>\n";
+						s += "\t<s x='" + x + "' y='" + y + "'>" + map[x][y].type + "</s>\n";
 			
 			/*
 			for (var key:Object in map) {
@@ -119,8 +119,14 @@ package War_game
 			return xml;
 		}
 		
-		private function make_sector(location:Location, type:String):void
+		public function make_sector(location:Location, type:String):void
 		{
+			//remove
+			if (map[location.x][location.y] != null)
+			{
+				delete map[location.x][location.y];
+			}
+			
 			//Init
 			var sector:Sector = new Sector(image_resource.duplicate_image(type), location,type);
 			map[location.x][location.y] = sector;
@@ -148,13 +154,13 @@ package War_game
 			var moves:Object = new Object();
 			_available_moves(location, distance, moves);
 			
+			var location_moves:Object = new Object();
 			for (var l:String in moves)
 			{
 				var a:Array = Location.un_pickle(l);
-				var location:Location = new Location(a[0], a[1]);
-				moves[l] = location;
+				location_moves[l] = new Location(a[0], a[1]);
 			}
-			return moves;
+			return location_moves;
 		}
 		
 		/**
@@ -165,6 +171,7 @@ package War_game
 			if (distance < 0)
 				return;
 			
+			//calc
 			var sector:Sector = map[location.x][location.y];
 			var difficulty:int = int(Sector.sector_stats[sector.type]["infantry_moves"]);
 			var new_distance:int = new int(distance-difficulty);
@@ -175,18 +182,19 @@ package War_game
 			
 			moves[String(location)] = distance;
 			
-			trace("Hi");
 			var circle:Array = get_circle(location, 1);
 			for each (var l:Location in circle)
 			{
-				if (moves[String(l)] == null
-				|| (moves[String(l)] != null && moves[String(l)] < new_distance)
-				)
+				if (moves[String(l)] == null)
 				{
 					_available_moves(l, new_distance, moves);
 				}
+				else if (moves[String(l)] != null && moves[String(l)] < new_distance)
+				{
+					delete moves[String(l)];
+					_available_moves(l, new_distance, moves);
+				}
 			}
-			
 		}
 		
 		public function get_circle(location:Location, r:int):Array

@@ -21,6 +21,7 @@ package War_game
 	import War_game.Sector;
 	import War_game.Location;
 	import War_game.Map;
+	import War_game.Units;
 	import War_game.Sector_event;
 	
 	
@@ -41,7 +42,7 @@ package War_game
 		private var active_unit:Unit;
 		private var screens:Screens;
 		private var map:Map;
-		private var units:Dictionary;
+		private var units:Units;
 		private var image_resource:Image_resource;
 		
 		public function Board()
@@ -54,8 +55,10 @@ package War_game
 			image_resource = new Image_resource("images.xml");
 			map = new Map(sizeX, sizeY, image_resource);
 			map.addEventListener(Sector_event.CLICKED, use_tool);
+			units = new Units(image_resource);
+			units.addEventListener(Unit_event.CLICKED, select_unit);
 			screens = new Screens(sizeX, sizeY, image_resource);
-			units = new Dictionary();
+			
 			
 			image_resource.addEventListener("loaded", completeHandler);
 			function completeHandler(event:Event):void
@@ -65,6 +68,7 @@ package War_game
 				screens.populate();
 			}
 			this.addChild(map);
+			this.addChild(units);
 			this.addChild(screens);
 		}
 		
@@ -98,58 +102,39 @@ package War_game
 					break;
 				case "unit":
 					//make_unit(event.sector.location, tool);
-					make_unit(event.sector.location, tool);
+					units.make_unit(event.sector.location, tool);
 					break;
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);
 					//screens.visible = true;
-					move_unit(event.sector.location);
+					units.move_unit(active_unit, event.sector.location);
 					break;
 			}
 		}
-				
-		private function make_unit(location:Location, type:String):void
-		{
-			var unit:Unit = new Unit(type, image_resource.duplicate_image(type),location);
-			units[location] = unit;
-			this.addChild(unit);
-			trace("Added a " + type);
-			
-			//Unit moving
-			unit.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, move);
-			function move(event:MouseEvent):void
-			{
-				mode = "move_unit"
-				active_unit = unit;
-				screens.visible = true;
-				screens.addEventListener(flash.events.MouseEvent.MOUSE_DOWN,hide);
-				function hide(event:MouseEvent):void
-				{
-					screens.visible = false;
-					screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
-				}
-				//int(Unit.stats["range"])
-				//trace("radius = " + radius);
-				trace(active_unit.unit_name + " -> ");
-				var available_moves:Object = 
-					map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
-			
-				screens.conceal();
-				
-				for each (var l:Location in available_moves)
-					screens.reveal(l);
-				
-				
-				//screens.reveal_circle(active_unit.location, radius);
-				
-			}
-		}
 		
-		private function move_unit(location:Location):void
+		
+		private function select_unit(event:Unit_event):void
 		{
-			delete units[active_unit.location];
-			active_unit.set_location(location);
-			units[active_unit.location] = active_unit;
-		}
+			mode = "move_unit"
+			active_unit = event.unit;
+			
+			//Hide Screens on move
+			screens.visible = true;
+			screens.addEventListener(flash.events.MouseEvent.MOUSE_DOWN,hide);
+			function hide(event:MouseEvent):void
+			{
+				screens.visible = false;
+				screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
+			}
+			
+			//Calculate Moves
+			var available_moves:Object = 
+				map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
+			//Screen
+			screens.conceal();
+			for each (var l:Location in available_moves)
+				screens.reveal(l);
+		}		
+		
 	}
 }

@@ -107,7 +107,13 @@ package War_game
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);
 					//screens.visible = true;
-					units.move_unit(active_unit, event.sector.location);
+					if (screens.is_revealed(event.sector.location))
+					{
+						//trace("true");
+						units.move_unit(active_unit, event.sector.location);
+						show_moves(active_unit);
+						//screens.visible = true;
+					}
 					break;
 			}
 		}
@@ -115,8 +121,13 @@ package War_game
 		
 		private function select_unit(event:Unit_event):void
 		{
+			show_moves(event.unit);
+		}
+		
+		private function show_moves(unit:Unit):void
+		{
 			mode = "move_unit"
-			active_unit = event.unit;
+			active_unit = unit;
 			
 			//Hide Screens on move
 			screens.visible = true;

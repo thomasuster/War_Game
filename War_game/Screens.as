@@ -15,13 +15,13 @@ package War_game
 	{	
 		private var hexagon_grid:Hexagon_grid;
 		private var screens:Array;
-		private var revealed:Array;
+		private var revealed:Object;
 		private var image_resource:Image_resource;
 		
 		public function Screens(_sizeX:int, _sizeY:int, _image_resource:Image_resource):void
 		{
 			image_resource = _image_resource;
-			revealed = new Array();
+			revealed = new Object();
 			hexagon_grid = new Hexagon_grid(_sizeX,_sizeY);
 			screens = hexagon_grid.grid;
 			this.visible = false;
@@ -52,15 +52,24 @@ package War_game
 			this.addChild(screen);
 		}
 		
+		public function is_revealed(location:Location):Boolean 
+		{
+			trace("(revealed[location] != null) = " + (revealed[location] != null));
+			return (revealed[location] != null);
+		}
+		
 		public function reveal(location:Location):void 
 		{
 			screens[location.x][location.y].reveal();
-			revealed.push(location);
+			revealed[location] = location;
 		}
-		public function conceal():void 
+		public function conceal():void
 		{
 			for each (var l:Location in revealed)
+			{
 				screens[l.x][l.y].conceal();
+				delete revealed[l];
+			}
 		}
 		
 		/*

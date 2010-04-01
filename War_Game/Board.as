@@ -112,6 +112,8 @@ package War_game
 						//trace("true");
 						units.move_unit(active_unit, event.sector.location);
 						show_moves(active_unit);
+						//active_unit.visible = true;
+						//this.setChildIndex(units, 0);
 						//screens.visible = true;
 					}
 					break;

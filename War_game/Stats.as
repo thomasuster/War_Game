@@ -29,12 +29,12 @@ package War_game
 					{
 						name = String(a.toXMLString());
 						hash[name] = new Object();
-						trace(name);
+						//trace(name);
 					}
 					else
 					{
 						hash[name][String(a.name())] = String(a.toXMLString());
-						trace(String(a.name()) + " -> " + String(a.toXMLString()));
+						//trace(String(a.name()) + " -> " + String(a.toXMLString()));
 					}
 				}
 				

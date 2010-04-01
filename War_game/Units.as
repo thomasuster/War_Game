@@ -32,20 +32,23 @@ package War_game
 		public function make_unit(location:Location, type:String):void
 		{
 			//Add units
-			var unit:Unit = new Unit(type, image_resource.duplicate_image(type),location);
+			var unit:Unit = new Unit(type, image_resource.duplicate_image(type), location);
+			trace("START");
 			units[location] = unit;
+			trace("END");
 			this.addChild(unit);
 			
 			//Unit moving
 			unit.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, move);
 			function move(event:MouseEvent):void
 			{
-				dispatchEvent(new Unit_event(Unit(event.target), Unit_event.CLICKED, false, false));
+				dispatchEvent(new Unit_event(Unit(event.currentTarget), Unit_event.CLICKED, false, false));
 			}
 		}
 		
 		public function move_unit(unit:Unit, location:Location):void
 		{
+			trace(location.x + " | " + location.y);
 			units[location] = unit;
 			delete units[unit.location];
 			unit.set_location(location);

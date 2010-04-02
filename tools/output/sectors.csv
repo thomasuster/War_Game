@@ -1,0 +1,6 @@
+name,infantry_moves,vehicle_moves
+grass,1,1
+forest,2,4
+water,-1,-1
+mountain,3,-1
+hill,2,2

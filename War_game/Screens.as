@@ -52,6 +52,15 @@ package War_game
 			screens[location.x][location.y].stroke();
 		}
 		
+		public function un_highlight():void
+		{
+			for each (var l:Location in highlighted)
+			{
+				screens[l.x][l.y].un_stroke();
+				delete highlighted[l];
+			}
+		}
+		
 		public function insert(img:BitmapData, location:Location):void
 		{
 			var screen:Screen = new Screen(img, location);

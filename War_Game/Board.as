@@ -146,6 +146,7 @@ package War_game
 			//Calculate Moves
 			var available_moves:Object = 
 				map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
+				
 			//Screen
 			screens.conceal();
 			for each (var l:Location in available_moves)
@@ -154,6 +155,8 @@ package War_game
 		
 		private function show_in_range(unit:Unit):void
 		{
+			screens.un_highlight();
+			
 			//Get Circle
 			var locations:Array = map.get_circle(unit.location, unit.range);
 			

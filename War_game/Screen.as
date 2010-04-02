@@ -10,6 +10,8 @@ package War_game
 	
 	public class Screen extends Board_object
 	{
+		private var border:Sprite;
+		
 		public function Screen(new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);
@@ -23,20 +25,25 @@ package War_game
 			bitmap.transform.colorTransform = resultColorTransform;
 		}
 		
+		public function un_stroke():void
+		{
+			this.removeChild(border);
+		}
+		
 		public function stroke():void
 		{
-			var line:Sprite = new Sprite();
-			line.graphics.lineStyle(2, 0x990000, .75);
-			line.graphics.moveTo(0, sector_height / 4);
-			line.graphics.lineTo(sector_width / 2, 0);
-			line.graphics.lineTo(sector_width, sector_height / 4);
+			border = new Sprite();
+			border.graphics.lineStyle(2, 0x990000, .75);
+			border.graphics.moveTo(0, sector_height / 4);
+			border.graphics.lineTo(sector_width / 2, 0);
+			border.graphics.lineTo(sector_width, sector_height / 4);
 			
-			line.graphics.lineTo(sector_width, 3 * sector_height / 4);
-			line.graphics.lineTo(sector_width / 2, sector_height);
-			line.graphics.lineTo(0, 3 * sector_height / 4);
-			line.graphics.lineTo(0, sector_height / 4);
+			border.graphics.lineTo(sector_width, 3 * sector_height / 4);
+			border.graphics.lineTo(sector_width / 2, sector_height);
+			border.graphics.lineTo(0, 3 * sector_height / 4);
+			border.graphics.lineTo(0, sector_height / 4);
 			
-			this.addChild(line);
+			this.addChild(border);
 		}
 		
 		public function reveal():void

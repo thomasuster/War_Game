@@ -9,8 +9,8 @@ package War_game
 	{
 		protected var bitmap:Bitmap;
 		public var location:Location;
-		private static const sector_width:int = 34;
-		private static const sector_height:int = 40;
+		public static const sector_width:int = 34;
+		public static const sector_height:int = 40;
 		
 		public function Board_object(new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
@@ -24,14 +24,14 @@ package War_game
 		public function set_location(new_location:Location):void 
 		{
 			location = new_location;
-			var x:int = new_location.x;
-			var y:int = new_location.y;
+			var index_x:int = new_location.x;
+			var index_y:int = new_location.y;
 			//Position
-			if (y % 2 == 0)
-				this.x = x * sector_width;
+			if (index_y % 2 == 0)
+				this.x = index_x * sector_width;
 			else
-				this.x = x * sector_width + sector_width/2;
-			this.y = y / 2 * sector_height * 3 / 2;
+				this.x = index_x * sector_width + sector_width/2;
+			this.y = index_y / 2 * sector_height * 3 / 2;
 		}
 		
 		public function image(new_bitmapData:BitmapData):void

@@ -201,5 +201,10 @@ package War_game
 		{
 			return hexagon_grid.get_circle(location, r);
 		}
+		
+		public function get_sector(location:Location):Sector
+		{
+			return map[location.x][location.y];
+		}
 	}
 }

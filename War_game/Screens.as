@@ -16,14 +16,16 @@ package War_game
 		private var hexagon_grid:Hexagon_grid;
 		private var screens:Array;
 		private var revealed:Object;
+		private var highlighted:Object;
 		private var image_resource:Image_resource;
 		
 		public function Screens(_sizeX:int, _sizeY:int, _image_resource:Image_resource):void
 		{
+			hexagon_grid = new Hexagon_grid(_sizeX, _sizeY);
+			screens = hexagon_grid.grid;
 			image_resource = _image_resource;
 			revealed = new Object();
-			hexagon_grid = new Hexagon_grid(_sizeX,_sizeY);
-			screens = hexagon_grid.grid;
+			highlighted = new Object();
 			this.visible = false;
 		}
 		
@@ -44,6 +46,11 @@ package War_game
 			return hexagon_grid.get_circle(location, r);
 		}
 		
+		public function highlight(location:Location):void
+		{
+			highlighted[location] = location;
+			screens[location.x][location.y].stroke();
+		}
 		
 		public function insert(img:BitmapData, location:Location):void
 		{

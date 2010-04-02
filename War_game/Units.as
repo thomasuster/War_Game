@@ -54,5 +54,21 @@ package War_game
 			unit.set_location(location);
 		}
 		
+		public function get_unit(location:Location):Unit
+		{
+			return units[location];
+		}
+		
+		public function in_range(unit:Unit, target:Unit):Sprite
+		{
+			var myShape:Sprite = new Sprite();
+			myShape.graphics.lineStyle(2, 0x990000, .75);
+			myShape.graphics.moveTo(unit.x + Board_object.sector_width/2, unit.y + Board_object.sector_height/2);
+			myShape.graphics.lineTo(target.x + Board_object.sector_width/2, target.y + Board_object.sector_height/2);
+			trace("Drew a line from " + unit.x + " " + unit.y + " to " + target.x + " " + target.y);
+			return myShape;
+		}
+		
+		
 	}
 }

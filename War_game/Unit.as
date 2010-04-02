@@ -18,6 +18,7 @@ package War_game
 		
 		private var number_label:TextField;
 		private var number:int;
+		public var range:int;
 		
 		public function Unit(_unit_name:String="empty", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
@@ -32,8 +33,11 @@ package War_game
 				unit_stats = stats.hash;
 			}
 			
-			//Text
+			//stats
+			range = int(unit_stats[unit_name]["range"]);
 			number = int(unit_stats[unit_name]["number"]);
+			
+			//Text
 			number_label = new TextField();
 			number_label.text = String(number);
 			number_label.selectable = false;

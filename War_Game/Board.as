@@ -1,6 +1,7 @@
 package War_game
 {
 	import adobe.utils.XMLUI;
+	import flash.display.Sprite;
 	
 	import mx.core.UIComponent;
 	
@@ -112,6 +113,7 @@ package War_game
 						//trace("true");
 						units.move_unit(active_unit, event.sector.location);
 						show_moves(active_unit);
+						show_in_range(active_unit);
 						//active_unit.visible = true;
 						//this.setChildIndex(units, 0);
 						//screens.visible = true;
@@ -124,6 +126,7 @@ package War_game
 		private function select_unit(event:Unit_event):void
 		{
 			show_moves(event.unit);
+			show_in_range(event.unit);
 		}
 		
 		private function show_moves(unit:Unit):void
@@ -147,7 +150,49 @@ package War_game
 			screens.conceal();
 			for each (var l:Location in available_moves)
 				screens.reveal(l);
-		}		
+		}
+		
+		private function show_in_range(unit:Unit):void
+		{
+			//Get Circle
+			var locations:Array = map.get_circle(unit.location, unit.range);
+			
+			//Remove me and all nulls
+			var targets_locations:Array = locations.filter(function (loc:Location, index:int, arr:Array):Boolean {
+				return (units.get_unit(loc) != null && units.get_unit(loc) != unit)
+			});
+			
+			//For each Target
+			for each(var l:Location in targets_locations)
+			{
+				var target:Unit = units.get_unit(l)
+				
+				screens.highlight(l);
+				
+				//Draw line
+				//var line:Sprite = units.in_range(unit, target);
+				//line.opaqueBackground = 0x00FF00;
+				//this.addChild(line);
+				//Clear Path?
+				/*for each(var loc:Location in locations)
+				{
+					if (loc.toString() != unit.location.toString() && loc.toString() != target.location.toString())
+					{
+						//map.get_sector(loc).visible = false;
+						
+					}
+				}*/
+				//For each create line, test for collision with Mountain, else light up
+				
+			}
+			
+			
+			
+			
+			//Calculate whos in range
+			//var available_moves:Object = 
+				//map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
+		}
 		
 	}
 }

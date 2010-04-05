@@ -33,9 +33,9 @@ package War_game
 		{
 			//Add units
 			var unit:Unit = new Unit(type, image_resource.duplicate_image(type), location);
-			trace("START");
+			//trace("START");
 			units[location] = unit;
-			trace("END");
+			//trace("END");
 			this.addChild(unit);
 			
 			//Unit moving

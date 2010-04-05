@@ -48,6 +48,7 @@ package War_game
 		
 		public function reveal():void
 		{
+			bitmap.visible = false;
 			var resultColorTransform:ColorTransform = new ColorTransform();
 			resultColorTransform.alphaMultiplier = 0.0;
 			resultColorTransform.redMultiplier = 0.0;
@@ -59,6 +60,7 @@ package War_game
 		
 		public function conceal():void
 		{
+			bitmap.visible = true;
 			var resultColorTransform:ColorTransform = new ColorTransform();
 			resultColorTransform.alphaMultiplier = 0.5;
 			resultColorTransform.redMultiplier = 0.0;

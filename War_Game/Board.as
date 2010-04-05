@@ -40,6 +40,7 @@ package War_game
 		public var mode:String;
 		public var tool:String;
 		public var radius:int;
+		private var available_moves:Object;
 		
 		private var active_unit:Unit;
 		private var screens:Screens;
@@ -108,7 +109,7 @@ package War_game
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);
 					//screens.visible = true;
-					if (screens.is_revealed(event.sector.location))
+					if (active_unit != null && available_moves[event.sector.location] != null)
 					{
 						//trace("true");
 						units.move_unit(active_unit, event.sector.location);
@@ -126,16 +127,18 @@ package War_game
 		private function select_unit(event:Unit_event):void
 		{
 			var unit:Unit = event.unit;
-			if (screens.is_highlighted(unit.location))
+			if (active_unit != null && screens.is_highlighted(unit.location))
 			{
 				trace("Initiate Combat");
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
-				combat.engage(map.distance(active_unit.location, unit.location), 
+				/*combat.engage(map.distance(active_unit.location, unit.location), 
 					map[active_unit.location].get_attacking(), map[active_unit.location].get_defending(),
 					map[unit.location].get_attacking(), map[unit.location].get_defending());
+				*/
 			}
 			else
 			{
+				active_unit = unit;
 				show_moves(unit);
 				show_in_range(unit);
 			}
@@ -144,7 +147,6 @@ package War_game
 		private function show_moves(unit:Unit):void
 		{
 			mode = "move_unit"
-			active_unit = unit;
 			
 			//Hide Screens on move
 			screens.visible = true;
@@ -152,12 +154,12 @@ package War_game
 			function hide(event:MouseEvent):void
 			{
 				screens.visible = false;
+				active_unit = null;
 				screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
 			}
 			
 			//Calculate Moves
-			var available_moves:Object = 
-				map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
+			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
 				
 			//Screen
 			screens.conceal();
@@ -183,30 +185,7 @@ package War_game
 				var target:Unit = units.get_unit(l)
 				
 				screens.highlight(l);
-				
-				//Draw line
-				//var line:Sprite = units.in_range(unit, target);
-				//line.opaqueBackground = 0x00FF00;
-				//this.addChild(line);
-				//Clear Path?
-				/*for each(var loc:Location in locations)
-				{
-					if (loc.toString() != unit.location.toString() && loc.toString() != target.location.toString())
-					{
-						//map.get_sector(loc).visible = false;
-						
-					}
-				}*/
-				//For each create line, test for collision with Mountain, else light up
-				
 			}
-			
-			
-			
-			
-			//Calculate whos in range
-			//var available_moves:Object = 
-				//map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
 		}
 		
 	}

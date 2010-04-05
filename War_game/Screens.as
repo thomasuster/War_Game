@@ -38,7 +38,6 @@ package War_game
 			{
 				insert(image_resource.duplicate_image("screen"), l);
 			}
-			
 		}
 		
 		public function distance(location_a:Location, location_b:Location):int

@@ -46,6 +46,10 @@ package War_game
 			return hexagon_grid.get_circle(location, r);
 		}
 		
+		public function is_highlighted(location:Location):Boolean
+		{
+			return (highlighted[location] != null);
+		}
 		public function highlight(location:Location):void
 		{
 			highlighted[location] = location;

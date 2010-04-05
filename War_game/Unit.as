@@ -57,6 +57,11 @@ package War_game
 			this.addChild(number_label);
 		}
 		
+		public function refresh_number():void
+		{
+			number_label.text = String(number);
+		}
+		
 		public override function toString():String
 		{
 			return "Unit";

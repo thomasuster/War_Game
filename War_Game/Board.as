@@ -24,6 +24,7 @@ package War_game
 	import War_game.Map;
 	import War_game.Units;
 	import War_game.Sector_event;
+	import War_game.Combat;
 	
 	
 	
@@ -59,7 +60,6 @@ package War_game
 			units = new Units(image_resource);
 			units.addEventListener(Unit_event.CLICKED, select_unit);
 			screens = new Screens(sizeX, sizeY, image_resource);
-			
 			
 			image_resource.addEventListener("loaded", completeHandler);
 			function completeHandler(event:Event):void
@@ -125,8 +125,18 @@ package War_game
 		
 		private function select_unit(event:Unit_event):void
 		{
-			show_moves(event.unit);
-			show_in_range(event.unit);
+			var unit:Unit = event.unit;
+			if (is_highlighted(unit.location))
+			{
+				trace("Initiate Combat");
+				var combat:Combat = new Combat(active_unit, unit);
+				combat.engage();
+			}
+			else
+			{
+				show_moves(unit);
+				show_in_range(unit);
+			}
 		}
 		
 		private function show_moves(unit:Unit):void

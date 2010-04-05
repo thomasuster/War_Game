@@ -40,7 +40,12 @@ package War_game
 			}
 			
 		}
-					
+		
+		public function distance(location_a:Location, location_b:Location):int
+		{
+			return hexagon_grid.distance(location_a, location_b);
+		}
+			
 		public function get_circle(location:Location, r:int):Array
 		{
 			return hexagon_grid.get_circle(location, r);

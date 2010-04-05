@@ -59,6 +59,7 @@ package War_game
 			return units[location];
 		}
 		
+		/*
 		public function in_range(unit:Unit, target:Unit):Sprite
 		{
 			var myShape:Sprite = new Sprite();
@@ -67,7 +68,7 @@ package War_game
 			myShape.graphics.lineTo(target.x + Board_object.sector_width/2, target.y + Board_object.sector_height/2);
 			trace("Drew a line from " + unit.x + " " + unit.y + " to " + target.x + " " + target.y);
 			return myShape;
-		}
+		}*/
 		
 		
 	}

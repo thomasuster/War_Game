@@ -126,11 +126,13 @@ package War_game
 		private function select_unit(event:Unit_event):void
 		{
 			var unit:Unit = event.unit;
-			if (is_highlighted(unit.location))
+			if (screens.is_highlighted(unit.location))
 			{
 				trace("Initiate Combat");
-				var combat:Combat = new Combat(active_unit, unit);
-				combat.engage();
+				var combat:Combat = new Combat(active_unit, unit, image_resource);
+				combat.engage(map.distance(active_unit.location, unit.location), 
+					map[active_unit.location].get_attacking(), map[active_unit.location].get_defending(),
+					map[unit.location].get_attacking(), map[unit.location].get_defending());
 			}
 			else
 			{
@@ -168,7 +170,7 @@ package War_game
 			screens.un_highlight();
 			
 			//Get Circle
-			var locations:Array = map.get_circle(unit.location, unit.range);
+			var locations:Array = map.get_circle(unit.location, unit.get_range());
 			
 			//Remove me and all nulls
 			var targets_locations:Array = locations.filter(function (loc:Location, index:int, arr:Array):Boolean {

@@ -106,13 +106,13 @@ package War_game
 			
 			for (var x:int = 0; x < sizeX; x++)
 				for (var y:int = 0; y < sizeY; y++)
-					if(map[x][y].type != "empty")
-						s += "\t<s x='" + x + "' y='" + y + "'>" + map[x][y].type + "</s>\n";
+					if(map[x][y].get_name() != "empty")
+						s += "\t<s x='" + x + "' y='" + y + "'>" + map[x][y].get_name() + "</s>\n";
 			
 			/*
 			for (var key:Object in map) {
-				if(map[key].type != "empty")
-				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].type + "</s>\n";
+				if(map[key].get_name() != "empty")
+				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].get_name() + "</s>\n";
 			}*/
 			s += "</map>\n";
 			var xml:XML = new XML(s);
@@ -173,7 +173,7 @@ package War_game
 			
 			//calc
 			var sector:Sector = map[location.x][location.y];
-			var difficulty:int = int(Sector.sector_stats[sector.type]["infantry_moves"]);
+			var difficulty:int = int(Sector.sector_stats[sector.get_name()]["infantry_moves"]);
 			var new_distance:int = new int(distance-difficulty);
 			
 			//Special unmovable case
@@ -195,6 +195,11 @@ package War_game
 					_available_moves(l, new_distance, moves);
 				}
 			}
+		}
+		
+		public function distance(location_a:Location, location_b:Location):int 
+		{
+			return hexagon_grid.distance(location_a, location_b);
 		}
 		
 		public function get_circle(location:Location, r:int):Array

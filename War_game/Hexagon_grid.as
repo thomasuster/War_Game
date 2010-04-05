@@ -34,6 +34,25 @@ package War_game
 		}
 		
 		/**
+		* Returns the distance between to locations
+		*/
+		public function distance(location_a:Location, location_b:Location):int 
+		{
+			var delta_x:int;
+			var delta_y:int;
+			
+			if (location_a.y % 2 == 0 && location_b.y % 2 == 0 //both even
+			||  location_a.y % 2 != 0 && location_b.y % 2 != 0)//both odd
+				delta_x = Math.abs(location_a.x - location_b.x) - 1;
+			else //Even Odd
+				delta_x = Math.abs(location_a.x - location_b.x);
+				
+			delta_y = Math.abs(location_a.y - location_b.y);
+			
+			return (delta_x + delta_y);
+		}
+		
+		/**
 		* Returns an array of locations for a circle.
 		*/
 		public function get_circle(location:Location, r:int):Array 

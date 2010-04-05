@@ -17,8 +17,7 @@ package War_game
 		public var unit_name:String;
 		
 		private var number_label:TextField;
-		private var number:int;
-		public var range:int;
+		public var number:int;
 		
 		public function Unit(_unit_name:String="empty", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
@@ -33,8 +32,7 @@ package War_game
 				unit_stats = stats.hash;
 			}
 			
-			//stats
-			range = int(unit_stats[unit_name]["range"]);
+			//Dynamic Stats
 			number = int(unit_stats[unit_name]["number"]);
 			
 			//Text
@@ -61,6 +59,28 @@ package War_game
 		{
 			number_label.text = String(number);
 		}
+		
+		
+		public function get_number():int { return number; }
+		
+		
+		public function get_name():String { return unit_name; }
+			
+		public function get_type():String { return unit_stats[unit_name]["type"]; }
+		
+		public function get_tier():int { return unit_stats[unit_name]["tier"]; }
+		
+		public function get_weapon():String { return unit_stats[unit_name]["weapon"]; }
+		
+		public function get_range():int { return unit_stats[unit_name]["range"]; }
+		
+		public function get_optimum_range():int { return unit_stats[unit_name]["optimum_range"]; }
+		
+		public function get_bullet_defense():int { return unit_stats[unit_name]["bullet_defense"]; }
+		
+		public function get_shell_defense():int { return unit_stats[unit_name]["shell_defense"]; }
+		
+		public function get_moves():int { return unit_stats[unit_name]["moves"]; }
 		
 		public override function toString():String
 		{

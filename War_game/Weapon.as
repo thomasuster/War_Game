@@ -24,15 +24,15 @@ package War_game
 		}
 		
 		public function get_name():String
-			return weapon_stats[weapon_name]["name"];
+			{ return weapon_stats[weapon_name]["name"];}
 		public function get_type():String
-			return weapon_stats[weapon_name]["type"];
+			{ return weapon_stats[weapon_name]["type"];}
 		public function get_power():int
-			return int(weapon_stats[weapon_name]["power"]);
+			{ return int(weapon_stats[weapon_name]["power"]);}
 		public function get_number():int
-			return int(weapon_stats[weapon_name]["number"]);
+			{ return int(weapon_stats[weapon_name]["number"]);}
 			
-		public override function toString():String
+		public function toString():String
 		{
 			return "Weapon";
 		}

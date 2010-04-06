@@ -126,11 +126,12 @@ package War_game
 		
 		private function select_unit(event:Unit_event):void
 		{
+			//init
 			var unit:Unit = event.unit;
+			
+			//Combat
 			if (active_unit != null && screens.is_highlighted(unit.location))
 			{
-				trace("Initiate Combat");
-				
 				//Init
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
 				var attacker_terrain:Sector = map.get_sector(active_unit.location);
@@ -141,22 +142,33 @@ package War_game
 					attacker_terrain.get_attacking(), attacker_terrain.get_defending(),
 					defender_terrain.get_attacking(), defender_terrain.get_defending());
 				
+				//Show outcomes
 				active_unit.refresh_number();
 				unit.refresh_number();
 				
+				//Cleanup
 				for each (var d:Unit in destroyed)
+				{
+					if (d == active_unit)
+					{
+						active_unit = null;
+						screens.visible = false;
+					}
 					units.destroy_unit(d.location);
-					
-				
-				
+				}
 			}
 			else
 			{
+				//Set Active unit
 				active_unit = unit;
 			}
 			
-			show_moves(active_unit);
-			show_in_range(active_unit);
+			if (active_unit != null)
+			{
+				//Show options
+				show_moves(active_unit);
+				show_in_range(active_unit);
+			}
 		}
 		
 		private function show_moves(unit:Unit):void

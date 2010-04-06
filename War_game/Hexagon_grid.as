@@ -38,18 +38,17 @@ package War_game
 		*/
 		public function distance(location_a:Location, location_b:Location):int 
 		{
-			var delta_x:int;
-			var delta_y:int;
+			var delta_x:int = Math.abs(location_a.x - location_b.x);
+			var delta_y:int = Math.abs(location_a.y - location_b.y);
+			var distance_x:int;
+			var distance_y:int;
 			
-			if (location_a.y % 2 == 0 && location_b.y % 2 == 0 //both even
-			||  location_a.y % 2 != 0 && location_b.y % 2 != 0)//both odd
-				delta_x = Math.abs(location_a.x - location_b.x) - 1;
-			else //Even Odd
-				delta_x = Math.abs(location_a.x - location_b.x);
-				
-			delta_y = Math.abs(location_a.y - location_b.y);
+			//distance_x = Math.floor(delta_y / 2);
 			
-			return (delta_x + delta_y);
+			//if (location_a.y % 2 != 0 && location_b.y % 2 == 0)
+				//distance_x++;
+			
+			return delta_y;
 		}
 		
 		/**

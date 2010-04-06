@@ -131,6 +131,7 @@ package War_game
 			{
 				trace("Initiate Combat");
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
+				trace(map.distance(active_unit.location, unit.location));
 				/*combat.engage(map.distance(active_unit.location, unit.location), 
 					map[active_unit.location].get_attacking(), map[active_unit.location].get_defending(),
 					map[unit.location].get_attacking(), map[unit.location].get_defending());
@@ -160,10 +161,15 @@ package War_game
 			
 			//Calculate Moves
 			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
+			var a:Array = map.visual_test_distance(active_unit.location, 2);
 				
 			//Screen
 			screens.conceal();
-			for each (var l:Location in available_moves)
+			//for each (var l:Location in available_moves)
+				//screens.reveal(l);
+				
+				
+			for each (var l:Location in a)
 				screens.reveal(l);
 		}
 		
@@ -185,6 +191,7 @@ package War_game
 				var target:Unit = units.get_unit(l)
 				
 				screens.highlight(l);
+				screens.reveal(l);
 			}
 		}
 		

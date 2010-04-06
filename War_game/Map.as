@@ -197,6 +197,23 @@ package War_game
 			}
 		}
 		
+		public function visual_test_distance(location:Location, r:int):Array
+		{
+			//For testing new distance function, will be removed
+			var circle:Array = new Array();
+			for (var x:int = 0; x < sizeX; x++)
+			{
+				for (var y:int = 0; y < sizeY; y++)
+				{
+					var l:Location = new Location(x,y);
+					var distance:int = distance(location, l);
+					if (distance <= r)
+						circle.push(l);
+				}
+			}
+			return circle;
+		}
+	
 		public function distance(location_a:Location, location_b:Location):int 
 		{
 			return hexagon_grid.distance(location_a, location_b);

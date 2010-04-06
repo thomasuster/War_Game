@@ -43,12 +43,23 @@ package War_game
 			var distance_x:int;
 			var distance_y:int;
 			
-			//distance_x = Math.floor(delta_y / 2);
+			
+			distance_x = Math.floor(delta_y / 2);
 			
 			//if (location_a.y % 2 != 0 && location_b.y % 2 == 0)
-				//distance_x++;
 			
-			return delta_y;
+			
+			//	distance_x++;
+			
+			if(delta_x == 0)
+				return delta_y;
+			else
+				return delta_y + (delta_x - distance_x);
+			
+			
+				
+			
+			
 		}
 		
 		/**

@@ -30,6 +30,20 @@ private var map_menu:XMLList =
 	</>;
 	
 [Bindable]
+public var color_collection:XMLListCollection;
+private var color_menu:XMLList =
+	<>
+		<menuitem label="Color Menu" data="top">
+			<menuitem label="Red" data="red"/>
+			<menuitem label="Green" data="green"/>
+			<menuitem label="Blue" data="blue"/>
+			<menuitem label="Yellow" data="yellow"/>
+			<menuitem label="Teal" data="teal"/>
+			<menuitem label="Pink" data="pink"/>
+		</menuitem>
+	</>;
+	
+[Bindable]
 public var infantry_collection:XMLListCollection;
 private var infantry_menu:XMLList =
 	<>
@@ -101,6 +115,7 @@ public var water:Class;
 private function initCollections():void {
 	game_collection = new XMLListCollection(game_menu);
 	map_collection = new XMLListCollection(map_menu);
+	color_collection = new XMLListCollection(color_menu);
 	infantry_collection = new XMLListCollection(infantry_menu);
 	vehicle_collection = new XMLListCollection(vehicle_menu);
 	temp_collection = new XMLListCollection(temp_menu);
@@ -117,6 +132,12 @@ private function menuHandler(event:MenuEvent):void
 	board.mode = "sector";
 	board.tool = s;
 	//CursorManager.setCursor(eval(event.item));
+}
+
+private function color_menu_Handler(event:MenuEvent):void 
+{
+	var s:String = event.item.@data;
+	board.color_mode = s;
 }
 
 // Event handler for the infantry_menu control's itemClick event.

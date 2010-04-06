@@ -7,6 +7,11 @@ package War_game
 	import flash.display.BitmapData;
 	import flash.text.TextFormat;
 	
+	//color
+	import flash.filters.BitmapFilter;
+    import flash.filters.BitmapFilterQuality;
+    import flash.filters.GlowFilter;
+	
 	public class Unit extends Board_object
 	{
 		//Static Stats
@@ -16,13 +21,20 @@ package War_game
 		public static var unit_stats:Object;
 		public var unit_name:String;
 		
+		//Number
 		private var number_label:TextField;
 		public var number:int;
 		
-		public function Unit(_unit_name:String="empty", new_bitmapData:BitmapData = null, new_location:Location=null):void
+		//Color
+		private var color:String;
+		private static var colors:Object;
+		
+		public function Unit(_unit_name:String="empty", _color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);
 			unit_name = _unit_name;
+			color = _color;
+			
 			//trace("unit_name = " + unit_name);
 			
 			//Static Stats
@@ -31,6 +43,24 @@ package War_game
 				stats = new Stats(stats_xml);
 				unit_stats = stats.hash;
 			}
+			
+			//Colors
+			if (colors == null)
+			{
+				colors = new Object();
+				colors["red"] = 0xFF0000;
+				colors["purple"] = 0x7300E4;
+				colors["orange"] = 0xFF7700;
+				colors["yellow"] = 0xFFFF00;
+				colors["green"] = 0x00FF00;
+				colors["teal"] = 0x00FFFF;
+				colors["blue"] = 0x0000FF;
+				colors["pink"] = 0xFF00FF;
+			}
+			var filter:BitmapFilter = get_bitmap_filter();
+            var my_filters:Array = new Array();
+            my_filters.push(filter);
+            filters = my_filters;
 			
 			//Dynamic Stats
 			number = int(unit_stats[unit_name]["number"]);
@@ -54,6 +84,26 @@ package War_game
 			
 			this.addChild(number_label);
 		}
+		
+		private function get_bitmap_filter():BitmapFilter {
+            var glow_color:Number = colors[color];
+            var alpha:Number = 0.5;
+            var blurX:Number = 1;
+            var blurY:Number = 1;
+            var strength:Number = 1;
+            var inner:Boolean = false;
+            var knockout:Boolean = false;
+            var quality:Number = BitmapFilterQuality.HIGH;
+
+            return new GlowFilter(glow_color,
+                                  alpha,
+                                  blurX,
+                                  blurY,
+                                  strength,
+                                  quality,
+                                  inner,
+                                  knockout);
+        }
 		
 		public function refresh_number():void
 		{

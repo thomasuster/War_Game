@@ -29,10 +29,10 @@ package War_game
 			units = new Object();
 		}
 		
-		public function make_unit(location:Location, type:String):void
+		public function make_unit(location:Location, type:String, color:String):void
 		{
 			//Add units
-			var unit:Unit = new Unit(type, image_resource.duplicate_image(type), location);
+			var unit:Unit = new Unit(type, color, image_resource.duplicate_image(type), location);
 			//trace("START");
 			units[location] = unit;
 			//trace("END");

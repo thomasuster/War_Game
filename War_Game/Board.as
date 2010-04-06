@@ -37,10 +37,12 @@ package War_game
 		private const sizeX:int = 23;
 		private const sizeY:int = 20;
 		
+		//Tools
 		public var mode:String;
 		public var tool:String;
 		public var radius:int;
 		private var available_moves:Object;
+		public var color_mode:String;
 		
 		private var active_unit:Unit;
 		private var screens:Screens;
@@ -104,7 +106,7 @@ package War_game
 					break;
 				case "unit":
 					//make_unit(event.sector.location, tool);
-					units.make_unit(event.sector.location, tool);
+					units.make_unit(event.sector.location, tool, color_mode);
 					break;
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);

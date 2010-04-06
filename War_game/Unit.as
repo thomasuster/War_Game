@@ -51,7 +51,7 @@ package War_game
 			{
 				colors = new Object();
 				colors["red"] = 0xFF0000;
-				colors["purple"] = 0x7300E4;
+				colors["purple"] = 0x9D00E4;
 				colors["orange"] = 0xFF7700;
 				colors["yellow"] = 0xFFFF00;
 				colors["green"] = 0x00FF00;
@@ -63,11 +63,12 @@ package War_game
 			trace(Conversion.rgb_color(colors[color], "red"));
 			trace(Conversion.rgb_color(colors[color], "green"));
 			trace(Conversion.rgb_color(colors[color], "blue"));
+			trace("color = " + color);
 			//var child:DisplayObject = DisplayObject(event.target.loader);
 			var matrix:Array = new Array();
-			var red:int = Conversion.rgb_color(colors[color], "red")/255.0;
-			var green:int = Conversion.rgb_color(colors[color], "green")/255.0;
-			var blue:int = Conversion.rgb_color(colors[color], "blue")/255.0;
+			var red:Number = Conversion.rgb_color(colors[color], "red")/255.0;
+			var green:Number = Conversion.rgb_color(colors[color], "green")/255.0;
+			var blue:Number = Conversion.rgb_color(colors[color], "blue")/255.0;
             matrix = matrix.concat([red, 0, 0, 0, 0]); // red
             matrix = matrix.concat([0, green, 0, 0, 0]); // green
             matrix = matrix.concat([0, 0, blue, 0, 0]); // blue

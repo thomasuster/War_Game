@@ -29,13 +29,13 @@ package War_game
 
 		public function get_name():String { return sector_name; }
 			
-		public function get_infantry_moves():String { return sector_stats[name]["infantry_moves"]; }
+		public function get_infantry_moves():String { return sector_stats[sector_name]["infantry_moves"]; }
 			
-		public function get_vehicle_moves():int { return int(sector_stats[name]["vehicle_moves"]); }
+		public function get_vehicle_moves():int { return int(sector_stats[sector_name]["vehicle_moves"]); }
 			
-		public function get_attacking():int { return int(sector_stats[name]["attacking"]); }
+		public function get_attacking():int { return int(sector_stats[sector_name]["attacking"]); }
 			
-		public function get_defending():int { return int(sector_stats[name]["defending"]); }
+		public function get_defending():int { return int(sector_stats[sector_name]["defending"]); }
 			
 		public override function toString():String { return sector_name; }
 	}

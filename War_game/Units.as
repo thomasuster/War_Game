@@ -54,6 +54,11 @@ package War_game
 			unit.set_location(location);
 		}
 		
+		public function destroy_unit(location:Location):void
+		{
+			this.removeChild(units[location]);
+			delete units[location];
+		}
 		public function get_unit(location:Location):Unit
 		{
 			return units[location];

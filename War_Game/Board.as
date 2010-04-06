@@ -130,19 +130,33 @@ package War_game
 			if (active_unit != null && screens.is_highlighted(unit.location))
 			{
 				trace("Initiate Combat");
+				
+				//Init
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
-				trace(map.distance(active_unit.location, unit.location));
-				/*combat.engage(map.distance(active_unit.location, unit.location), 
-					map[active_unit.location].get_attacking(), map[active_unit.location].get_defending(),
-					map[unit.location].get_attacking(), map[unit.location].get_defending());
-				*/
+				var attacker_terrain:Sector = map.get_sector(active_unit.location);
+				var defender_terrain:Sector = map.get_sector(unit.location);
+				
+				//Perform Combat
+				var destroyed:Array = combat.engage(map.distance(active_unit.location, unit.location), 
+					attacker_terrain.get_attacking(), attacker_terrain.get_defending(),
+					defender_terrain.get_attacking(), defender_terrain.get_defending());
+				
+				active_unit.refresh_number();
+				unit.refresh_number();
+				
+				for each (var d:Unit in destroyed)
+					units.destroy_unit(d.location);
+					
+				
+				
 			}
 			else
 			{
 				active_unit = unit;
-				show_moves(unit);
-				show_in_range(unit);
 			}
+			
+			show_moves(active_unit);
+			show_in_range(active_unit);
 		}
 		
 		private function show_moves(unit:Unit):void
@@ -161,16 +175,19 @@ package War_game
 			
 			//Calculate Moves
 			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
-			var a:Array = map.visual_test_distance(active_unit.location, 10);
-				
+			
+			//Distance functon testing
+			//var a:Array = map.visual_test_distance(active_unit.location, 10);
+			//for each (var l:Location in a)
+			//screens.reveal(l);
+			
 			//Screen
 			screens.conceal();
-			//for each (var l:Location in available_moves)
-				//screens.reveal(l);
-				
-				
-			for each (var l:Location in a)
+			for each (var l:Location in available_moves)
 				screens.reveal(l);
+				
+				
+			
 		}
 		
 		private function show_in_range(unit:Unit):void

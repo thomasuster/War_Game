@@ -1,7 +1,7 @@
 <sectors>
-	<sector name="grass"infantry_moves="1"vehicle_moves="1"></sector>
-	<sector name="forest"infantry_moves="2"vehicle_moves="4"></sector>
-	<sector name="water"infantry_moves="-1"vehicle_moves="-1"></sector>
-	<sector name="mountain"infantry_moves="3"vehicle_moves="-1"></sector>
-	<sector name="hill"infantry_moves="2"vehicle_moves="2"></sector>
+	<sector name="grass"infantry_moves="1"vehicle_moves="1"attacking="0"defending="0"></sector>
+	<sector name="forest"infantry_moves="2"vehicle_moves="4"attacking="0"defending="1"></sector>
+	<sector name="water"infantry_moves="-1"vehicle_moves="-1"attacking="0"defending="0"></sector>
+	<sector name="mountain"infantry_moves="3"vehicle_moves="-1"attacking="1"defending="2"></sector>
+	<sector name="hill"infantry_moves="2"vehicle_moves="2"attacking="1"defending="1"></sector>
 </sectors>

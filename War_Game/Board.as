@@ -55,6 +55,7 @@ package War_game
 			radius = 1;
 			active_unit = null;
 			opaqueBackground = "0xFFFFFF";
+			color_mode = "red";
 			tool = "grass";
 
 			image_resource = new Image_resource("images.xml");

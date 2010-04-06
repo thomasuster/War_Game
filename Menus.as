@@ -40,6 +40,8 @@ private var color_menu:XMLList =
 			<menuitem label="Yellow" data="yellow"/>
 			<menuitem label="Teal" data="teal"/>
 			<menuitem label="Pink" data="pink"/>
+			<menuitem label="Orange" data="orange"/>
+			<menuitem label="Purple" data="purple"/>
 		</menuitem>
 	</>;
 	

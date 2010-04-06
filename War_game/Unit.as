@@ -1,16 +1,18 @@
 package War_game
 {
+	import flash.geom.Matrix;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
+	
+	import Standard.Conversion;
 	import War_game.Board_object;
 	import War_game.Stats;
+	
 	import flash.display.BitmapData;
 	import flash.text.TextFormat;
 	
 	//color
-	import flash.filters.BitmapFilter;
-    import flash.filters.BitmapFilterQuality;
-    import flash.filters.GlowFilter;
+	import flash.filters.ColorMatrixFilter;
 	
 	public class Unit extends Board_object
 	{
@@ -57,10 +59,29 @@ package War_game
 				colors["blue"] = 0x0000FF;
 				colors["pink"] = 0xFF00FF;
 			}
-			var filter:BitmapFilter = get_bitmap_filter();
-            var my_filters:Array = new Array();
-            my_filters.push(filter);
-            filters = my_filters;
+			//trace(Conversion.to_hex_string(0xFF0000));
+			trace(Conversion.rgb_color(colors[color], "red"));
+			trace(Conversion.rgb_color(colors[color], "green"));
+			trace(Conversion.rgb_color(colors[color], "blue"));
+			//var child:DisplayObject = DisplayObject(event.target.loader);
+			var matrix:Array = new Array();
+			var red:int = Conversion.rgb_color(colors[color], "red")/255.0;
+			var green:int = Conversion.rgb_color(colors[color], "green")/255.0;
+			var blue:int = Conversion.rgb_color(colors[color], "blue")/255.0;
+            matrix = matrix.concat([red, 0, 0, 0, 0]); // red
+            matrix = matrix.concat([0, green, 0, 0, 0]); // green
+            matrix = matrix.concat([0, 0, blue, 0, 0]); // blue
+            matrix = matrix.concat([0, 0, 0, 1, 0]); // alpha
+			var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
+			var filters:Array = new Array();
+            filters.push(filter);
+            bitmap.filters = filters;
+			
+			
+
+			
+			
+			
 			
 			//Dynamic Stats
 			number = int(unit_stats[unit_name]["number"]);
@@ -84,26 +105,6 @@ package War_game
 			
 			this.addChild(number_label);
 		}
-		
-		private function get_bitmap_filter():BitmapFilter {
-            var glow_color:Number = colors[color];
-            var alpha:Number = 0.5;
-            var blurX:Number = 1;
-            var blurY:Number = 1;
-            var strength:Number = 1;
-            var inner:Boolean = false;
-            var knockout:Boolean = false;
-            var quality:Number = BitmapFilterQuality.HIGH;
-
-            return new GlowFilter(glow_color,
-                                  alpha,
-                                  blurX,
-                                  blurY,
-                                  strength,
-                                  quality,
-                                  inner,
-                                  knockout);
-        }
 		
 		public function refresh_number():void
 		{

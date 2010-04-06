@@ -27,7 +27,10 @@
 		dataProvider="{map_collection}" />
 	
 	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
-		dataProvider="{unit_collection}" />
+		dataProvider="{infantry_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
+		dataProvider="{vehicle_collection}" />
 		
 	<mx:MenuBar labelField="@label" itemClick="temp_menu_Handler(event);" 
 		dataProvider="{temp_collection}" />

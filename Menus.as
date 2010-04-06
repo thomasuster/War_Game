@@ -30,10 +30,10 @@ private var map_menu:XMLList =
 	</>;
 	
 [Bindable]
-public var unit_collection:XMLListCollection;
-private var unit_menu:XMLList =
+public var infantry_collection:XMLListCollection;
+private var infantry_menu:XMLList =
 	<>
-		<menuitem label="Unit Menu" data="top">
+		<menuitem label="infantry Menu" data="top">
 			<menuitem label="Engineer" data="engineer"/>
 			<menuitem label="Infantry" data="infantry"/>
 			<menuitem label="MG Team" data="mg_team"/>
@@ -41,6 +41,20 @@ private var unit_menu:XMLList =
 			<menuitem label="AT Team" data="at_team"/>
 			<menuitem label="Officer" data="officer"/>
 			<menuitem label="Special Forces" data="special_forces"/>
+			<menuitem label="Sniper" data="sniper"/>
+		</menuitem>
+	</>;
+	
+[Bindable]
+public var vehicle_collection:XMLListCollection;
+private var vehicle_menu:XMLList =
+	<>
+		<menuitem label="Vehicle Menu" data="top">
+			<menuitem label="Light Tank" data="light_tank"/>
+			<menuitem label="Halftrack" data="halftrack"/>
+			<menuitem label="Jeep" data="jeep"/>
+			<menuitem label="Tank" data="tank"/>
+			<menuitem label="Artillary" data="artillary"/>
 		</menuitem>
 	</>;
 
@@ -87,7 +101,8 @@ public var water:Class;
 private function initCollections():void {
 	game_collection = new XMLListCollection(game_menu);
 	map_collection = new XMLListCollection(map_menu);
-	unit_collection = new XMLListCollection(unit_menu);
+	infantry_collection = new XMLListCollection(infantry_menu);
+	vehicle_collection = new XMLListCollection(vehicle_menu);
 	temp_collection = new XMLListCollection(temp_menu);
 }
 
@@ -104,16 +119,13 @@ private function menuHandler(event:MenuEvent):void
 	//CursorManager.setCursor(eval(event.item));
 }
 
-// Event handler for the unit_menu control's itemClick event.
+// Event handler for the infantry_menu control's itemClick event.
 private function unit_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
 	board.mode = "unit";
 	board.tool = s;
 	board.tool
-	trace("working");
-	
-	
 }
 
 // Event handler for the unit_menu control's itemClick event.

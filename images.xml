@@ -12,7 +12,7 @@
 		<i name = "hill">hill.png</i>
 	</directory>
 	
-	<directory url = "images/units/">
+	<directory url = "images/units/infantry/">
 		<i name = "engineer">engineer.png</i>
 		<i name = "at_team">at_team.png</i>
 		<i name = "infantry">infantry.png</i>
@@ -21,5 +21,13 @@
 		<i name = "officer">officer.png</i>
 		<i name = "sniper">sniper.png</i>
 		<i name = "special_forces">special_forces.png</i>
+	</directory>
+	
+	<directory url = "images/units/vehicles/">
+		<i name = "jeep">jeep.png</i>
+		<i name = "halftrack">halftrack.png</i>
+		<i name = "light_tank">light_tank.png</i>
+		<i name = "tank">tank.png</i>
+		<i name = "artillary">artillary.png</i>
 	</directory>
 </images>

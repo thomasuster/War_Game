@@ -40,21 +40,43 @@ package War_game
 		{
 			var delta_x:int = Math.abs(location_a.x - location_b.x);
 			var delta_y:int = Math.abs(location_a.y - location_b.y);
-			var distance_x:int;
-			var distance_y:int;
 			
+			if (location_a.x < location_b.x)
+			{
+				if (location_a.y % 2 != 0 && location_b.y % 2 == 0)
+					delta_x--;
+			}
+			else if (location_a.x > location_b.x)
+			{
+				if (location_a.y % 2 == 0 && location_b.y % 2 != 0)
+					delta_x--;
+			}
+				
+			var possible_x_traveled:int;
 			
-			distance_x = Math.floor(delta_y / 2);
+			//diagonal travel
+			possible_x_traveled = Math.floor(delta_y / 2);
 			
-			//if (location_a.y % 2 != 0 && location_b.y % 2 == 0)
+			if (delta_x > possible_x_traveled)
+				delta_x -= possible_x_traveled;
+			else
+				delta_x = 0;
+			
+			//if (delta_x <= 0)
+			//	return 0;
+			//return 10;
+			
+			//
 			
 			
 			//	distance_x++;
 			
-			if(delta_x == 0)
+			/*if(delta_x == 0)
 				return delta_y;
 			else
-				return delta_y + (delta_x - distance_x);
+			*/
+			
+			return delta_y + delta_x;
 			
 			
 				

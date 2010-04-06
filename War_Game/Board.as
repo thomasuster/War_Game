@@ -161,7 +161,7 @@ package War_game
 			
 			//Calculate Moves
 			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
-			var a:Array = map.visual_test_distance(active_unit.location, 2);
+			var a:Array = map.visual_test_distance(active_unit.location, 10);
 				
 			//Screen
 			screens.conceal();

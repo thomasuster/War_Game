@@ -1,3 +1,8 @@
 <h1>Welcome, this will be some sort of Dashboard</h1>
 It's <%= Time.now %>
 <!--We have <%= pluralize(@total_orders, "order" ) %>.-->
+
+<br />
+
+<%= link_to 'Join Game', :controller => 'game', :action => 'join' %><br />
+<%= link_to 'Setup Game', :controller => 'game', :action => 'setup' %><br />

@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<% if session[:user_uuid] %>
+	<%= link_to 'Dashboard', :controller => 'user', :action => 'index' %><br />
+	<%= link_to 'Logout', :controller => 'user', :action => 'logout' %>
+<% end %>
+
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>

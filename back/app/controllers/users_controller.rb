@@ -1,4 +1,16 @@
 class UsersController < ApplicationController
+  before_filter :authorize, :except => :create
+  
+	protected
+	def authorize
+		unless (User.find_by_uuid(session[:user_uuid]) && User.find_by_uuid(session[:user_uuid]).email == "thomasuster@gmail.com")
+				flash[:notice] = "If you're an admin, please login."
+				redirect_to :controller => 'user', :action => 'login'
+		end
+	end
+  
+  public
+  
   # GET /users
   # GET /users.xml
   def index

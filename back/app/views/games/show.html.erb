@@ -1,0 +1,38 @@
+<p>
+  <b>Uuid:</b>
+  <%=h @game.uuid %>
+</p>
+
+<p>
+  <b>Owner uuid:</b>
+  <%=h @game.owner_uuid %>
+</p>
+
+<p>
+  <b>Player uuid:</b>
+  <%=h @game.player_uuid %>
+</p>
+
+<p>
+  <b>Turn expiration:</b>
+  <%=h @game.turn_expiration %>
+</p>
+
+<p>
+  <b>Turn speed:</b>
+  <%=h @game.turn_speed %>
+</p>
+
+<p>
+  <b>Map uuid:</b>
+  <%=h @game.map_uuid %>
+</p>
+
+<p>
+  <b>Current map:</b>
+  <%=h @game.current_map %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

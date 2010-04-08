@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uuid: MyString
+  owner_uuid: MyString
+  player_uuid: MyString
+  turn_expiration: 2010-04-08 15:05:26
+  turn_speed: 2010-04-08 15:05:26
+  map_uuid: MyString
+  current_map: 
+
+two:
+  uuid: MyString
+  owner_uuid: MyString
+  player_uuid: MyString
+  turn_expiration: 2010-04-08 15:05:26
+  turn_speed: 2010-04-08 15:05:26
+  map_uuid: MyString
+  current_map: 

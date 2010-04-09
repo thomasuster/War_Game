@@ -1,8 +1,18 @@
 <h1>New game</h1>
+ 
+<%
+map = Map.new
+maps = map.get_maps
+print "Hello world\n"
+%>
+
+<% maps.each do |m| %>
+  <p><%= m[:uuid].to_s + "\n" %></p>
+<% end %>
 
 <% form_for(@game) do |f| %>
   <%= f.error_messages %>
-
+<!--
   <p>
     <%= f.label :owner_uuid %><br />
     <%= f.text_field :owner_uuid %>
@@ -14,11 +24,13 @@
   <p>
     <%= f.label :turn_expiration %><br />
     <%= f.datetime_select :turn_expiration %>
-  </p>
+  </p>-->
   <p>
     <%= f.label :turn_speed %><br />
     <%= f.datetime_select :turn_speed %>
   </p>
+  
+  <!--
   <p>
     <%= f.label :map_uuid %><br />
     <%= f.text_field :map_uuid %>
@@ -27,6 +39,7 @@
     <%= f.label :current_map %><br />
     <%= f.text_field :current_map %>
   </p>
+  -->
   <p>
     <%= f.submit 'Create' %>
   </p>

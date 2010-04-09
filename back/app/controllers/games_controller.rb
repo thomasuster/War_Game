@@ -41,12 +41,12 @@ class GamesController < ApplicationController
   # POST /games.xml
   def create
 	u = User.find_by_uuid(session[:user_uuid])
-	#print "\n\n\n\n"
-	#print params[:game]
-	#print "\n\n\n\n"
-	
 	params[:game][:owner_uuid] = u.uuid;
 	params[:game][:player_uuid] = u.uuid;
+	
+	
+	m = Map.find_by_uuid(params[:game][:map_uuid])
+	params[:game][:current_map] = m.data;
 	
 	
     @game = Game.new(params[:game])

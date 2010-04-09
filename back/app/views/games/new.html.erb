@@ -1,14 +1,4 @@
 <h1>New game</h1>
- 
-<%
-map = Map.new
-maps = map.get_maps
-print "Hello world\n"
-%>
-
-<% maps.each do |m| %>
-  <p><%= m[:uuid].to_s + "\n" %></p>
-<% end %>
 
 <% form_for(@game) do |f| %>
   <%= f.error_messages %>
@@ -30,6 +20,17 @@ print "Hello world\n"
     <%= f.datetime_select :turn_speed %>
   </p>
   
+  
+	<%
+	#init
+	map = Map.new
+	maps = map.get_maps
+	%>
+	<% maps.each do |m| %>
+		<%= f.radio_button :map_uuid, m[:uuid] %>
+		<%= f.label m[:name] %><br />
+	<% end %>
+
   <!--
   <p>
     <%= f.label :map_uuid %><br />

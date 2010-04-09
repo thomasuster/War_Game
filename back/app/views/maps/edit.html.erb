@@ -1,0 +1,28 @@
+<h1>Editing map</h1>
+
+<% form_for(@map) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :uuid %><br />
+    <%= f.text_field :uuid %>
+  </p>
+  <p>
+    <%= f.label :data %><br />
+    <%= f.text_field :data %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :players %><br />
+    <%= f.text_field :players %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @map %> |
+<%= link_to 'Back', maps_path %>

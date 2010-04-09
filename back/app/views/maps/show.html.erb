@@ -1,0 +1,23 @@
+<p>
+  <b>Uuid:</b>
+  <%=h @map.uuid %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%=h @map.data %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @map.name %>
+</p>
+
+<p>
+  <b>Players:</b>
+  <%=h @map.players %>
+</p>
+
+
+<%= link_to 'Edit', edit_map_path(@map) %> |
+<%= link_to 'Back', maps_path %>

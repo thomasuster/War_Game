@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uuid: MyString
+  data: 
+  name: MyString
+  players: 1
+
+two:
+  uuid: MyString
+  data: 
+  name: MyString
+  players: 1

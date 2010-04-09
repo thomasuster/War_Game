@@ -40,6 +40,15 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.xml
   def create
+	u = User.find_by_uuid(session[:user_uuid])
+	#print "\n\n\n\n"
+	#print params[:game]
+	#print "\n\n\n\n"
+	
+	params[:game][:owner_uuid] = u.uuid;
+	params[:game][:player_uuid] = u.uuid;
+	
+	
     @game = Game.new(params[:game])
 
     respond_to do |format|

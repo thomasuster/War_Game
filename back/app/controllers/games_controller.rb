@@ -44,12 +44,12 @@ class GamesController < ApplicationController
 	params[:game][:owner_uuid] = u.uuid;
 	params[:game][:player_uuid] = u.uuid;
 	
-	days = params[:game][:days]
-	hours = params[:game][:hours]
-	minutes = params[:game][:minutes]
-	
-	
-	
+	#turn_speed
+	days = Integer(params[:date][:days]) * 24 * 60
+	hours = Integer(params[:date][:hours]) * 60
+	minutes = Integer(params[:date][:minutes])
+	params[:game][:turn_speed_minutes] = days + hours + minutes
+
 	m = Map.find_by_uuid(params[:game][:map_uuid])
 	params[:game][:current_map] = m.data;
 	

@@ -12,13 +12,24 @@
     <%= f.text_field :player_uuid %>
   </p>
   <p>
-    <%= f.label :turn_expiration %><br />
-    <%= f.datetime_select :turn_expiration %>
+    <%#= f.label :turn_expiration %><br />
+    <%#= f.datetime_select :turn_expiration %>
   </p>-->
+  
+  
+  <!--
   <p>
     <%= f.label :turn_speed %><br />
-    <%= f.datetime_select :turn_speed %>
+    <%#= f.datetime_select :turn_speed %>
   </p>
+  -->
+  
+  <%= f.label :turn_speed %><br />
+  <p>Select the time you want until a player&#39;s turn expires. For example, the default selection below will give each player up to 1 day for each turn.</p>
+  <%= select_day(1, :field_name => "days") %> Days
+  <%= select_hour(0, :field_name => "hours") %> Hours
+  <%= select_minute(0, :field_name => "minutes") %> Minutes
+  <br />
   
   
 	<%

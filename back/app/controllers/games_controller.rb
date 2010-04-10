@@ -48,7 +48,15 @@ class GamesController < ApplicationController
 	days = Integer(params[:date][:days]) * 24 * 60
 	hours = Integer(params[:date][:hours]) * 60
 	minutes = Integer(params[:date][:minutes])
-	params[:game][:turn_speed_minutes] = days + hours + minutes
+	turn_speed_minutes = days + hours + minutes;
+	params[:game][:turn_speed_minutes] = turn_speed_minutes
+	
+	#turn_expiration
+	exp = Time.now
+	print "\nIt was " + exp.to_datetime.to_s + "\n"
+	exp += turn_speed_minutes * 60
+	print "\nIt's now " + exp.to_datetime.to_s + "\n"
+	params[:game][:turn_expiration] = exp.to_datetime
 
 	m = Map.find_by_uuid(params[:game][:map_uuid])
 	params[:game][:current_map] = m.data;

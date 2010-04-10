@@ -48,13 +48,10 @@ class GamesController < ApplicationController
 	hours = params[:game][:hours]
 	minutes = params[:game][:minutes]
 	
-	params[:game][:turn_speed] = DateTime.civil(0,0,days,hours,minutes,0)
-	#now = DateTime.now
-	#params[:game][:turn_expiration] = DateTime.civil(now.year,now.month,now.days+days,now.hours+hours,now.minutes+minutes,0)
+	
 	
 	m = Map.find_by_uuid(params[:game][:map_uuid])
 	params[:game][:current_map] = m.data;
-	
 	
     @game = Game.new(params[:game])
 

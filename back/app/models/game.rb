@@ -15,7 +15,9 @@ class Game < ActiveRecord::Base
 		@turn_speed = t
 	end
 	
-	def get_games
+	# Returns basic game information
+	def get_games()
 		g = Game.find( :all, :select => 'uuid, name, map_uuid')
 	end
+	
 end

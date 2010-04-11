@@ -1,6 +1,6 @@
 <h1>Join game</h1>
 
-<% form_tag 'user/join' do -%>
+<% form_tag 'join' do -%>
 
 	<% @games.each_pair do |k,v| %>
 		<%= radio_button_tag :game_uuid, k %>

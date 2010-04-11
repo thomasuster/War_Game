@@ -13,6 +13,23 @@ class UserController < ApplicationController
     end
   end
   
+	def show_games
+		#Returns the game uuid, game name and map name
+		game = Game.new
+		games = game.get_games
+
+		h = {}
+
+		games.each do |g|
+			map = Map.new
+			m = map.get_map(g[:map_uuid])
+			h[g.uuid] = {:game_name => g.name, :map_name => m.name}
+		end
+		@games = h
+	end
+  
+  
+  
 	def join
 
 	end

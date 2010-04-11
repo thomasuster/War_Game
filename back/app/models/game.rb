@@ -16,6 +16,6 @@ class Game < ActiveRecord::Base
 	end
 	
 	def get_games
-		g = Game.find( :all, :select => 'uuid, map_uuid')
+		g = Game.find( :all, :select => 'uuid, name, map_uuid')
 	end
 end

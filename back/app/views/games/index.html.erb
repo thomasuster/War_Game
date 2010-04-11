@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Uuid</th>
+	<th>Name</th>
     <th>Owner uuid</th>
     <th>Player uuid</th>
     <th>Turn expiration</th>
@@ -14,6 +15,7 @@
 <% @games.each do |game| %>
   <tr>
     <td><%=h game.uuid %></td>
+	<td><%=h game.name %></td>
     <td><%=h game.owner_uuid %></td>
     <td><%=h game.player_uuid %></td>
     <td><%=h game.turn_expiration %></td>

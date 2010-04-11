@@ -1,0 +1,14 @@
+<h1>Join game</h1>
+
+<% form_tag 'user/join' do -%>
+
+	<% @games.each_pair do |k,v| %>
+		<%= radio_button_tag :game_uuid, k %>
+		<%= label_tag v[:game_name] + ", " + v[:map_name] %><br />
+	<% end %>
+
+<%= submit_tag 'Join' %>
+
+<% end %>
+
+<%= link_to 'Back', games_path %>

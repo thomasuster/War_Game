@@ -16898,3 +16898,36 @@ Rendering template within layouts/application
 Rendering games/index
   [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
 Completed in 38ms (View: 12, DB: 4) | 200 OK [http://localhost/games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100407214115)
+Migrating to ModifyUuid (20100407221948)
+Migrating to CreateSessions (20100408011024)
+Migrating to CreateGames (20100408220526)
+Migrating to CreateMaps (20100409023306)
+Migrating to ChangeTurnSpeed (20100410000035)
+Migrating to ChangeTurnSpeedToMinutes (20100410011142)
+Migrating to AddNamesToGames (20100411200848)
+Migrating to CreatePlayers (20100411221252)
+  [4;36;1mSQL (69.0ms)[0m   [0;1mCREATE TABLE `players` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `uuid` varchar(255), `user_uuid` varchar(255), `game_uuid` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (22.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100411221252')[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `games`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `games`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mdescribe `maps`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `maps`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `players`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `players`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `sessions`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mdescribe `sessions`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `sessions`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `users`[0m

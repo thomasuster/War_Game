@@ -1,0 +1,24 @@
+<h1>Listing players</h1>
+
+<table>
+  <tr>
+    <th>Uuid</th>
+    <th>User uuid</th>
+    <th>Game uuid</th>
+  </tr>
+
+<% @players.each do |player| %>
+  <tr>
+    <td><%=h player.uuid %></td>
+    <td><%=h player.user_uuid %></td>
+    <td><%=h player.game_uuid %></td>
+    <td><%= link_to 'Show', player %></td>
+    <td><%= link_to 'Edit', edit_player_path(player) %></td>
+    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New player', new_player_path %>

@@ -1,0 +1,18 @@
+<p>
+  <b>Uuid:</b>
+  <%=h @player.uuid %>
+</p>
+
+<p>
+  <b>User uuid:</b>
+  <%=h @player.user_uuid %>
+</p>
+
+<p>
+  <b>Game uuid:</b>
+  <%=h @player.game_uuid %>
+</p>
+
+
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %>

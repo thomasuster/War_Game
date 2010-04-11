@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100411200848) do
+ActiveRecord::Schema.define(:version => 20100411221252) do
 
   create_table "games", :force => true do |t|
     t.string   "uuid"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 20100411200848) do
     t.binary   "data"
     t.string   "name"
     t.integer  "players"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "uuid"
+    t.string   "user_uuid"
+    t.string   "game_uuid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

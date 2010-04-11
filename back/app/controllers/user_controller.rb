@@ -13,7 +13,9 @@ class UserController < ApplicationController
     end
   end
   
+	def join
 
+	end
   
   def logout
     session[:user_uuid] = nil

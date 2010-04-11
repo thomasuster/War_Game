@@ -14,4 +14,8 @@ class Game < ActiveRecord::Base
 		t = Time.utc(nil,nil,days,hours,minutes,nil)
 		@turn_speed = t
 	end
+	
+	def get_games
+		g = Game.find( :all, :select => 'uuid, map_uuid')
+	end
 end

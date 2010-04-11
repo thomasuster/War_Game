@@ -37,6 +37,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+
   # POST /games
   # POST /games.xml
   def create

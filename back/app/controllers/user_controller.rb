@@ -42,19 +42,16 @@ class UserController < ApplicationController
 		params[:player][:user_uuid] = session[:user_uuid]
 	
 		@player = Player.new(params[:player])
+		games = Game.get_games
+		@games = preview_games(games)
 
-		respond_to do |format|
-			if @player.save
-				flash[:notice] = 'You joined the game!'
-				format.html { redirect_to(:action => "index") }
-				format.xml  { render :xml => @player, :status => :created, :location => @player }
-			else
-				flash[:notice] = 'Unable to join game'
-				format.html { redirect_to(:action => "show_games") }
-				format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
-			end
+		if @player.save
+			flash[:notice] = 'You joined the game!'
+			redirect_to :action => 'index'
+		else
+			flash[:notice] = 'Unable to join game'
+			render :action => 'show_games'
 		end
-		
 	end
 
 	def logout

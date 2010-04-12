@@ -22484,3 +22484,479 @@ Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:47:31) [GET
 Rendering template within layouts/application
 Rendering user/show_games
 Completed in 79ms (View: 4, DB: 15) | 200 OK [http://localhost/user/show_games]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:48:12) [GET]
+  [4;35;1mUser Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (1.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mPlayer Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (1.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 117ms (View: 3, DB: 13) | 200 OK [http://localhost/user/show_games]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing PlayersController#new (for 127.0.0.1 at 2010-04-12 12:52:18) [GET]
+  [4;35;1mUser Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;35;1mPlayer Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+Rendering template within layouts/application
+Rendering players/new
+Completed in 70ms (View: 14, DB: 5) | 200 OK [http://localhost/players/new]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing PlayersController#create (for 127.0.0.1 at 2010-04-12 12:52:27) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "player"=>{"uuid"=>"", "user_uuid"=>"d40e52f8-429f-11df-a5dc-0026f2b76973", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973"}, "commit"=>"Create"}
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering template within layouts/application
+Rendering players/new
+Completed in 73ms (View: 15, DB: 8) | 200 OK [http://localhost/players]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#index (for 127.0.0.1 at 2010-04-12 12:53:43) [GET]
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Load (1.0ms)[0m   [0;1mSELECT user_uuid, game_uuid FROM `players` WHERE (`players`.`user_uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') [0m
+  [4;35;1mPlayer Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (1.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/index
+Completed in 83ms (View: 3, DB: 15) | 200 OK [http://localhost/user]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:53:46) [GET]
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 90ms (View: 12, DB: 13) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 12:53:49) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Redirected to http://localhost:3000/user/show_games
+Completed in 93ms (DB: 6) | 302 Found [http://localhost/user/join]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:53:50) [GET]
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 78ms (View: 3, DB: 16) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:56:19) [GET]
+  [4;36;1mUser Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 92ms (View: 12, DB: 12) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 12:56:21) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Redirected to http://localhost:3000/user/show_games
+Completed in 59ms (DB: 7) | 302 Found [http://localhost/user/join]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:56:22) [GET]
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (1.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 81ms (View: 4, DB: 15) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 12:58:17) [GET]
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 120ms (View: 3, DB: 16) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 12:58:20) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (1.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+ActionView::TemplateError (undefined method `each_pair' for nil:NilClass) on line #9 of app/views/user/show_games.html.erb:
+6: <% form_tag 'join' do -%>
+7: 
+8: 
+9: 	<% @games.each_pair do |k,v| %>
+10: 		<%= radio_button_tag :game_uuid, k %>
+11: 		<%= label_tag v[:game_name] + ", " + v[:map_name] + ", " + v[:num_players]+ "/" + v[:players]%><br />
+12: 	<% end %>
+
+    app/views/user/show_games.html.erb:9:in `block in _run_erb_app47views47user47show_games46html46erb'
+    app/views/user/show_games.html.erb:6
+    app/controllers/user_controller.rb:55:in `block in join'
+    app/controllers/user_controller.rb:46:in `join'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (98.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 12:59:35) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+NoMethodError (undefined method `call' for nil:NilClass):
+  app/controllers/user_controller.rb:46:in `join'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (66.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 13:00:23) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;35;1mUser Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;35;1mPlayer Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPlayer Load (0.0ms)[0m   [0mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+NoMethodError (undefined method `call' for nil:NilClass):
+  app/controllers/user_controller.rb:46:in `join'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (62.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 13:01:25) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (35.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPlayer Load (0.0ms)[0m   [0mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mROLLBACK[0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+NoMethodError (undefined method `call' for nil:NilClass):
+  app/controllers/user_controller.rb:47:in `join'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (66.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 13:02:46) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;35;1mUser Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;35;1mPlayer Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+NoMethodError (undefined method `call' for nil:NilClass):
+  app/controllers/user_controller.rb:48:in `join'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (100.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing PlayersController#index (for 127.0.0.1 at 2010-04-12 13:02:51) [GET]
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT * FROM `players` [0m
+Rendering template within layouts/application
+Rendering players/index
+  [4;35;1mPlayer Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+Completed in 58ms (View: 7, DB: 6) | 200 OK [http://localhost/players]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#index (for 127.0.0.1 at 2010-04-12 13:02:54) [GET]
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT user_uuid, game_uuid FROM `players` WHERE (`players`.`user_uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') [0m
+  [4;35;1mPlayer Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mGame Load (1.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/index
+Completed in 86ms (View: 4, DB: 17) | 200 OK [http://localhost/user]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#show_games (for 127.0.0.1 at 2010-04-12 13:02:56) [GET]
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mGame Load (1.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (1.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mPlayer Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 83ms (View: 4, DB: 15) | 200 OK [http://localhost/user/show_games]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 13:02:59) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mGame Load (1.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;36;1mGame Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPlayer Load (0.0ms)[0m   [0mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mROLLBACK[0m
+Rendering template within layouts/application
+Rendering user/show_games
+
+NoMethodError (undefined method `call' for nil:NilClass):
+  app/controllers/user_controller.rb:48:in `join'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (99.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#join (for 127.0.0.1 at 2010-04-12 13:04:47) [POST]
+  Parameters: {"authenticity_token"=>"Dxs4n9lpiX46jYtnGzhT+QWjjyG4LeJUpff/xS9kmmY=", "game_uuid"=>"81bd2d8a-45a6-11df-9c24-0026f2b76973", "commit"=>"Join"}
+  [4;35;1mUser Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') LIMIT 1[0m
+  [4;35;1mPlayer Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `players`[0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` [0m
+  [4;35;1mGame Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;35;1mMap Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `maps`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'd3f66256-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `players` WHERE (`players`.`game_uuid` = '95fd7ed0-45a6-11df-9c24-0026f2b76973') [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPlayer Load (0.0ms)[0m   [0;1mSELECT `players`.id FROM `players` WHERE (`players`.`user_uuid` = BINARY 'd40e52f8-429f-11df-a5dc-0026f2b76973' AND `players`.game_uuid = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering template within layouts/application
+Rendering user/show_games
+Completed in 95ms (View: 12, DB: 16) | 200 OK [http://localhost/user/join]

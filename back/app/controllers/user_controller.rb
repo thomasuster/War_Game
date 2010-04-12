@@ -50,7 +50,7 @@ class UserController < ApplicationController
 				format.html { redirect_to(:action => "index") }
 				format.xml  { render :xml => @player, :status => :created, :location => @player }
 			else
-				flash[:notice] = 'You didn\'t join the game.'
+				flash[:notice] = 'Unable to join game'
 				format.html { redirect_to(:action => "show_games") }
 				format.xml  { render :xml => @player.errors, :status => :unprocessable_entity }
 			end
@@ -70,8 +70,7 @@ private
 	def preview_games(games)
 		h = {}
 		games.each do |g|
-			map = Map.new
-			m = map.get_map(g[:map_uuid])
+			m = Map.get_map(g[:map_uuid])
 			h[g.uuid] = {:game_name => g.name, :map_name => m.name, :players => m.players.to_s, :num_players => Player.num_players(g.uuid).to_s}
 		end
 		return h

@@ -15,8 +15,7 @@ class GamesController < ApplicationController
 	def preview_games(games)
 		h = {}
 		games.each do |g|
-			map = Map.new
-			m = map.get_map(g[:map_uuid])
+			m = Map.get_map(g[:map_uuid])
 			h[g.uuid] = {:game_name => g.name, :map_name => m.name}
 		end
 		return h

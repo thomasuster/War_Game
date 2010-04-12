@@ -42,8 +42,7 @@
   
 	<%
 	#init
-	map = Map.new
-	maps = map.get_maps
+	maps = Map.get_maps
 	%>
 	<% maps.each do |m| %>
 		<%= f.radio_button :map_uuid, m[:uuid] %>

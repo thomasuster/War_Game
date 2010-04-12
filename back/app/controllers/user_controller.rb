@@ -1,7 +1,6 @@
 class UserController < ApplicationController
-
-	def login
 	
+	def login
 		if request.post?
 			user = User.authenticate(params[:email], params[:password])
 			if user
@@ -25,8 +24,8 @@ class UserController < ApplicationController
 		
 		games = []
 		players.each do |player|
-			#print game_uuid.inspect() + "\n\n\n\n"
 			games.push(Game.get_game(player[:game_uuid]))
+			print player[:game_uuid].inspect + "!1\n"
 		end
 
 		@games = preview_games(games)
@@ -71,7 +70,7 @@ private
 		h = {}
 		games.each do |g|
 			m = Map.get_map(g[:map_uuid])
-			h[g.uuid] = {:game_name => g.name, :map_name => m.name, :players => m.players.to_s, :num_players => Player.num_players(g.uuid).to_s}
+			h[g.uuid] = {:game_name => g[:name], :map_name => m.name, :players => m.players.to_s, :num_players => Player.num_players(g.uuid).to_s}
 		end
 		return h
 	end

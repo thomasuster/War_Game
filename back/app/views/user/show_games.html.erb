@@ -4,7 +4,7 @@
 
 	<% @games.each_pair do |k,v| %>
 		<%= radio_button_tag :game_uuid, k %>
-		<%= label_tag v[:game_name] + ", " + v[:map_name] %><br />
+		<%= label_tag v[:game_name] + ", " + v[:map_name] + ", " + v[:num_players]+ "/" + v[:players]%><br />
 	<% end %>
 
 <%= submit_tag 'Join' %>

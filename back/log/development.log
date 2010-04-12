@@ -18430,3 +18430,35 @@ Processing UserController#index (for 127.0.0.1 at 2010-04-11 17:22:37) [GET]
 Rendering template within layouts/application
 Rendering user/index
 Completed in 52ms (View: 4, DB: 11) | 200 OK [http://localhost/user]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#index (for 127.0.0.1 at 2010-04-11 17:26:25) [GET]
+  [4;35;1mGame Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mPlayer Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mPlayer Load (0.0ms)[0m   [0mSELECT user_uuid, game_uuid FROM `players` WHERE (`players`.`user_uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') [0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering user/index
+Completed in 61ms (View: 13, DB: 8) | 200 OK [http://localhost/user]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UserController#index (for 127.0.0.1 at 2010-04-11 17:26:33) [GET]
+  [4;35;1mGame Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mPlayer Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `players`[0m
+  [4;35;1mPlayer Load (0.0ms)[0m   [0mSELECT user_uuid, game_uuid FROM `players` WHERE (`players`.`user_uuid` = 'd40e52f8-429f-11df-a5dc-0026f2b76973') [0m
+  [4;36;1mGame Load (0.0ms)[0m   [0;1mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '81bd2d8a-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;35;1mGame Load (0.0ms)[0m   [0mSELECT uuid, name, map_uuid FROM `games` WHERE (`games`.`uuid` = '8a62224c-45a6-11df-9c24-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `maps`[0m
+  [4;35;1mMap Load (0.0ms)[0m   [0mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'be8ecfd2-4404-11df-bdeb-0026f2b76973') LIMIT 1[0m
+  [4;36;1mMap Load (0.0ms)[0m   [0;1mSELECT name, players FROM `maps` WHERE (`maps`.`uuid` = 'c6660c4a-4411-11df-bdeb-0026f2b76973') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering user/index
+Completed in 61ms (View: 13, DB: 9) | 200 OK [http://localhost/user]

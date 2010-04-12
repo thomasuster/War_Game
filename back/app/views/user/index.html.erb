@@ -6,3 +6,8 @@ It's <%= Time.now %>
 
 <%= link_to 'Join Game', :controller => 'user', :action => 'show_games' %><br />
 <%= link_to 'Setup Game', :controller => 'games', :action => 'new' %><br />
+
+<% @games.each_pair do |k,v| %>
+	<%= radio_button_tag :game_uuid, k %>
+	<%= label_tag v[:game_name] + ", " + v[:map_name] %><br />
+<% end %>

@@ -14,24 +14,25 @@ class UserController < ApplicationController
 	end
 	
 	# Returns the game uuid, game name and map name	for all of this users games
-	def index
+	def show_games
 		game = Game.new
-		games = game.get_games(session[:user_uuid])
-		@games = game.preview_games(games)
+		games = game.get_games
+		@games = preview_games(games)
 	end
 
 	# Returns the game uuid, game name and map name	
-	def show_games
+	def index
 		game = Game.new
 		player = Player.new
-		players = player.get_players
+		players = player.get_game_uuids(session[:user_uuid])
 		
-		players.each do |p|
-		
+		games = []
+		players.each do |player|
+			#print game_uuid.inspect() + "\n\n\n\n"
+			games.push(game.get_game(player[:game_uuid]))
 		end
-		
-		
-		@games = game.preview_games(games)
+
+		@games = preview_games(games)
 	end
 	
 	# Returns hash of preview information of games, getting map information

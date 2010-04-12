@@ -25,7 +25,6 @@ class UserController < ApplicationController
 		games = []
 		players.each do |player|
 			games.push(Game.get_game(player[:game_uuid]))
-			print player[:game_uuid].inspect + "!1\n"
 		end
 
 		@games = preview_games(games)

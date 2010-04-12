@@ -20,11 +20,15 @@ class Player < ActiveRecord::Base
 	end
 	
 	def validate
+		validate_open_game
+	end
+	
+	def validate_open_game
 		#If It's not full
-		#game = Game.get_game(@game_uuid)
-		#map = Map.get_map(game[:map_uuid])
-		#num = Player.num_players(@game_uuid)
-		#errors.add_to_base "Game is full" if num < map.players
+		game = Game.get_game(game_uuid)
+		map = Map.get_map(game[:map_uuid])
+		num = Player.num_players(game_uuid)
+		errors.add_to_base "Game is full" if num >= map.players
 	end
 
 end

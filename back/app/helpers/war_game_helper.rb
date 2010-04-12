@@ -1,0 +1,2 @@
+module WarGameHelper
+end

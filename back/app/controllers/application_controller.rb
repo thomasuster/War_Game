@@ -25,4 +25,11 @@ class ApplicationController < ActionController::Base
 				redirect_to :controller => 'user', :action => 'login'
 		end
 	end
+	
+	#Launches the Flash instance
+	def play
+		print "\nHello world!!!!!!!!!!!!!!!!!!!!!!\n"
+		@game = Game.get_game(params[:game_uuid])
+		
+	end
 end

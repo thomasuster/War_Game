@@ -164,5 +164,44 @@ private function end_turn(event:MouseEvent):void
 
 private function export_map(event:MouseEvent):void 
 {
+	import mx.controls.Alert;
+    import mx.events.CloseEvent;
+			
 	trace(board.export_map().toString());
+	Alert.show(board.export_map().toString(), "Flash", 0, this);
+
+			
+	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
+	
+	/*
+	var xml_string:String = board.export_map().toString();
+	var map:XML = new XML(xml_string);
+	var xml_url_request:URLRequest = new URLRequest("maps/save");
+	
+	xml_url_request.data = map;
+	xml_url_request.contentType = "text/xml";
+	xml_url_request.method = URLRequestMethod.POST;
+	
+	var xml_send_loader:URLLoader = new URLLoader();
+	xml_send_loader.addEventListener(Event.COMPLETE, on_complete, false, 0, true);
+	xml_send_loader.addEventListener(IOErrorEvent.IO_ERROR, on_IO_error, false, 0, true);
+	xml_send_loader.load(xml_url_request);
+
+	function on_complete(evt:Event):void
+	{
+		try {
+			//xmlResponse = new XML(evt.target.data);
+			//respTxt.text = xmlResponse;
+			removeEventListener(Event.COMPLETE, on_complete);
+			removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);
+		} catch (err:TypeError) {
+			respTxt.text = "An error occured when communicating with server:\n" + err.message;
+		}
+		placeText();
+	}
+
+	function on_IO_error(evt:IOErrorEvent):void {
+		//respTxt.text = "An error occurred when attempting to load the XML.\n" + evt.text;
+		//placeText();
+	}*/
 }

@@ -54,7 +54,7 @@ package War_game
 		public function Board()
 		{
 			//ExternalInterface.call("alert", "Hello world");
-
+			
 
 			radius = 1;
 			active_unit = null;

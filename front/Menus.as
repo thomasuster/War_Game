@@ -167,16 +167,14 @@ private function export_map(event:MouseEvent):void
 	import mx.controls.Alert;
     import mx.events.CloseEvent;
 			
-	trace(board.export_map().toString());
-	Alert.show(board.export_map().toString(), "Flash", 0, this);
+	//trace(board.export_map().toString());
+	//Alert.show(board.export_map().toString(), "Flash", 0, this);
 
 			
 	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
-	
-	/*
 	var xml_string:String = board.export_map().toString();
 	var map:XML = new XML(xml_string);
-	var xml_url_request:URLRequest = new URLRequest("maps/save");
+	var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/play/save");
 	
 	xml_url_request.data = map;
 	xml_url_request.contentType = "text/xml";
@@ -185,23 +183,52 @@ private function export_map(event:MouseEvent):void
 	var xml_send_loader:URLLoader = new URLLoader();
 	xml_send_loader.addEventListener(Event.COMPLETE, on_complete, false, 0, true);
 	xml_send_loader.addEventListener(IOErrorEvent.IO_ERROR, on_IO_error, false, 0, true);
+	
+	xml_send_loader.addEventListener(Event.OPEN, openHandler);
+	xml_send_loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+	xml_send_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);	
+	xml_send_loader.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+	xml_send_loader.dataFormat=URLLoaderDataFormat.TEXT;
+	
+	
+	
 	xml_send_loader.load(xml_url_request);
 
+	
+	function openHandler(event:Event):void {
+		trace("openHandler: " + event);
+	}
+
+	function progressHandler(event:ProgressEvent):void {
+		trace("progressHandler loaded:" + event.bytesLoaded + " total: " + event.bytesTotal);
+	}
+
+	function securityErrorHandler(event:SecurityErrorEvent):void {
+		trace("securityErrorHandler: " + event);
+	}
+
+	function httpStatusHandler(event:HTTPStatusEvent):void {
+		trace("httpStatusHandler: " + event);
+	}
+
+		
 	function on_complete(evt:Event):void
 	{
 		try {
-			//xmlResponse = new XML(evt.target.data);
-			//respTxt.text = xmlResponse;
+			//var xml_response:XML = new XML(evt.target.data);
+			//Alert.show(xml_response.toString(), "Flash", 0, this);
+			var loader:URLLoader = URLLoader(evt.target);
+			var response:String = loader.data;
+			//Alert.show("response = " + response, "Flash", 0, this);
+			trace(response);
 			removeEventListener(Event.COMPLETE, on_complete);
 			removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);
 		} catch (err:TypeError) {
-			respTxt.text = "An error occured when communicating with server:\n" + err.message;
+			Alert.show("An error occured when communicating with server:\n" + err.message, "Flash", 0, this);
 		}
-		placeText();
 	}
 
 	function on_IO_error(evt:IOErrorEvent):void {
-		//respTxt.text = "An error occurred when attempting to load the XML.\n" + evt.text;
-		//placeText();
-	}*/
+		Alert.show("An error occurred when attempting to load the XML.\n" + evt.text, "Flash", 0, this);
+	}
 }

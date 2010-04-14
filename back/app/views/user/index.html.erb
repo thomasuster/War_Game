@@ -8,6 +8,6 @@
 <br />
 
 <% @games.each_pair do |k,v| %>
-	<%= link_to v[:game_name] + ", " + v[:map_name], :controller => 'War_game', :action => 'play', :params => { :game_uuid => k} %>
+	<%= link_to v[:game_name] + ", " + v[:map_name], :controller => 'front', :action => 'play', :params => { :game_uuid => k} %>
 	<br />
 <% end %>

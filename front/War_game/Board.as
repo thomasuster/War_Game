@@ -25,6 +25,7 @@ package War_game
 	import War_game.Units;
 	import War_game.Sector_event;
 	import War_game.Combat;
+	import flash.external.ExternalInterface;
 	
 	
 	
@@ -52,6 +53,9 @@ package War_game
 		
 		public function Board()
 		{
+			//ExternalInterface.call("alert", "Hello world");
+
+
 			radius = 1;
 			active_unit = null;
 			opaqueBackground = "0xFFFFFF";

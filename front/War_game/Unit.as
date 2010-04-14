@@ -60,10 +60,10 @@ package War_game
 				colors["pink"] = 0xFF00FF;
 			}
 			//trace(Conversion.to_hex_string(0xFF0000));
-			trace(Conversion.rgb_color(colors[color], "red"));
-			trace(Conversion.rgb_color(colors[color], "green"));
-			trace(Conversion.rgb_color(colors[color], "blue"));
-			trace("color = " + color);
+			//trace(Conversion.rgb_color(colors[color], "red"));
+			//trace(Conversion.rgb_color(colors[color], "green"));
+			//trace(Conversion.rgb_color(colors[color], "blue"));
+			//trace("color = " + color);
 			//var child:DisplayObject = DisplayObject(event.target.loader);
 			var matrix:Array = new Array();
 			var red:Number = Conversion.rgb_color(colors[color], "red")/255.0;

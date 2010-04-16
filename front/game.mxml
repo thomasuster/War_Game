@@ -17,7 +17,11 @@
 	<!-- <mx:Label id="p" text=""/>-->
 	<mx:Label id="currency" text="$400.00"/>
 	
+	
 	<mx:Label id="expiration" text="Expires in 23 hours"/>
+	
+	<mx:Button label="Export Map" click="export_map(event)"/>
+	
 	<mx:Button label="End Turn" click="end_turn(event)"/>
 
 	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
@@ -38,7 +42,7 @@
 	<mx:MenuBar labelField="@label" itemClick="temp_menu_Handler(event);" 
 		dataProvider="{temp_collection}" />
 	
-	<mx:Button label="Export Map" click="export_map(event)"/>
+
 		
 	<mx:Label id="mouse_x_ui" text=""/>
 	<mx:Label id="mouse_y_ui" text=""/>

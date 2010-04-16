@@ -174,7 +174,7 @@ private function export_map(event:MouseEvent):void
 	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
 	var xml_string:String = board.export_map().toString();
 	var map:XML = new XML(xml_string);
-	var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/play/save");
+	var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/save");
 	
 	xml_url_request.data = map;
 	xml_url_request.contentType = "text/xml";
@@ -219,7 +219,7 @@ private function export_map(event:MouseEvent):void
 			//Alert.show(xml_response.toString(), "Flash", 0, this);
 			var loader:URLLoader = URLLoader(evt.target);
 			var response:String = loader.data;
-			//Alert.show("response = " + response, "Flash", 0, this);
+			Alert.show(response, "Flash");
 			trace(response);
 			removeEventListener(Event.COMPLETE, on_complete);
 			removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);

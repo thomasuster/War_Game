@@ -168,12 +168,35 @@ private function temp_menu_Handler(event:MenuEvent):void
 
 private function end_turn(event:MouseEvent):void 
 {
+	show_export_map(event);
+}
+
+private function show_export_map(event:MouseEvent):void 
+{
+	import mx.events.ModuleEvent;
+	import mx.modules.ModuleManager;
+	import mx.modules.IModuleInfo;
+	import mx.core.UIComponent;
+	var info:IModuleInfo;
+	info = ModuleManager.getModule("modules/export_map.swf");
+	info.addEventListener(ModuleEvent.READY, show)
+	info.load();
+	
+	function show(e:ModuleEvent):void
+	{
+		var prompt:DisplayObject = info.factory.create() as DisplayObject;
+		//PopUpManager.addPopUp(prompt, this, true);
+		//PopUpManager.centerPopUp(prompt);
+	}
+}
+private function export_map(event:MouseEvent):void 
+{
+	/*
 	//panel
 	var panel:Panel = new Panel();
 	panel.title = "Map export";
-	//panel.width = 50%;
-	//panel.height = 50%;
 	
+	//Form
 	var map_form:Form = new Form();
 	
 	//Heading
@@ -195,25 +218,18 @@ private function end_turn(event:MouseEvent):void
 	//Submit
 	var submit:Button = new Button();
 	submit.label = "Submit";
+	submit.addEventListener(MouseEvent.CLICK, send_map);
 	
 	map_form.addChild(fh);
 	map_form.addChild(name);
 	map_form.addChild(players);
 	map_form.addChild(submit);
 	panel.addChild(map_form);
+	*/
+
 	
-	PopUpManager.addPopUp(panel, this, true);
-	PopUpManager.centerPopUp(panel);
-}
-
-private function export_map(event:MouseEvent):void 
-{
-    import mx.events.CloseEvent;
-			
-	//trace(board.export_map().toString());
-	//Alert.show(board.export_map().toString(), "Flash", 0, this);
-
-			
+	import mx.events.CloseEvent;
+	
 	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
 	var xml_string:String = board.export_map().toString();
 	//var map:XML = new XML(xml_string);

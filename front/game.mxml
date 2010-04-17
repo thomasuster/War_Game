@@ -10,8 +10,6 @@
 	<mx:Style source="css/styles.css" />
 	
 	<mx:Script source="Menus.as" />
-	<!--<mx:Script source="examples/loader_example.as" />-->
-	
 	
 	<mx:Box direction = "horizontal" styleName = "ui" width="800" height="100">
 	<!-- <mx:Label id="p" text=""/>-->

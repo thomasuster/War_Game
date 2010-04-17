@@ -1,8 +1,18 @@
 import flash.events.MouseEvent;
+import flash.net.URLLoaderDataFormat;
+import flash.system.SecurityPanel;
 import mx.events.MenuEvent;
 import mx.collections.*;
 import mx.managers.CursorManager;
 import flash.utils.getDefinitionByName;
+import mx.controls.Alert;
+import mx.containers.Form;
+import mx.containers.FormHeading;
+import mx.containers.FormItem;
+import mx.controls.TextInput;
+import mx.managers.PopUpManager;
+import mx.containers.VBox;
+import mx.containers.Panel;
 
 [Bindable]
 public var game_collection:XMLListCollection;
@@ -90,7 +100,6 @@ private var temp_menu:XMLList =
 		</menuitem>
 	</>;
 
-
 /*	
 [Embed(source="images/sectors/grass.png")]
 [Bindable]
@@ -159,12 +168,46 @@ private function temp_menu_Handler(event:MenuEvent):void
 
 private function end_turn(event:MouseEvent):void 
 {
+	//panel
+	var panel:Panel = new Panel();
+	panel.title = "Map export";
+	//panel.width = 50%;
+	//panel.height = 50%;
 	
+	var map_form:Form = new Form();
+	
+	//Heading
+	var fh:FormHeading = new FormHeading();
+	fh.label = "Map attributes";
+	
+	//Map name
+	var name:FormItem = new FormItem();
+	name.label = "Map name";
+	name.required = true;
+	name.addChild(new TextInput());
+	
+	//Number of players
+	var players:FormItem = new FormItem();
+	players.label = "Players";
+	players.required = true;
+	players.addChild(new TextInput());
+	
+	//Submit
+	var submit:Button = new Button();
+	submit.label = "Submit";
+	
+	map_form.addChild(fh);
+	map_form.addChild(name);
+	map_form.addChild(players);
+	map_form.addChild(submit);
+	panel.addChild(map_form);
+	
+	PopUpManager.addPopUp(panel, this, true);
+	PopUpManager.centerPopUp(panel);
 }
 
 private function export_map(event:MouseEvent):void 
 {
-	import mx.controls.Alert;
     import mx.events.CloseEvent;
 			
 	//trace(board.export_map().toString());

@@ -1,3 +1,5 @@
+import flash.display.DisplayObject;
+import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.net.URLLoaderDataFormat;
 import flash.system.SecurityPanel;
@@ -166,29 +168,58 @@ private function temp_menu_Handler(event:MenuEvent):void
 	board.radius = int(event.item.@data);
 }
 
+import mx.events.ModuleEvent;
+import mx.modules.ModuleManager;
+import mx.modules.IModuleInfo;
+
+public var info:IModuleInfo;
+
 private function end_turn(event:MouseEvent):void 
 {
-	show_export_map(event);
+	info = ModuleManager.getModule("modules/export_map.swf");
+	info.addEventListener(ModuleEvent.READY, show_export_map);           
+	info.load();
 }
 
-private function show_export_map(event:MouseEvent):void 
+import mx.core.IFlexDisplayObject;
+import mx.containers.TitleWindow;
+import mx.core.Container;
+
+private function show_export_map(e:ModuleEvent):void
 {
-	import mx.events.ModuleEvent;
-	import mx.modules.ModuleManager;
-	import mx.modules.IModuleInfo;
-	import mx.core.UIComponent;
-	var info:IModuleInfo;
-	info = ModuleManager.getModule("modules/export_map.swf");
-	info.addEventListener(ModuleEvent.READY, show)
-	info.load();
+	var prompt:DisplayObject = info.factory.create() as DisplayObject;
 	
-	function show(e:ModuleEvent):void
-	{
-		var prompt:DisplayObject = info.factory.create() as DisplayObject;
-		//PopUpManager.addPopUp(prompt, this, true);
-		//PopUpManager.centerPopUp(prompt);
-	}
+	var tw:TitleWindow = new TitleWindow();
+    tw.title = "My Title";
+	tw.addChild(prompt);
+		
+	PopUpManager.addPopUp(tw, this, true);
+	
+	//this.addChild(prompt);
+	//this.setChildIndex(prompt, 0);
+	
+	//var prompt:Container = info.factory.create() as Container;
+	//var panel:Panel = Panel(prompt.getChildAt(0));
+	//PopUpManager.addPopUp(panel, this, true);
+	
+	//
+	//Alert.show("yar", "This worked", 0, this);
+	//
+	//PopUpManager.centerPopUp(pop);
+	//pop.addChild(prompt);
+	
+	/*
+	
+	
+	pop.addChild(prompt);
+	//var container:UIComponent = new UIComponent();
+	//container.addChild(prompt);
+	//
+	
+	
+	*/
 }
+
 private function export_map(event:MouseEvent):void 
 {
 	/*

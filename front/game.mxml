@@ -2,11 +2,11 @@
 <mx:Application 
 	width="800" height="800"
 	styleName="application"
-	horizontalScrollPolicy="off"
-	verticalScrollPolicy="off"
+	
     xmlns:mx="http://www.adobe.com/2006/mxml"
 	creationComplete="initCollections(); init();">
-
+<!--horizontalScrollPolicy="off"
+	verticalScrollPolicy="off"-->
 	<mx:Style source="css/styles.css" />
 	
 	<mx:Script source="Menus.as" />

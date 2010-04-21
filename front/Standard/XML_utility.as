@@ -21,7 +21,7 @@ package Standard
 			function xmlLoaded(event:Event):void
 			{
 				myXML = XML(myLoader.data);
-				trace("Data loaded.");
+				//trace("Data loaded.");
 				dispatchEvent(new Event("loaded"));
 			}
 		}

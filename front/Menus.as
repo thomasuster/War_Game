@@ -142,30 +142,30 @@ private function menuHandler(event:MenuEvent):void
 	//CursorManager.removeAllCursors();
 	//var ClassReference:Class = getDefinitionByName("grass") as Class;
 	//CursorManager.setCursor(this[s]);
-	this["board"].mode = "sector";
-	this["board"].tool = s;
+	board.mode = "sector";
+	board.tool = s;
 	//CursorManager.setCursor(eval(event.item));
 }
 
 private function color_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
-	this["board"].color_mode = s;
+	board.color_mode = s;
 }
 
 // Event handler for the infantry_menu control's itemClick event.
 private function unit_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
-	this["board"].mode = "unit";
-	this["board"].tool = s;
-	this["board"].tool
+	board.mode = "unit";
+	board.tool = s;
+	board.tool
 }
 
 // Event handler for the unit_menu control's itemClick event.
 private function temp_menu_Handler(event:MenuEvent):void 
 {
-	this["board"].radius = int(event.item.@data);
+	board.radius = int(event.item.@data);
 }
 
 import mx.events.ModuleEvent;
@@ -174,11 +174,20 @@ import mx.modules.IModuleInfo;
 
 public var info:IModuleInfo;
 
-private function export_map(event:MouseEvent):void 
+/**
+* Loads export_map module
+*/
+private function export_map_click(event:MouseEvent):void 
 {
-	info = ModuleManager.getModule("modules/export_map.swf");
-	info.addEventListener(ModuleEvent.READY, show_export_map);           
+	var map:String = board.export_map().toString();
+	info = ModuleManager.getModule("http://localhost:3000/front/modules/export_map.swf?map="+map);
+	info.addEventListener(ModuleEvent.READY, show_export_map);
+	info.addEventListener(ModuleEvent.ERROR, export_error);
 	info.load();
+	
+	function export_error(e:ModuleEvent):void {
+		Alert.show("Error: " + e.errorText);
+	}
 }
 
 import mx.core.IFlexDisplayObject;
@@ -188,6 +197,9 @@ import mx.modules.Module;
 
 private var prompt:Module;
 
+/**
+* Popups export_map module
+*/
 private function show_export_map(e:ModuleEvent):void
 {
 	prompt = info.factory.create() as Module;
@@ -195,76 +207,4 @@ private function show_export_map(e:ModuleEvent):void
 	PopUpManager.centerPopUp(prompt);
 }
 
-private function send_map(event:MouseEvent):void 
-{
-	PopUpManager.removePopUp(prompt);
-	var variables:URLVariables = new URLVariables();
-	variables.num_players = this["num_players"].text;
-	variables.map_name = this["map_name"].text;
-	
-	return;
-	import mx.events.CloseEvent; 
-	
-	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
-	var xml_string:String = this["board"].export_map().toString();
-	//var map:XML = new XML(xml_string);
-	var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/save");
-	
-	variables.map = xml_string;
-	xml_url_request.data = variables;
-	//Alert.show(xml_string, "Flash");
-	xml_url_request.contentType = "text/xml";
-	xml_url_request.method = URLRequestMethod.POST;
-	
-	var xml_send_loader:URLLoader = new URLLoader();
-	xml_send_loader.addEventListener(Event.COMPLETE, on_complete, false, 0, true);
-	xml_send_loader.addEventListener(IOErrorEvent.IO_ERROR, on_IO_error, false, 0, true);
-	
-	xml_send_loader.addEventListener(Event.OPEN, openHandler);
-	xml_send_loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
-	xml_send_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);	
-	xml_send_loader.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-	xml_send_loader.dataFormat=URLLoaderDataFormat.BINARY;
-	
-	
-	
-	xml_send_loader.load(xml_url_request);
 
-	
-	function openHandler(event:Event):void {
-		trace("openHandler: " + event);
-	}
-
-	function progressHandler(event:ProgressEvent):void {
-		trace("progressHandler loaded:" + event.bytesLoaded + " total: " + event.bytesTotal);
-	}
-
-	function securityErrorHandler(event:SecurityErrorEvent):void {
-		trace("securityErrorHandler: " + event);
-	}
-
-	function httpStatusHandler(event:HTTPStatusEvent):void {
-		trace("httpStatusHandler: " + event);
-	}
-
-		
-	function on_complete(evt:Event):void
-	{
-		try {
-			//var xml_response:XML = new XML(evt.target.data);
-			//Alert.show(xml_response.toString(), "Flash", 0, this);
-			var loader:URLLoader = URLLoader(evt.target);
-			var response:String = loader.data;
-			Alert.show(response, "Flash");
-			trace(response);
-			removeEventListener(Event.COMPLETE, on_complete);
-			removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);
-		} catch (err:TypeError) {
-			Alert.show("An error occured when communicating with server:\n" + err.message, "Flash", 0, this);
-		}
-	}
-
-	function on_IO_error(evt:IOErrorEvent):void {
-		Alert.show("An error occurred when attempting to load the XML.\n" + evt.text, "Flash", 0, this);
-	}
-}

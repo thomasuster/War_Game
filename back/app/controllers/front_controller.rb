@@ -6,6 +6,7 @@ class FrontController < ApplicationController
 	
 	def save
 		#@data = request.env['RAW_POST_DATA']
+		@data = params
 		print params.inspect
 		render :layout => false
 	end

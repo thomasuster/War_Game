@@ -37,7 +37,7 @@ package Standard
 				{
 					var name:String = String(i.@name);
 					images[name] = url + i;
-					trace(images[name]);
+					//trace(images[name]);
 					number_to_load++;
 				}
 			}

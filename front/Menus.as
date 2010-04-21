@@ -184,81 +184,17 @@ private function end_turn(event:MouseEvent):void
 import mx.core.IFlexDisplayObject;
 import mx.containers.TitleWindow;
 import mx.core.Container;
+import mx.modules.Module;
 
 private function show_export_map(e:ModuleEvent):void
 {
-	var prompt:DisplayObject = info.factory.create() as DisplayObject;
-	
-	var tw:TitleWindow = new TitleWindow();
-    tw.title = "My Title";
-	tw.addChild(prompt);
-		
-	PopUpManager.addPopUp(tw, this, true);
-	
-	//this.addChild(prompt);
-	//this.setChildIndex(prompt, 0);
-	
-	//var prompt:Container = info.factory.create() as Container;
-	//var panel:Panel = Panel(prompt.getChildAt(0));
-	//PopUpManager.addPopUp(panel, this, true);
-	
-	//
-	//Alert.show("yar", "This worked", 0, this);
-	//
-	//PopUpManager.centerPopUp(pop);
-	//pop.addChild(prompt);
-	
-	/*
-	
-	
-	pop.addChild(prompt);
-	//var container:UIComponent = new UIComponent();
-	//container.addChild(prompt);
-	//
-	
-	
-	*/
+	var prompt:Module = info.factory.create() as Module;
+	PopUpManager.addPopUp(prompt, this, true);
+	PopUpManager.centerPopUp(prompt);
 }
 
 private function export_map(event:MouseEvent):void 
 {
-	/*
-	//panel
-	var panel:Panel = new Panel();
-	panel.title = "Map export";
-	
-	//Form
-	var map_form:Form = new Form();
-	
-	//Heading
-	var fh:FormHeading = new FormHeading();
-	fh.label = "Map attributes";
-	
-	//Map name
-	var name:FormItem = new FormItem();
-	name.label = "Map name";
-	name.required = true;
-	name.addChild(new TextInput());
-	
-	//Number of players
-	var players:FormItem = new FormItem();
-	players.label = "Players";
-	players.required = true;
-	players.addChild(new TextInput());
-	
-	//Submit
-	var submit:Button = new Button();
-	submit.label = "Submit";
-	submit.addEventListener(MouseEvent.CLICK, send_map);
-	
-	map_form.addChild(fh);
-	map_form.addChild(name);
-	map_form.addChild(players);
-	map_form.addChild(submit);
-	panel.addChild(map_form);
-	*/
-
-	
 	import mx.events.CloseEvent;
 	
 	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554

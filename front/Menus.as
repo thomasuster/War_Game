@@ -142,30 +142,30 @@ private function menuHandler(event:MenuEvent):void
 	//CursorManager.removeAllCursors();
 	//var ClassReference:Class = getDefinitionByName("grass") as Class;
 	//CursorManager.setCursor(this[s]);
-	board.mode = "sector";
-	board.tool = s;
+	this["board"].mode = "sector";
+	this["board"].tool = s;
 	//CursorManager.setCursor(eval(event.item));
 }
 
 private function color_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
-	board.color_mode = s;
+	this["board"].color_mode = s;
 }
 
 // Event handler for the infantry_menu control's itemClick event.
 private function unit_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
-	board.mode = "unit";
-	board.tool = s;
-	board.tool
+	this["board"].mode = "unit";
+	this["board"].tool = s;
+	this["board"].tool
 }
 
 // Event handler for the unit_menu control's itemClick event.
 private function temp_menu_Handler(event:MenuEvent):void 
 {
-	board.radius = int(event.item.@data);
+	this["board"].radius = int(event.item.@data);
 }
 
 import mx.events.ModuleEvent;
@@ -174,7 +174,7 @@ import mx.modules.IModuleInfo;
 
 public var info:IModuleInfo;
 
-private function end_turn(event:MouseEvent):void 
+private function export_map(event:MouseEvent):void 
 {
 	info = ModuleManager.getModule("modules/export_map.swf");
 	info.addEventListener(ModuleEvent.READY, show_export_map);           
@@ -186,23 +186,32 @@ import mx.containers.TitleWindow;
 import mx.core.Container;
 import mx.modules.Module;
 
+private var prompt:Module;
+
 private function show_export_map(e:ModuleEvent):void
 {
-	var prompt:Module = info.factory.create() as Module;
+	prompt = info.factory.create() as Module;
 	PopUpManager.addPopUp(prompt, this, true);
 	PopUpManager.centerPopUp(prompt);
 }
 
-private function export_map(event:MouseEvent):void 
+private function send_map(event:MouseEvent):void 
 {
-	import mx.events.CloseEvent;
+	PopUpManager.removePopUp(prompt);
+	var variables:URLVariables = new URLVariables();
+	variables.num_players = this["num_players"].text;
+	variables.map_name = this["map_name"].text;
+	
+	return;
+	import mx.events.CloseEvent; 
 	
 	//Technique from sgrant at http://www.actionscript.org/forums/showthread.php3?t=169554
-	var xml_string:String = board.export_map().toString();
+	var xml_string:String = this["board"].export_map().toString();
 	//var map:XML = new XML(xml_string);
 	var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/save");
 	
-	xml_url_request.data = xml_string;
+	variables.map = xml_string;
+	xml_url_request.data = variables;
 	//Alert.show(xml_string, "Flash");
 	xml_url_request.contentType = "text/xml";
 	xml_url_request.method = URLRequestMethod.POST;

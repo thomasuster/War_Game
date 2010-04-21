@@ -20,7 +20,7 @@
 	
 	<mx:Button label="Export Map" click="export_map(event)"/>
 	
-	<mx:Button label="End Turn" click="end_turn(event)"/>
+	<mx:Button label="End Turn"/>
 
 	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
 		dataProvider="{game_collection}" />

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	width="800" height="800"
+	styleName="application"
+	
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+	creationComplete="initCollections(); init();">
+<!--horizontalScrollPolicy="off"
+	verticalScrollPolicy="off"-->
+	<mx:Style source="css/styles.css" />
+	
+	<mx:Script source="Menus.as" />
+	
+	<mx:Box direction = "horizontal" styleName = "ui" width="800" height="100">
+	<!-- <mx:Label id="p" text=""/>-->
+	<mx:Label id="currency" text="$400.00"/>
+	
+	
+	<mx:Label id="expiration" text="Expires in 23 hours"/>
+	
+	
+	
+	<mx:Button label="Export Map" click="export_map_click(event)"/>
+	
+	<mx:Button label="End Turn"/>
+
+	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
+		dataProvider="{game_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="menuHandler(event);" 
+		dataProvider="{map_collection}" />
+	
+	<mx:MenuBar labelField="@label" itemClick="color_menu_Handler(event);" 
+		dataProvider="{color_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
+		dataProvider="{infantry_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
+		dataProvider="{vehicle_collection}" />
+		
+	<mx:MenuBar labelField="@label" itemClick="temp_menu_Handler(event);" 
+		dataProvider="{temp_collection}" />
+	
+
+		
+	<mx:Label id="mouse_x_ui" text=""/>
+	<mx:Label id="mouse_y_ui" text=""/>
+			
+			
+			
+	</mx:Box>
+	
+	<mx:Canvas id = "canvas" styleName = "canvas" width="800" height="800">
+	</mx:Canvas>
+	
+	<mx:Script>
+        <![CDATA[
+		import War_game.Board;
+		public var board:Board;
+		
+		private function init():void {
+			
+			
+			board = new Board();
+			canvas.addChild(board);
+			
+			import flash.events.MouseEvent;
+			//Movment Listener
+			board.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, mouseMove);
+			function mouseMove(event:MouseEvent):void
+			{
+				//trace(event.localX);	
+				mouse_x_ui.text = String(board.contentMouseX);
+				mouse_y_ui.text = String(board.contentMouseY);
+			}
+			
+			
+		}
+		
+        ]]>
+    </mx:Script>
+	
+    <!-- <mx:Button id="myButton" styleName = "myButton" label="I'm a button!" /> -->
+	
+</mx:Application>

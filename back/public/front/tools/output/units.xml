@@ -1,0 +1,15 @@
+<units>
+	<unit name="Engineer"type="Infantry"number="4"tier="1"Weapon="Carbine"range="3"optimum_range="2"bullet_defense="1"shell_defense="1"></unit>
+	<unit name="Infantry"type="Infantry"number="12"tier="1"Weapon="Rifle"range="3"optimum_range="1"bullet_defense="1"shell_defense="2"></unit>
+	<unit name="MG Team"type="Infantry"number="2"tier="2"Weapon="Machine Gun"range="3"optimum_range="3"bullet_defense="0"shell_defense="1"></unit>
+	<unit name="Morter Team"type="Infantry"number="2"tier="2"Weapon="Mortor"range="5"optimum_range="5"bullet_defense="0"shell_defense="1"></unit>
+	<unit name="Sniper"type="Infantry"number="1"tier="2"Weapon="Rifle"range="5"optimum_range="4"bullet_defense="1"shell_defense="1"></unit>
+	<unit name="AT Team"type="Infantry"number="4"tier="2"Weapon="Rocket Launcher and Rifles"range="3"optimum_range="2"bullet_defense="1"shell_defense="1"></unit>
+	<unit name="Officer"type="Infantry"number="1"tier="3"Weapon="Pistol"range="2"optimum_range="1"bullet_defense="2"shell_defense="1"></unit>
+	<unit name="Special Forces"type="Infantry"number="7"tier="3"Weapon="Sub-machine gun"range="3"optimum_range="1"bullet_defense="2"shell_defense="1"></unit>
+	<unit name="Light Tank"type="Vehicle"number="1"tier="2"Weapon="Cannon"range="3"optimum_range="2"bullet_defense="10"shell_defense="5"></unit>
+	<unit name="HalfTrack"type="Vehicle"number="1"tier="2"Weapon="Machine Gun"range="3"optimum_range="1"bullet_defense="5"shell_defense="2"></unit>
+	<unit name="Jeep"type="Vehicle"number="1"tier="1"Weapon="Light Machine Gun"range="3"optimum_range="1"bullet_defense="3"shell_defense="1"></unit>
+	<unit name="Tank"type="Vehicle"number="1"tier="3"Weapon="Cannon"range="4"optimum_range="3"bullet_defense="15"shell_defense="7"></unit>
+	<unit name="Artillary"type="Vehicle"number="1"tier="3"Weapon="Howitzer"range="10"optimum_range="8"bullet_defense="5"shell_defense="3"></unit>
+</units>

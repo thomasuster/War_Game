@@ -1,0 +1,12 @@
+name,type,power,number
+Carbine,Bullet,1,3
+Rifle,Bullet,1,1
+Machine Gun,Bullet,1,6
+Mortor,Bullet,4,1
+Sniper Rifle,Bullet,1,1
+AT,Shell,4,1
+Cannon,Shell,5,1
+Light Machine Gun,Bullet,0.5,6
+Pistol,Bullet,0.5,1
+Sub-machine gun,Bullet,0.5,6
+Howitzer,Shell,10,1

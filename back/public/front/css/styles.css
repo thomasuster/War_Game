@@ -1,0 +1,30 @@
+.application
+{
+	backgroundColor:"0x000000";
+    horizontalAlign:"left";
+    paddingLeft:"0";
+    paddingTop:"0";
+    paddingBottom:"0";
+    paddingRight:"0";
+}
+
+.myButton
+{
+	width:"300px";	
+	color:"0x00FF00";
+	cornerRadius:"5";
+	borderThicknessTop:"10";
+}
+
+.canvas
+{
+	backgroundColor:"0xFFFFFF";
+}
+
+.ui
+{
+	backgroundColor:"0xAAAAAA";
+	color:"0x000000";
+	height:"72px";
+	width:"800px";
+}

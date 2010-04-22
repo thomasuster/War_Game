@@ -9,7 +9,9 @@ class FrontController < ApplicationController
 	def save
 		#@data = request.env['RAW_POST_DATA']
 		@data = params
-		#print params.inspect
+		print "\n\n\n\n\n"
+		print params["map_name"] + "\n"
+		print params["num_players"]
 		render :layout => false
 	end
 end

@@ -90,8 +90,8 @@ package War_game
 				{
 					//init
 					var location:Location = new Location(indexX, indexY);
-					
-					if(original_map[indexX + " " + indexY] == null)
+					//trace(original_map[indexX + " " + indexY]);
+					if(original_map[indexX + " " + indexY] == undefined)
 						make_sector(location, "empty");
 					else
 						make_sector(location, original_map[indexX + " " + indexY]);
@@ -119,6 +119,9 @@ package War_game
 			return xml;
 		}
 		
+		/**
+		* Makes a sector
+		*/
 		public function make_sector(location:Location, type:String):void
 		{
 			//remove

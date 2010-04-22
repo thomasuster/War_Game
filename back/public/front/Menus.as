@@ -183,7 +183,7 @@ private function export_map_click(event:MouseEvent):void
 	import flash.system.SecurityDomain;
 	
 	//info = ModuleManager.getModule("http://localhost:3000/front/modules/export_map.swf?map="+map);
-	info = ModuleManager.getModule("modules/export_map.swf");
+	info = ModuleManager.getModule("export_map.swf");
 	info.addEventListener(ModuleEvent.READY, show_export_map);
 	info.addEventListener(ModuleEvent.ERROR, export_error);
 	info.load();
@@ -212,6 +212,7 @@ private function show_export_map(e:ModuleEvent):void
 	prompt = info.factory.create() as Module;
 	prompt.addEventListener(Module_event.COMPLETE, function():void {
 		PopUpManager.removePopUp(prompt);
+		
 	});
 	
 	PopUpManager.addPopUp(prompt, this, true);

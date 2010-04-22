@@ -15,6 +15,7 @@ import mx.controls.TextInput;
 import mx.managers.PopUpManager;
 import mx.containers.VBox;
 import mx.containers.Panel;
+import Standard.Module_event;
 
 [Bindable]
 public var game_collection:XMLListCollection;
@@ -209,6 +210,10 @@ private var prompt:Module;
 private function show_export_map(e:ModuleEvent):void
 {
 	prompt = info.factory.create() as Module;
+	prompt.addEventListener(Module_event.COMPLETE, function():void {
+		PopUpManager.removePopUp(prompt);
+	});
+	
 	PopUpManager.addPopUp(prompt, this, true);
 	PopUpManager.centerPopUp(prompt);
 }

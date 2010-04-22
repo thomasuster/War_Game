@@ -1,6 +1,0 @@
-name,infantry_moves,vehicle_moves,attacking,defending
-grass,1,1,0,0
-forest,2,4,0,1
-water,-1,-1,0,0
-mountain,3,-1,1,2
-hill,2,2,1,1

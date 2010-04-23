@@ -8,4 +8,8 @@ class Map < ActiveRecord::Base
 	def self.get_map(uuid)
 		m = Map.find( :first,  :conditions => { :uuid => uuid}, :select => 'name, players')
 	end
+	
+	def self.get_map_data(uuid)
+		m = Map.find( :first,  :conditions => { :uuid => uuid}, :select => 'data')
+	end
 end

@@ -10,6 +10,7 @@ package War_game
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLVariables;
 	import flash.utils.Dictionary;
 	import flash.events.MouseEvent;
 	import flash.display.Bitmap;
@@ -62,6 +63,7 @@ package War_game
 			color_mode = "red";
 			tool = "grass";
 
+
 			image_resource = new Image_resource("images.xml");
 			map = new Map(sizeX, sizeY, image_resource);
 			map.addEventListener(Sector_event.CLICKED, use_tool);
@@ -72,8 +74,64 @@ package War_game
 			image_resource.addEventListener("loaded", completeHandler);
 			function completeHandler(event:Event):void
 			{
-				//The map
-				map.load_xml("maps/river.xml");
+				//Get a map
+				
+				//Prepare data
+				var variables:URLVariables = new URLVariables();
+				variables.game_uuid = parentApplication.parameters["game_uuid"];
+				
+				for (var p:String in parentApplication.parameters)
+				{
+					Alert.show("param" + p, "Flash", 0, Sprite(parentApplication));
+				}
+				
+				
+				//Action
+				var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/get_map");
+				xml_url_request.method = URLRequestMethod.GET;
+				xml_url_request.data = variables;
+					
+				//Set Handlers and load
+				var xml_send_loader:URLLoader = new URLLoader();
+				xml_send_loader.addEventListener(Event.COMPLETE, on_complete, false, 0, true);
+				xml_send_loader.addEventListener(IOErrorEvent.IO_ERROR, on_IO_error, false, 0, true);
+				xml_send_loader.dataFormat = URLLoaderDataFormat.TEXT;
+				xml_send_loader.load(xml_url_request);
+
+				import flash.events.IOErrorEvent;
+				import flash.net.URLRequestMethod;
+				import flash.net.URLLoaderDataFormat;
+				import mx.controls.Alert;
+				
+				//Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
+				function on_complete(evt:Event):void
+				{
+					try {
+						Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
+						var loader:URLLoader = URLLoader(evt.target);
+						Alert.show("Then here", "Flash", 0, Sprite(parentApplication));
+						var response:String = loader.data;
+						Alert.show("The response:\n" + response, "Flash",0, Sprite(parentApplication));
+						//trace();
+						map.load_map(XML(response));
+						removeEventListener(Event.COMPLETE, on_complete);
+						removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);
+					} catch (err:TypeError) {
+						Alert.show("An error occured when communicating with server:\n" + err.message, "Flash", 0, Sprite(parentApplication));
+						trace("An error occured when communicating with server:\n" + err.message)
+					}
+				}
+
+				function on_IO_error(evt:IOErrorEvent):void {
+					trace("An error occurred when attempting to load the data.\n" + evt.text);
+					Alert.show("An error occurred when attempting to load the data.\n" + evt.text, "Flash",0, Sprite(parentApplication));
+					map.load_xml("maps/river.xml");
+				}
+				
+				
+				
+				
+				//
 				screens.populate();
 			}
 			this.addChild(map);

@@ -6,6 +6,12 @@ class FrontController < ApplicationController
 		@game = Game.get_game(params[:game_uuid])
 	end
 	
+	def get_map
+		g = Game.get_game(params[:game_uuid])
+		m = Map.get_map_data(g[:map_uuid])
+		@data = m[:data]
+	end
+	
 	def save
 		#@data = request.env['RAW_POST_DATA']
 		#@data = params

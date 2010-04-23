@@ -127,6 +127,7 @@ package War_game
 			//remove
 			if (map[location.x][location.y] != null)
 			{
+				removeChild(map[location.x][location.y]);
 				delete map[location.x][location.y];
 			}
 			

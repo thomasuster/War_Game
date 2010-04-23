@@ -1,5 +1,10 @@
 <h1><%= @game[:name] %></h1>
 
+
+<%- content_for(:head) do -%>
+<%= javascript_include_tag "front.js" -%>
+<%- end -%>
+
 <!-- BEGIN INSERT --><HEAD><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"></HEAD><!-- END INSERT --> 
 
 <script type="text/javascript" src="../javascripts/swfobject.js"></script>

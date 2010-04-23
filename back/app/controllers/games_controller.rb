@@ -24,7 +24,7 @@ class GamesController < ApplicationController
 	# GET /games/1
 	# GET /games/1.xml
 	def show
-		@game = Game.find_by_uuid(params[:id])
+		@game = Game.find_by_id(params[:id])
 
 		respond_to do |format|
 			format.html # show.html.erb

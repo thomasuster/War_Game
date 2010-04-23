@@ -3,13 +3,16 @@ package War_game
 	import flash.display.Sprite;
 	import flash.events.EventDispatcher;
 	import flash.net.URLRequestHeader;
+	import flash.display.BitmapData;
+	import flash.utils.Dictionary;
+	
+	import Math;
+	
 	import Standard.Image_resource;
+	
 	import War_game.Screen;
 	import War_game.Location;
 	import War_game.Hexagon_grid;
-	import flash.display.BitmapData;
-	import flash.utils.Dictionary;
-	import Math;
 	
 	public class Screens extends Sprite implements IHexagon_grid
 	{	
@@ -29,6 +32,9 @@ package War_game
 			this.visible = false;
 		}
 		
+		/**
+		* Make a bunch of screens
+		*/
 		public function populate():void 
 		{
 			//screen

@@ -8,7 +8,5 @@ package War_game
 		public function UI():void
 		{
 		}
-		
-		
 	}
 }

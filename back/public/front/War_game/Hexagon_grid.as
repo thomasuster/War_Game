@@ -4,6 +4,9 @@ package War_game
 	import War_game.Location;
 	import Math;
 	
+	/**
+	* Base class for working with Hexagon grids
+	*/
 	public class Hexagon_grid implements IHexagon_grid
 	{
 		public var grid:Array;
@@ -22,6 +25,10 @@ package War_game
 			}
 		}
 		
+		
+		/**
+		* Iterating, check me
+		*/
 		public function foreach(f:Function):void 
 		{
 			for (var x:int = 0; x < sizeX; x++)
@@ -61,27 +68,8 @@ package War_game
 				delta_x -= possible_x_traveled;
 			else
 				delta_x = 0;
-			
-			//if (delta_x <= 0)
-			//	return 0;
-			//return 10;
-			
-			//
-			
-			
-			//	distance_x++;
-			
-			/*if(delta_x == 0)
-				return delta_y;
-			else
-			*/
-			
-			return delta_y + delta_x;
-			
-			
-				
-			
-			
+
+			return delta_y + delta_x;			
 		}
 		
 		/**
@@ -109,7 +97,6 @@ package War_game
 				
 			}	
 			
-			
 			var endY:int = location.y + r;
 			var circle_width:int = 2 * r + 1;
 			var delta_y_odd:int = -1;
@@ -118,7 +105,6 @@ package War_game
 			var circle:Array = new Array();
 			for (var y:int = startY; y <= endY; y++)
 			{
-				
 				var length:int = circle_width - Math.abs(y - location.y);
 				
 				if (y % 2 == 0)
@@ -140,12 +126,8 @@ package War_game
 					
 				}
 				
-				
-					
-				
 				var start:int = startX + offset;
 				//trace("y = " + y + "location = " + location.y + " : " + length);
-				
 				
 				var s:String = "";
 				for (var x:int = start; x < start + length; x++)

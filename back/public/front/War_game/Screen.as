@@ -8,6 +8,9 @@ package War_game
 	import flash.geom.ColorTransform;
 	import flash.display.Sprite;
 	
+	/**
+	* One Screen hides or reveals on sector
+	*/
 	public class Screen extends Board_object
 	{
 		private var border:Sprite;
@@ -30,6 +33,9 @@ package War_game
 			this.removeChild(border);
 		}
 		
+		/**
+		* Outline a Screen
+		*/
 		public function stroke():void
 		{
 			border = new Sprite();
@@ -46,6 +52,9 @@ package War_game
 			this.addChild(border);
 		}
 		
+		/**
+		* Reveal a Sector
+		*/
 		public function reveal():void
 		{
 			bitmap.visible = false;
@@ -58,6 +67,9 @@ package War_game
 			bitmap.transform.colorTransform = resultColorTransform;
 		}
 		
+		/**
+		* Conceal a Sector
+		*/
 		public function conceal():void
 		{
 			bitmap.visible = true;

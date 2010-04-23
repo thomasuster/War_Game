@@ -3,16 +3,14 @@ package War_game
 	import flash.geom.Matrix;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-	
-	import Standard.Conversion;
-	import War_game.Board_object;
-	import War_game.Stats;
-	
 	import flash.display.BitmapData;
 	import flash.text.TextFormat;
-	
-	//color
 	import flash.filters.ColorMatrixFilter;
+	
+	import Standard.Conversion;
+	
+	import War_game.Board_object;
+	import War_game.Stats;
 	
 	public class Unit extends Board_object
 	{
@@ -77,12 +75,6 @@ package War_game
 			var filters:Array = new Array();
             filters.push(filter);
             bitmap.filters = filters;
-			
-			
-
-			
-			
-			
 			
 			//Dynamic Stats
 			number = int(unit_stats[unit_name]["number"]);

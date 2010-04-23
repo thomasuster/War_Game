@@ -3,10 +3,11 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.net.URLLoaderDataFormat;
 import flash.system.SecurityPanel;
+import flash.utils.getDefinitionByName;
+
 import mx.events.MenuEvent;
 import mx.collections.*;
 import mx.managers.CursorManager;
-import flash.utils.getDefinitionByName;
 import mx.controls.Alert;
 import mx.containers.Form;
 import mx.containers.FormHeading;
@@ -15,6 +16,7 @@ import mx.controls.TextInput;
 import mx.managers.PopUpManager;
 import mx.containers.VBox;
 import mx.containers.Panel;
+
 import Standard.Module_event;
 
 [Bindable]
@@ -125,8 +127,11 @@ public var mountain:Class;
 public var water:Class;
 */
 
-// Event handler to initialize the MenuBar control.
-private function initCollections():void {
+/**
+* Event handler to initialize the MenuBar control.
+*/
+private function initCollections():void
+{
 	game_collection = new XMLListCollection(game_menu);
 	map_collection = new XMLListCollection(map_menu);
 	color_collection = new XMLListCollection(color_menu);
@@ -135,26 +140,35 @@ private function initCollections():void {
 	temp_collection = new XMLListCollection(temp_menu);
 }
 
-// Event handler for the MenuBar control's itemClick event.
+/**
+* Event handler for the MenuBar control's itemClick event.
+*/
 private function menuHandler(event:MenuEvent):void 
 {
-	//trace(event.item.@data);
 	var s:String = event.item.@data;
+	//trace(s);
+	
+	//Cursor
 	//CursorManager.removeAllCursors();
 	//var ClassReference:Class = getDefinitionByName("grass") as Class;
 	//CursorManager.setCursor(this[s]);
+	//CursorManager.setCursor(eval(event.item));
 	board.mode = "sector";
 	board.tool = s;
-	//CursorManager.setCursor(eval(event.item));
 }
 
+/**
+* Change color
+*/
 private function color_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
 	board.color_mode = s;
 }
 
-// Event handler for the infantry_menu control's itemClick event.
+/**
+* Event handler for the infantry_menu control's itemClick event.
+*/
 private function unit_menu_Handler(event:MenuEvent):void 
 {
 	var s:String = event.item.@data;
@@ -163,7 +177,9 @@ private function unit_menu_Handler(event:MenuEvent):void
 	board.tool
 }
 
-// Event handler for the unit_menu control's itemClick event.
+/**
+* Event handler for the temp_menu control's itemClick event.
+*/
 private function temp_menu_Handler(event:MenuEvent):void 
 {
 	board.radius = int(event.item.@data);
@@ -193,10 +209,14 @@ private function export_map_click(event:MouseEvent):void
 	}
 }
 
+/**
+* Board Composition, Add an interface!
+*/
 public function map_xml():String
 {
 	return board.export_map().toString(); 
 }
+
 import mx.core.IFlexDisplayObject;
 import mx.containers.TitleWindow;
 import mx.core.Container;

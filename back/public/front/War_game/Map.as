@@ -2,8 +2,6 @@ package War_game
 {
 	import flash.sampler.NewObjectSample;
 	import flash.ui.KeyLocation;
-	import Math;
-	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.display.Sprite;
@@ -15,6 +13,8 @@ package War_game
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
+	import Math;
+	
 	import Standard.Image_resource;
 	
 	import War_game.Screen;
@@ -22,11 +22,9 @@ package War_game
 	import War_game.Hexagon_grid;
 	import War_game.Sector_event;
 	
-	
-	
-	
-	
-	
+	/**
+	* The map
+	*/
 	public class Map extends Sprite implements IHexagon_grid
 	{	
 		private var sizeX:int;
@@ -43,21 +41,10 @@ package War_game
 			sizeY = _sizeY;
 			map = hexagon_grid.grid;
 		}
-		public function map_toString():String
-		{
-			var s:String = "";
-			var total:int = 0;
-			/*
-			for (var key:Object in map) {
-				if(map[key].toString() != "empty")
-				{
-						s += "{" + key.toString() + " " + map[key].toString() + "}\n";
-						total++;
-				}
-			}*/
-			return s + "\nTotal: " + total + "\n";
-		}
 		
+		/**
+		* Loads the map xml file, calls load_map with files contents
+		*/
 		public function load_xml(xml_url:String):void 
 		{
 			var myXML:XML = new XML();
@@ -67,11 +54,13 @@ package War_game
 			function xmlLoaded(event:Event):void
 			{
 				myXML = XML(myLoader.data);
-				//trace("Data loaded.");
 				load_map(myXML); //Decouple me
 			}
 		}
 		
+		/**
+		* Loads the map from given xml
+		*/
 		public function load_map(xml:XML):void 
 		{
 			var original_map:Object = new Object();
@@ -90,7 +79,7 @@ package War_game
 				{
 					//init
 					var location:Location = new Location(indexX, indexY);
-					//trace(original_map[indexX + " " + indexY]);
+					
 					if(original_map[indexX + " " + indexY] == undefined)
 						make_sector(location, "empty");
 					else
@@ -100,6 +89,9 @@ package War_game
 			
 		}
 		
+		/**
+		* Returns XML of the current map
+		*/
 		public function export_map():XML 
 		{
 			var s:String = "<map>\n";
@@ -108,12 +100,7 @@ package War_game
 				for (var y:int = 0; y < sizeY; y++)
 					if(map[x][y].get_name() != "empty")
 						s += "\t<s x='" + x + "' y='" + y + "'>" + map[x][y].get_name() + "</s>\n";
-			
-			/*
-			for (var key:Object in map) {
-				if(map[key].get_name() != "empty")
-				   s += "\t<s x='" + key.x + "' y='" + key.y + "'>" + map[key].get_name() + "</s>\n";
-			}*/
+						
 			s += "</map>\n";
 			var xml:XML = new XML(s);
 			return xml;
@@ -200,36 +187,17 @@ package War_game
 				}
 			}
 		}
-		
-		public function visual_test_distance(location:Location, r:int):Array
-		{
-			//For testing new distance function, will be removed
-			var circle:Array = new Array();
-			for (var x:int = 0; x < sizeX; x++)
-			{
-				for (var y:int = 0; y < sizeY; y++)
-				{
-					var l:Location = new Location(x,y);
-					var distance:int = distance(location, l);
-					if (distance <= r)
-						circle.push(l);
-				}
-			}
-			return circle;
-		}
 	
-		public function distance(location_a:Location, location_b:Location):int 
-		{
+		/**
+		* Composition for Hexagon_grid
+		*/
+		public function distance(location_a:Location, location_b:Location):int {
 			return hexagon_grid.distance(location_a, location_b);
 		}
-		
-		public function get_circle(location:Location, r:int):Array
-		{
+		public function get_circle(location:Location, r:int):Array {
 			return hexagon_grid.get_circle(location, r);
 		}
-		
-		public function get_sector(location:Location):Sector
-		{
+		public function get_sector(location:Location):Sector {
 			return map[location.x][location.y];
 		}
 	}

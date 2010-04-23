@@ -5,6 +5,9 @@ package War_game
 	import flash.display.BitmapData;
 	import War_game.Location;
 	
+	/**
+	* Base class for board objects like units and sectors
+	*/
 	public class Board_object extends Sprite
 	{
 		protected var bitmap:Bitmap;

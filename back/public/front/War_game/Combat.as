@@ -6,6 +6,9 @@ package War_game
 	import War_game.Weapon;
 	import Math;
 	
+	/**
+	* Combat instance handler
+	*/
 	public class Combat extends Sprite
 	{	
 		private var image_resource:Image_resource;
@@ -60,6 +63,9 @@ package War_game
 			
 		}
 		
+		/**
+		* Unit's raw damage
+		*/
 		private function damage(unit:Unit, range:int, attack_multiplier:int):int
 		{
 			var weapon:Weapon = new Weapon(unit.get_weapon());
@@ -70,6 +76,9 @@ package War_game
 				return unit.get_number();
 		}
 		
+		/**
+		* Unit's raw defense
+		*/
 		private function defense(unit:Unit, defense_multiplier:int):int
 		{
 			return (unit.get_number() * defense_multiplier);

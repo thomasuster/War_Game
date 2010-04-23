@@ -56,7 +56,6 @@ package War_game
 		{
 			//ExternalInterface.call("alert", "Hello world");
 			
-
 			radius = 1;
 			active_unit = null;
 			opaqueBackground = "0xFFFFFF";
@@ -144,6 +143,9 @@ package War_game
 			return map.export_map();
 		}
 		
+		/**
+		* Let's the user place sectors, units, or move units
+		*/
 		private function use_tool(event:Sector_event):void
 		{
 			//trace("kar");
@@ -188,7 +190,9 @@ package War_game
 			}
 		}
 		
-		
+		/**
+		* Selects a unit, for moving/attacking
+		*/
 		private function select_unit(event:Unit_event):void
 		{
 			//init
@@ -236,6 +240,9 @@ package War_game
 			}
 		}
 		
+		/**
+		* Reveals secotors the unit is able to move to
+		*/
 		private function show_moves(unit:Unit):void
 		{
 			mode = "move_unit"
@@ -253,20 +260,15 @@ package War_game
 			//Calculate Moves
 			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));
 			
-			//Distance functon testing
-			//var a:Array = map.visual_test_distance(active_unit.location, 10);
-			//for each (var l:Location in a)
-			//screens.reveal(l);
-			
 			//Screen
 			screens.conceal();
 			for each (var l:Location in available_moves)
 				screens.reveal(l);
-				
-				
-			
 		}
 		
+		/**
+		* Reveals and outlines the units the selected unit is able to attack
+		*/
 		private function show_in_range(unit:Unit):void
 		{
 			screens.un_highlight();

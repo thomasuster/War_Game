@@ -1,9 +1,10 @@
 <h1><%= @game[:name] %></h1>
 
+<% content_for(:head) do %>
+<%= javascript_include_tag "front.js" %>
+<% end %>
 
-<%- content_for(:head) do -%>
-<%= javascript_include_tag "front.js" -%>
-<%- end -%>
+<% content_for(:body) do %>onLoad = "init()"<% end %>
 
 <!-- BEGIN INSERT --><HEAD><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"></HEAD><!-- END INSERT --> 
 

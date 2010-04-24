@@ -8,8 +8,9 @@
   <!-- BEGIN INSERT --><META HTTP-EQUIV="Expires" CONTENT="Mon, 04 Dec 1999 21:29:02 GMT"><!-- END INSERT --> 
   <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"> 
   <%= stylesheet_link_tag 'scaffold' %>
+  <%= yield :head %>
 </head>
-<body>
+<body <%= yield :body %> >
 
 <% if session[:user_uuid] %>
 	<%= link_to 'Dashboard', :controller => 'user', :action => 'index' %><br />

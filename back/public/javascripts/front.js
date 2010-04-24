@@ -1,11 +1,19 @@
 function init()
 {
-	var params = params();
+	
+	var params = get_params();
+	
+	/*alert("Hello world")
+	var params = [];
+	params["goose"] = "cook";
+	alert(params["goose"]);
+	//
+	*/
 	alert(params["game_uuid"]);
 }
 
 //http://snipplr.com/view/799/get-url-variables/
-function params()
+function get_params()
 {
 	var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');

@@ -10,6 +10,7 @@ class FrontController < ApplicationController
 		g = Game.get_game(params[:game_uuid])
 		m = Map.get_map_data(g[:map_uuid])
 		@data = m[:data]
+		render :layout => false
 	end
 	
 	def save

@@ -1,7 +1,7 @@
 function init()
 {
 	
-	var params = get_params();
+	
 	
 	/*alert("Hello world")
 	var params = [];
@@ -9,9 +9,14 @@ function init()
 	alert(params["goose"]);
 	//
 	*/
-	alert(params["game_uuid"]);
+	//alert(get_param("game_uuid"));
 }
 
+function get_param(param)
+{
+	var params = get_params();
+	return params[param];
+}
 //http://snipplr.com/view/799/get-url-variables/
 function get_params()
 {

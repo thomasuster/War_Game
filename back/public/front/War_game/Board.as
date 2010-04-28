@@ -27,7 +27,7 @@ package War_game
 	import War_game.Sector_event;
 	import War_game.Combat;
 	import flash.external.ExternalInterface;
-	
+	import mx.controls.Alert;
 	
 	
 	
@@ -51,10 +51,28 @@ package War_game
 		private var map:Map;
 		private var units:Units;
 		private var image_resource:Image_resource;
+		private var game_guuid:String;
 		
 		public function Board()
 		{
-			//ExternalInterface.call("alert", "Hello world");
+			if (ExternalInterface.available)
+			{
+				try {
+					game_guuid = ExternalInterface.call("get_param", "game_uuid");
+					//Alert.show(a);
+					//ExternalInterface.call("alert", a);
+				} catch (error:SecurityError) {
+					Alert.show("A SecurityError occurred: " + error.message + "\n");
+                    
+                } catch (error:Error) {
+					Alert.show("An Error occurred: " + error.message + "\n");
+                }
+			}
+			else
+				Alert.show("Unavailable");
+			
+			//Alert.show("Breezed");
+			//trace("here!!");
 			
 			radius = 1;
 			active_unit = null;
@@ -77,7 +95,7 @@ package War_game
 				
 				//Prepare data
 				var variables:URLVariables = new URLVariables();
-				variables.game_uuid = parentApplication.parameters["game_uuid"];
+				variables.game_uuid = game_guuid;
 				
 				for (var p:String in parentApplication.parameters)
 				{
@@ -100,15 +118,14 @@ package War_game
 				import flash.events.IOErrorEvent;
 				import flash.net.URLRequestMethod;
 				import flash.net.URLLoaderDataFormat;
-				import mx.controls.Alert;
 				
 				//Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
 				function on_complete(evt:Event):void
 				{
 					try {
-						Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
+						//Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
 						var loader:URLLoader = URLLoader(evt.target);
-						Alert.show("Then here", "Flash", 0, Sprite(parentApplication));
+						//Alert.show("Then here", "Flash", 0, Sprite(parentApplication));
 						var response:String = loader.data;
 						Alert.show("The response:\n" + response, "Flash",0, Sprite(parentApplication));
 						//trace();

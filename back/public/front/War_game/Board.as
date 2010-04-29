@@ -221,13 +221,17 @@ package War_game
 			{
 				//Init
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
-				var attacker_terrain:Sector = map.get_sector(active_unit.location);
-				var defender_terrain:Sector = map.get_sector(unit.location);
+				var destroyed:Array = combat.engage();
+				
+				//Move this stuff to server
+				//var attacker_terrain:Sector = map.get_sector(active_unit.location);
+				//var defender_terrain:Sector = map.get_sector(unit.location);
 				
 				//Perform Combat
+				/*
 				var destroyed:Array = combat.engage(map.distance(active_unit.location, unit.location), 
 					attacker_terrain.get_attacking(), attacker_terrain.get_defending(),
-					defender_terrain.get_attacking(), defender_terrain.get_defending());
+					defender_terrain.get_attacking(), defender_terrain.get_defending());*/
 				
 				//Show outcomes
 				active_unit.refresh_number();

@@ -127,7 +127,7 @@ package War_game
 						var loader:URLLoader = URLLoader(evt.target);
 						//Alert.show("Then here", "Flash", 0, Sprite(parentApplication));
 						var response:String = loader.data;
-						Alert.show("The response:\n" + response, "Flash",0, Sprite(parentApplication));
+						//Alert.show("The response:\n" + response, "Flash",0, Sprite(parentApplication));
 						//trace();
 						map.load_map(XML(response));
 						removeEventListener(Event.COMPLETE, on_complete);
@@ -141,7 +141,7 @@ package War_game
 				function on_IO_error(evt:IOErrorEvent):void {
 					trace("An error occurred when attempting to load the data.\n" + evt.text);
 					Alert.show("An error occurred when attempting to load the data.\n" + evt.text, "Flash",0, Sprite(parentApplication));
-					map.load_xml("maps/river.xml");
+					map.load_xml("maps/erin.xml");
 				}
 				
 				

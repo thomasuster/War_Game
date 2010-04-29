@@ -163,6 +163,8 @@ package War_game
 				return;
 			
 			//calc
+			if (map[location.x][location.y].get_name() == "empty")
+				return;
 			var sector:Sector = map[location.x][location.y];
 			var difficulty:int = int(Sector.sector_stats[sector.get_name()]["infantry_moves"]);
 			var new_distance:int = new int(distance-difficulty);

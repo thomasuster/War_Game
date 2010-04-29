@@ -55,6 +55,7 @@ package War_game
 		
 		public function Board()
 		{
+			//Get game_uuid from Javascript
 			if (ExternalInterface.available)
 			{
 				try {

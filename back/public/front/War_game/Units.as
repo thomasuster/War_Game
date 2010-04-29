@@ -18,13 +18,20 @@ package War_game
 	
 	import War_game.Location;
 	
+	import mx.controls.Alert;
+	
 	public class Units extends Sprite
 	{	
 		private var units:Object;
 		private var image_resource:Image_resource;
 		
+		private var turn_xml:XML;
+		
 		public function Units(_image_resource:Image_resource):void
 		{
+			//Init xml
+			turn_xml = new XML("<turn></turn>");
+			
 			image_resource = _image_resource;
 			units = new Object();
 		}
@@ -48,6 +55,11 @@ package War_game
 		
 		public function move_unit(unit:Unit, location:Location):void
 		{
+			var start:String = "<start x=\"" + unit.location.x + "\" y=\"" + unit.location.y + "\"></start>";
+			var end:String = "<end x=\"" + location.x + "\" y=\"" + location.y + "\"></end>";
+			turn_xml.appendChild(new XML("<move>"+start+end+"</move>"));
+			
+			Alert.show(turn_xml);
 			trace(location.x + " | " + location.y);
 			units[location] = unit;
 			delete units[unit.location];

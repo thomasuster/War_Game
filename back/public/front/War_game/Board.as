@@ -180,11 +180,12 @@ package War_game
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
 				turn_xml.appendChild(units.get_moves());
 				turn_xml.appendChild(combat.get_combat());
-				Alert.show(turn_xml);
+				//Alert.show(turn_xml);
 				
 				//Request
 				var variables:Object = new Object();
 				variables["data"] = turn_xml;
+				variables["authenticity_token"] = ExternalInterface.call("get_authenticity_token");
 				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST");
 				request.addEventListener("complete", on_complete);
 				function on_complete(evt:Event):void

@@ -59,7 +59,7 @@ package War_game
 			var end:String = "<end x=\"" + location.x + "\" y=\"" + location.y + "\"></end>";
 			moves_xml.appendChild(new XML("<move>"+start+end+"</move>"));
 			
-			Alert.show(moves_xml);
+			//Alert.show(moves_xml);
 			trace(location.x + " | " + location.y);
 			units[location] = unit;
 			delete units[unit.location];

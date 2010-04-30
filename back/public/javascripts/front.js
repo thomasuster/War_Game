@@ -3,13 +3,19 @@ function init()
 	
 	
 	
-	/*alert("Hello world")
+	alert(get_authenticity_token())
+	/*
 	var params = [];
 	params["goose"] = "cook";
 	alert(params["goose"]);
 	//
 	*/
 	//alert(get_param("game_uuid"));
+}
+
+function get_authenticity_token()
+{
+	return document.getElementById("authenticity_token").innerHTML;
 }
 
 function get_param(param)

@@ -1,5 +1,5 @@
 class FrontController < ApplicationController
-	protect_from_forgery :except => :save
+	#protect_from_forgery :except => :save
 	
 	#Launches the Flash instance
 	def play
@@ -7,8 +7,7 @@ class FrontController < ApplicationController
 	end
 	
 	def turn
-		#@data = params[:data]
-		@data = "Hello world"
+		@data = params[:data]
 		render :layout => false
 	end
 	

@@ -33,7 +33,7 @@ package War_game
 			var a:String = "<attacker x=\"" + attacker.location.x + "\" y=\"" + attacker.location.y + "\"></attacker>";
 			var d:String = "<defender x=\"" + defender.location.x + "\" y=\"" + defender.location.y + "\"></defender>";
 			combat_xml = new XML("<combat>" + a + d + "</combat>");
-			Alert.show(combat_xml);
+			//Alert.show(combat_xml);
 			return combat_xml;
 		}
 		 

@@ -54,6 +54,8 @@ package War_game
 		private var image_resource:Image_resource;
 		private var game_uuid:String;
 		
+		public var turn_xml:XML;
+		
 		public function Board()
 		{
 			radius = 1;
@@ -61,6 +63,7 @@ package War_game
 			opaqueBackground = "0xFFFFFF";
 			color_mode = "red";
 			tool = "grass";
+			turn_xml = new XML("<turn></turn>");
 			
 			//Get game_uuid from Javascript
 			if (ExternalInterface.available)
@@ -175,7 +178,34 @@ package War_game
 			{
 				//Init
 				var combat:Combat = new Combat(active_unit, unit, image_resource);
-				var destroyed:Array = combat.engage();
+				turn_xml.appendChild(units.get_moves());
+				turn_xml.appendChild(combat.get_combat());
+				Alert.show(turn_xml);
+				
+				//Request
+				var variables:Object = new Object();
+				variables["data"] = turn_xml;
+				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST");
+				request.addEventListener("complete", on_complete);
+				function on_complete(evt:Event):void
+				{
+					Alert.show("Response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
+				}
+				request.load();
+				 
+				//Need me
+				
+				
+				//var destroyed:Array
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				//Move this stuff to server
 				//var attacker_terrain:Sector = map.get_sector(active_unit.location);
@@ -187,6 +217,9 @@ package War_game
 					attacker_terrain.get_attacking(), attacker_terrain.get_defending(),
 					defender_terrain.get_attacking(), defender_terrain.get_defending());*/
 				
+					
+					
+					/*
 				//Show outcomes
 				active_unit.refresh_number();
 				unit.refresh_number();
@@ -200,7 +233,7 @@ package War_game
 						screens.visible = false;
 					}
 					units.destroy_unit(d.location);
-				}
+				}*/
 			}
 			else
 			{

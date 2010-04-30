@@ -6,6 +6,12 @@ class FrontController < ApplicationController
 		@game = Game.get_game(params[:game_uuid])
 	end
 	
+	def turn
+		#@data = params[:data]
+		@data = "Hello world"
+		render :layout => false
+	end
+	
 	def get_map
 		g = Game.get_game(params[:game_uuid])
 		m = Map.get_map_data(g[:map_uuid])

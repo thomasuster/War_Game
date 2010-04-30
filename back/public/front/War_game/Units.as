@@ -25,12 +25,12 @@ package War_game
 		private var units:Object;
 		private var image_resource:Image_resource;
 		
-		private var turn_xml:XML;
+		private var moves_xml:XML;
 		
 		public function Units(_image_resource:Image_resource):void
 		{
 			//Init xml
-			turn_xml = new XML("<turn></turn>");
+			moves_xml = new XML("<moves></moves>");
 			
 			image_resource = _image_resource;
 			units = new Object();
@@ -57,9 +57,9 @@ package War_game
 		{
 			var start:String = "<start x=\"" + unit.location.x + "\" y=\"" + unit.location.y + "\"></start>";
 			var end:String = "<end x=\"" + location.x + "\" y=\"" + location.y + "\"></end>";
-			turn_xml.appendChild(new XML("<move>"+start+end+"</move>"));
+			moves_xml.appendChild(new XML("<move>"+start+end+"</move>"));
 			
-			Alert.show(turn_xml);
+			Alert.show(moves_xml);
 			trace(location.x + " | " + location.y);
 			units[location] = unit;
 			delete units[unit.location];
@@ -75,6 +75,8 @@ package War_game
 		{
 			return units[location];
 		}
+		
+		public function get_moves():XML { return moves_xml; }
 		
 		/*
 		public function in_range(unit:Unit, target:Unit):Sprite

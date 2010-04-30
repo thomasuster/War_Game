@@ -17,6 +17,7 @@ package War_game
     import flash.display.BitmapData;
 	
 	import Standard.Image_resource;
+	import Standard.Request;
 	
 	import War_game.Board_object;
 	import War_game.Screens;
@@ -51,7 +52,7 @@ package War_game
 		private var map:Map;
 		private var units:Units;
 		private var image_resource:Image_resource;
-		private var game_guuid:String;
+		private var game_uuid:String;
 		
 		public function Board()
 		{
@@ -59,7 +60,7 @@ package War_game
 			if (ExternalInterface.available)
 			{
 				try {
-					game_guuid = ExternalInterface.call("get_param", "game_uuid");
+					game_uuid = ExternalInterface.call("get_param", "game_uuid");
 					//Alert.show(a);
 					//ExternalInterface.call("alert", a);
 				} catch (error:SecurityError) {
@@ -93,10 +94,22 @@ package War_game
 			function completeHandler(event:Event):void
 			{
 				//Get a map
+				var variables:Object = new Object();
+				variables["game_uuid"] = game_uuid;
+				var request:Request = new Request(variables, "http://localhost:3000/front/get_map", "get");
+				request.addEventListener("complete", on_complete);
+				function on_complete(evt:Event):void
+				{
+					Alert.show("The response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
+					map.load_map(XML(request.get_response()));
+				}
+				request.load();
+				
 				
 				//Prepare data
+				/*
 				var variables:URLVariables = new URLVariables();
-				variables.game_uuid = game_guuid;
+				variables.game_uuid = game_uuid;
 				
 				for (var p:String in parentApplication.parameters)
 				{
@@ -105,7 +118,7 @@ package War_game
 				
 				
 				//Action
-				var xml_url_request:URLRequest = new URLRequest("http://localhost:3000/front/get_map");
+				var xml_url_request:URLRequest = new URLRequest("");
 				xml_url_request.method = URLRequestMethod.GET;
 				xml_url_request.data = variables;
 					
@@ -143,7 +156,7 @@ package War_game
 					trace("An error occurred when attempting to load the data.\n" + evt.text);
 					Alert.show("An error occurred when attempting to load the data.\n" + evt.text, "Flash",0, Sprite(parentApplication));
 					map.load_xml("maps/erin.xml");
-				}
+				}*/
 				
 				
 				
@@ -151,6 +164,7 @@ package War_game
 				//
 				screens.populate();
 			}
+			
 			this.addChild(map);
 			this.addChild(units);
 			this.addChild(screens);

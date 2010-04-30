@@ -56,6 +56,12 @@ package War_game
 		
 		public function Board()
 		{
+			radius = 1;
+			active_unit = null;
+			opaqueBackground = "0xFFFFFF";
+			color_mode = "red";
+			tool = "grass";
+			
 			//Get game_uuid from Javascript
 			if (ExternalInterface.available)
 			{
@@ -73,15 +79,6 @@ package War_game
 			else
 				Alert.show("Unavailable");
 			
-			//Alert.show("Breezed");
-			//trace("here!!");
-			
-			radius = 1;
-			active_unit = null;
-			opaqueBackground = "0xFFFFFF";
-			color_mode = "red";
-			tool = "grass";
-
 
 			image_resource = new Image_resource("images.xml");
 			map = new Map(sizeX, sizeY, image_resource);
@@ -100,68 +97,11 @@ package War_game
 				request.addEventListener("complete", on_complete);
 				function on_complete(evt:Event):void
 				{
-					Alert.show("The response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
+					//Alert.show("Response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
 					map.load_map(XML(request.get_response()));
 				}
 				request.load();
 				
-				
-				//Prepare data
-				/*
-				var variables:URLVariables = new URLVariables();
-				variables.game_uuid = game_uuid;
-				
-				for (var p:String in parentApplication.parameters)
-				{
-					Alert.show("param" + p, "Flash", 0, Sprite(parentApplication));
-				}
-				
-				
-				//Action
-				var xml_url_request:URLRequest = new URLRequest("");
-				xml_url_request.method = URLRequestMethod.GET;
-				xml_url_request.data = variables;
-					
-				//Set Handlers and load
-				var xml_send_loader:URLLoader = new URLLoader();
-				xml_send_loader.addEventListener(Event.COMPLETE, on_complete, false, 0, true);
-				xml_send_loader.addEventListener(IOErrorEvent.IO_ERROR, on_IO_error, false, 0, true);
-				xml_send_loader.dataFormat = URLLoaderDataFormat.TEXT;
-				xml_send_loader.load(xml_url_request);
-
-				import flash.events.IOErrorEvent;
-				import flash.net.URLRequestMethod;
-				import flash.net.URLLoaderDataFormat;
-				
-				//Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
-				function on_complete(evt:Event):void
-				{
-					try {
-						//Alert.show("I got here", "Flash", 0, Sprite(parentApplication));
-						var loader:URLLoader = URLLoader(evt.target);
-						//Alert.show("Then here", "Flash", 0, Sprite(parentApplication));
-						var response:String = loader.data;
-						//Alert.show("The response:\n" + response, "Flash",0, Sprite(parentApplication));
-						//trace();
-						map.load_map(XML(response));
-						removeEventListener(Event.COMPLETE, on_complete);
-						removeEventListener(IOErrorEvent.IO_ERROR, on_IO_error);
-					} catch (err:TypeError) {
-						Alert.show("An error occured when communicating with server:\n" + err.message, "Flash", 0, Sprite(parentApplication));
-						trace("An error occured when communicating with server:\n" + err.message)
-					}
-				}
-
-				function on_IO_error(evt:IOErrorEvent):void {
-					trace("An error occurred when attempting to load the data.\n" + evt.text);
-					Alert.show("An error occurred when attempting to load the data.\n" + evt.text, "Flash",0, Sprite(parentApplication));
-					map.load_xml("maps/erin.xml");
-				}*/
-				
-				
-				
-				
-				//
 				screens.populate();
 			}
 			

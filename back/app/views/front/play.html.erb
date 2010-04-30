@@ -2,17 +2,13 @@
 
 <% content_for(:head) do %>
 <%= javascript_include_tag "front.js" %>
+<%= javascript_include_tag "swfobject.js" %>
 <!-- BEGIN INSERT --><META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"><!-- END INSERT --> 
 <!-- BEGIN INSERT --><META HTTP-EQUIV="Expires" CONTENT="Mon, 04 Dec 1999 21:29:02 GMT"><!-- END INSERT --> 
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"> 
 <% end %>
 
 <% content_for(:body) do %>onLoad = "init()"<% end %>
-
-
-
-  
-<script type="text/javascript" src="../javascripts/swfobject.js"></script>
 
 <script type="text/javascript">
 	swfobject.embedSWF("../front/game.swf", "myContent", "800", "800", "9.0.0", "expressInstall.swf");

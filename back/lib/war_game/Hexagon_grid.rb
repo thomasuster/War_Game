@@ -22,7 +22,7 @@ class Hexagon_grid
 		end
 		
 		#diagonal travel
-		possible_x_traveled = (delta_y / 2).floor
+		possible_x_traveled = (delta_y / 2.0).floor
 		
 		if delta_x > possible_x_traveled
 			delta_x -= possible_x_traveled
@@ -34,16 +34,16 @@ class Hexagon_grid
 	end
 	
 	# Returns an array of locations for a circle.
-	def get_circle(location, r) 
+	def get_circle(location, r)
 		startY = location.y - r
 		
 		startX = 0
 		endX = 0
 		if startY % 2 == 0
-			startX = location.x - (r / 2).floor
+			startX = location.x - (r / 2.0).floor
 			endX = location.x + r;
 		else
-			startX = location.x - (r / 2).floor
+			startX = location.x - (r / 2.0).floor
 			endX = location.x + r;
 			if r % 2 == 0
 				startX+=1; endX+=1;
@@ -72,20 +72,16 @@ class Hexagon_grid
 				if (delta_y_odd == -1)
 					delta_y_odd = (y - location.y).abs;
 				end
-				offset =  (((y - location.y).abs - delta_y_odd) / 2).floor - 1;
+				offset =  (((y - location.y).abs - delta_y_odd) / 2.0).floor - 1;
 			end
 			
 			start = startX + offset;
 			#trace("y = " + y + "location = " + location.y + " : " + length);
 			
 			s = "";
-			for x in Range.new(start, start + length)
+			for x in Range.new(start, start + length - 1)
 				s += x.to_s + " ";
-				#if (0 <= x)
-				#	if (0 <= y)
 						circle.push(Location.new(x,y));
-				#	end
-				#end
 			end
 			#trace(s);
 		end

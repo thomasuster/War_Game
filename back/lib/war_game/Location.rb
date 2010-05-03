@@ -1,1 +1,1 @@
-class Location	attr_accessor :x	attr_accessor :y		def initialize(x, y)		@x = x		@y = y	end		def to_s()		return @x.to_s + ' ' + @y.to_s	endend
+class Location	attr_accessor :x	attr_accessor :y		def initialize(x, y)		@x = x		@y = y	end		def to_s()		return @x.to_s + ' ' + @y.to_s	end		def self.un_pickle(s)		a = Array.new		s.each(" ") {|sub| a << sub}		return a;	endend

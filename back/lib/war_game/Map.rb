@@ -8,7 +8,7 @@ class Map < Hexagon_grid
 	attr_accessor :map
 	
 	def initialize()
-		map = Hash.new
+		@map = Hash.new
 	end
 	
 	#Loads the map xml file, calls load_map with files contents
@@ -32,20 +32,20 @@ class Map < Hexagon_grid
 		
 		doc.elements.each("map/s") do |sector|
 			#Make Sector
-			l = Location.new(sector.attributes["x"], sector.attributes["y"])
+			l = Location.new(sector.attributes["x"].to_i, sector.attributes["y"].to_i)
 			s = Sector.new(sector.text, l)
-			map[l.to_s] = s
+			@map[l.to_s] = s
 		end
 	end
 	
 	#Returns a Hash of available moves
 	def available_moves(location, distance)
 		moves = Hash.new
-		_available_moves(location, distance, moves);
+		_available_moves(location, distance, moves)
 		
 		location_moves = Hash.new
-		location_moves.each do |l|
-			a = Location.un_pickle(l);
+		moves.each_key do |l|
+			a = Location.un_pickle(l.to_s);
 			location_moves[l.to_s] = Location.new(a[0], a[1]);
 		end
 		return location_moves;
@@ -53,34 +53,29 @@ class Map < Hexagon_grid
 	
 	#Helper function, Returns a Hash of available moves
 	def _available_moves(location, distance, moves)
-		if (distance < 0)
-			return;
+		return if (distance < 0)
 		
 		#calc
-		if (map[location.to_s].get_name() == "empty")
-			return;
-		var sector:Sector = map[location.x][location.y];
-		var difficulty:int = int(Sector.sector_stats[sector.get_name()]["infantry_moves"]);
-		var new_distance:int = new int(distance-difficulty);
+		return if (@map[location.to_s].nil?)
+		#return if (@map[location.to_s].get_name() == "empty")
 		
-		//Special unmovable case
-		if (difficulty == -1)
-			return;
+		sector = @map[location.to_s];
+		difficulty = sector.get_infantry_moves()
+		new_distance = distance-difficulty.to_i;
 		
-		moves[String(location)] = distance;
+		#Special unmovable case
+		return if (difficulty == -1)
 		
-		var circle:Array = get_circle(location, 1);
-		for each (var l:Location in circle)
-		{
-			if (moves[String(l)] == null)
-			{
+		moves[location.to_s] = distance;
+		
+		circle = get_circle(location, 1)
+		circle.each do |l|
+			if !moves.has_key?(l.to_s)
 				_available_moves(l, new_distance, moves);
-			}
-			else if (moves[String(l)] != null && moves[String(l)] < new_distance)
-			{
-				delete moves[String(l)];
-				_available_moves(l, new_distance, moves);
-			}
-		}
+			elsif (moves.has_key?(l.to_s) && moves[l.to_s] < new_distance)
+				moves.delete(l.to_s);
+				_available_moves(l, new_distance, moves)
+			end
+		end
 	end
 end

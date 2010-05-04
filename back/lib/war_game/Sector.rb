@@ -16,26 +16,26 @@ class Sector < Board_object
 	end
 	
 	def get_name() 
-		return sector_name;
+		return @sector_name;
 	end
 		
 	def get_infantry_moves() 
-		return @@stats[sector_name]["infantry_moves"]
+		return @@stats[@sector_name]["infantry_moves"]
 	end
 
 	def get_vehicle_moves() 
-		return @@stats[sector_name]["vehicle_moves"]
+		return @@stats[@sector_name]["vehicle_moves"]
 	end
 
 	def get_attacking() 
-		return @@stats[sector_name]["attacking"]
+		return @@stats[@sector_name]["attacking"]
 	end
 
 	def get_defending() 
-		return @@stats[sector_name]["defending"]
+		return @@stats[@sector_name]["defending"]
 	end
 
 	def to_s() 
-		return sector_name;
+		return @sector_name;
 	end
 end

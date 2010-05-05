@@ -3,7 +3,7 @@ function init()
 	
 	
 	
-	alert(get_authenticity_token())
+	//alert(get_authenticity_token())
 	/*
 	var params = [];
 	params["goose"] = "cook";

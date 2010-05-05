@@ -7,7 +7,19 @@ class FrontController < ApplicationController
 	end	
 	
 	def turn
-		@data = params[:data]
+		require 'Map'
+		map = War_game::Map.new
+		#map.load_map(get_map)
+		@data = "asd"
+	
+		#@data = params[:data]
+		#
+		
+		#War_Game.new(current_game)
+		#current_game = War_Game.process_turn
+		#Return current_game to user
+		
+		
 		render :layout => false
 	end
 	

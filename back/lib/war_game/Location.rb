@@ -1,1 +1,0 @@
-class Location	attr_accessor :x	attr_accessor :y		def initialize(x, y)		@x = x		@y = y	end		def to_s()		return @x.to_s + ' ' + @y.to_s	end		def self.un_pickle(s)		return s.split(' ')	endend

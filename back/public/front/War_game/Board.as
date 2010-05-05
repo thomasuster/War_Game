@@ -184,6 +184,7 @@ package War_game
 				
 				//Request
 				var variables:Object = new Object();
+				variables["game_uuid"] = game_uuid;
 				variables["data"] = turn_xml;
 				variables["authenticity_token"] = ExternalInterface.call("get_authenticity_token");
 				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST");

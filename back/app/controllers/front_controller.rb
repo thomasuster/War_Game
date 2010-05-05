@@ -7,18 +7,14 @@ class FrontController < ApplicationController
 	end	
 	
 	def turn
-		require 'Map'
+		require 'War_game/Map'
+		require 'War_game/Location'
 		map = War_game::Map.new
-		#map.load_map(get_map)
-		@data = "asd"
-	
-		#@data = params[:data]
-		#
-		
-		#War_Game.new(current_game)
-		#current_game = War_Game.process_turn
-		#Return current_game to user
-		
+		g = Game.get_game(params[:game_uuid])
+		m = Map.get_map_data(g[:map_uuid])
+		map.load_map(m[:data])
+		location = War_game::Location.new(0,0)
+		@data = (map.available_moves(location, 3).count == 3)
 		
 		render :layout => false
 	end

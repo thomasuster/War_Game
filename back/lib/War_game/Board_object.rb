@@ -1,0 +1,1 @@
+require 'War_game/Location.rb'module War_game	class Board_object		attr_accessor :location				def initialize(location)			@location = location		end	endend

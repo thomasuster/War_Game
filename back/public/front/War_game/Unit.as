@@ -106,6 +106,7 @@ package War_game
 		
 		
 		public function get_number():int { return number; }
+		public function get_color():int { return color; }
 		
 		
 		public function get_name():String { return unit_name; }

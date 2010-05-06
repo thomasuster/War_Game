@@ -36,6 +36,21 @@ package War_game
 			units = new Object();
 		}
 		
+		/**
+		* Returns XML of the all current units
+		*/
+		public function export_units():XML 
+		{
+			var s:String = "<units>\n";
+			
+			for each(var unit:Unit in units)
+				s += "\t<unit x='" + unit.location.x + "' y='" + unit.location.y + "' number='" + unit.get_number() + "' color='" + unit.get_color() + >" + unit.get_name() + "</unit>\n";
+						
+			s += "</units>\n";
+			var xml:XML = new XML(s);
+			return xml;
+		}
+		
 		public function make_unit(location:Location, type:String, color:String):void
 		{
 			//Add units

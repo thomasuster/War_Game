@@ -217,6 +217,14 @@ public function map_xml():String
 	return board.export_map().toString(); 
 }
 
+/**
+* Board Composition, Add an interface!
+*/
+public function units_xml():String
+{
+	return board.export_units().toString(); 
+}
+
 import mx.core.IFlexDisplayObject;
 import mx.containers.TitleWindow;
 import mx.core.Container;

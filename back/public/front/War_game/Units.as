@@ -44,7 +44,7 @@ package War_game
 			var s:String = "<units>\n";
 			
 			for each(var unit:Unit in units)
-				s += "\t<unit x='" + unit.location.x + "' y='" + unit.location.y + "' number='" + unit.get_number() + "' color='" + unit.get_color() + >" + unit.get_name() + "</unit>\n";
+				s += "\t<unit x='" + unit.location.x + "' y='" + unit.location.y + "' number='" + unit.get_number() + "' color='" + unit.get_color() + "'>" + unit.get_name() + "</unit>\n";
 						
 			s += "</units>\n";
 			var xml:XML = new XML(s);

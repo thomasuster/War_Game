@@ -113,9 +113,14 @@ package War_game
 			this.addChild(screens);
 		}
 		
-		public function export_map():XML 
+		public function export_map():XML
 		{
 			return map.export_map();
+		}
+		
+		public function export_units():XML
+		{
+			return units.export_units();
 		}
 		
 		/**

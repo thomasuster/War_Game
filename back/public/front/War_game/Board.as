@@ -96,12 +96,16 @@ package War_game
 				//Get a map
 				var variables:Object = new Object();
 				variables["game_uuid"] = game_uuid;
-				var request:Request = new Request(variables, "http://localhost:3000/front/get_map", "get");
+				var request:Request = new Request(variables, "http://localhost:3000/front/get_map", "get", "text");
 				request.addEventListener("complete", on_complete);
 				function on_complete(evt:Event):void
 				{
-					//Alert.show("Response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
-					map.load_map(XML(request.get_response()));
+					
+					var response_variables:URLVariables = new URLVariables(request.get_response());
+					map.load_map(XML(response_variables.data));
+					//Alert.show("Response:\n" + response_variables.unit_data);
+					//map.load_map(XML(response_variables["data"]));
+					units.load_units(XML(response_variables.unit_data));
 				}
 				request.load();
 				
@@ -192,7 +196,7 @@ package War_game
 				variables["game_uuid"] = game_uuid;
 				variables["data"] = turn_xml;
 				variables["authenticity_token"] = ExternalInterface.call("get_authenticity_token");
-				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST");
+				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST", "text");
 				request.addEventListener("complete", on_complete);
 				function on_complete(evt:Event):void
 				{

@@ -22,7 +22,10 @@ class FrontController < ApplicationController
 	def get_map
 		g = Game.get_game(params[:game_uuid])
 		m = Map.get_map_data(g[:map_uuid])
-		@data = m[:data]
+		@data = m
+		#@data = m[:data]
+		#@data["unit_data"] = m[:unit_data]
+		#@data = m
 		render :layout => false
 	end
 	

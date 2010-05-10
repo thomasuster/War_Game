@@ -37,6 +37,22 @@ package War_game
 		}
 		
 		/**
+		* Loads the map from given xml
+		*/
+		public function load_units(xml:XML):void 
+		{
+			for each (var unit_data:XML in xml.unit)
+			{
+				var x:int = Number(unit_data.@x);
+				var y:int = Number(unit_data.@y);
+				var color:String = String(unit_data.@color);
+				var type:String = String(unit_data);
+				var l:Location = new Location(x, y);
+				make_unit(l, type, color);
+			}
+		}
+		
+		/**
 		* Returns XML of the all current units
 		*/
 		public function export_units():XML 

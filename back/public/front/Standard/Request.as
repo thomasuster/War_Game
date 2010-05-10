@@ -22,12 +22,14 @@ package Standard
 		private var xml_send_loader:URLLoader;
 		private var xml_url_request:URLRequest;
 		
-		public function Request(_variables:Object, url:String, method:String):void
+		public function Request(_variables:Object, url:String, method:String, response_method:String):void
 		{
 			//Prepare data
 			var variables:URLVariables = new URLVariables();
 			for(var name:String in _variables)
 				variables[name] = _variables[name];
+				
+			//Alert.show(variables.toString());
 			
 			//Action
 			xml_url_request = new URLRequest(url);
@@ -42,7 +44,7 @@ package Standard
 			xml_send_loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, http_status_handler);
 			xml_send_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, security_error_handler);	
 			xml_send_loader.addEventListener(ProgressEvent.PROGRESS, progress_handler);
-			xml_send_loader.dataFormat = URLLoaderDataFormat.TEXT;
+			xml_send_loader.dataFormat = response_method; //URLLoaderDataFormat.TEXT;
 
 			function open_handler(event:Event):void {
 				trace("open_handler: " + event);
@@ -56,7 +58,7 @@ package Standard
 
 			function security_error_handler(event:SecurityErrorEvent):void {
 				trace("security_error_handler: " + event);
-				//Alert.show("security_error_handler: " + event, "Flash",0, Sprite(parentApplication));
+				Alert.show("security_error_handler: " + event);
 			}
 
 			function http_status_handler(event:HTTPStatusEvent):void {

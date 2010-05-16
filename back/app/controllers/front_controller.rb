@@ -13,8 +13,18 @@ class FrontController < ApplicationController
 		g = Game.get_game(params[:game_uuid])
 		m = Map.get_map_data(g[:map_uuid])
 		map.load_map(m[:data])
-		location = War_game::Location.new(0,0)
-		@data = (map.available_moves(location, 3).count == 3)
+		
+		#Current map will contain unit information, unit_data
+		get_current_map
+		#Process moves
+		#require "rexml/document"
+		#include REXML
+		
+		#Process Combat
+		#location = War_game::Location.new(0,0)
+		#@data = (map.available_moves(location, 3).count == 3)
+		
+		@data = params[:turn_xml]
 		
 		render :layout => false
 	end

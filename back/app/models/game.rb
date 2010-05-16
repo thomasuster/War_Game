@@ -18,6 +18,11 @@ class Game < ActiveRecord::Base
 		g = Game.find( :first, :select => 'uuid, name, map_uuid', :conditions => {:uuid => uuid})
 	end
 	
+	# Returns specific game information
+	def self.get_current_map(uuid)
+		g = Game.find( :first, :select => 'current_map', :conditions => {:uuid => uuid})
+	end
+	
 	# Returns basic game information
 	def self.get_games()
 		g = Game.find( :all, :select => 'uuid, name, map_uuid')

@@ -70,8 +70,8 @@ class GamesController < ApplicationController
 	print "\nIt's now " + exp.to_datetime.to_s + "\n"
 	params[:game][:turn_expiration] = exp.to_datetime
 
-	m = Map.find_by_uuid(params[:game][:map_uuid])
-	params[:game][:current_map] = m.data;
+	m = Map.get_unit_data(params[:game][:map_uuid])
+	params[:game][:unit_data] = m.unit_data;
 	
 		@game = Game.new(params[:game])
 

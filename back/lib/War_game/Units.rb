@@ -9,6 +9,17 @@ module War_game
 			@units = Hash.new
 		end
 		
+		#Loads the units from given xml string or file
+		def load_units(doc)
+			doc = Document.new doc
+			doc.elements.each("units/unit") do |unit|
+				l = Location.new(sector.attributes["x"].to_i, sector.attributes["y"].to_i)
+				color = unit.attributes["color"]
+				type = unit.text
+				make_unit(l, type, color);
+			end
+		end
+		
 		def make_unit(location, type, color)
 			unit = Unit.new(type, color)
 			units[location.to_s] = unit

@@ -19,8 +19,8 @@ class Game < ActiveRecord::Base
 	end
 	
 	# Returns specific game information
-	def self.get_current_map(uuid)
-		g = Game.find( :first, :select => 'current_map', :conditions => {:uuid => uuid})
+	def self.get_unit_data(uuid)
+		g = Game.find( :first, :select => 'unit_data', :conditions => {:uuid => uuid})
 	end
 	
 	# Returns basic game information

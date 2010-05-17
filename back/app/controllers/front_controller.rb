@@ -7,15 +7,24 @@ class FrontController < ApplicationController
 	end	
 	
 	def turn
+		#state information
+		map_data = Map.get_map_data(g[:map_uuid])[:data]
+		unit_data = Game.get_unit_data(params[:game_uuid])[:unit_data]
+		
+		#Load game
 		require 'War_game/Map'
 		require 'War_game/Location'
 		map = War_game::Map.new
-		g = Game.get_game(params[:game_uuid])
-		m = Map.get_map_data(g[:map_uuid])
-		map.load_map(m[:data])
+		map.load_map(map_data)
+		map = War_game::Units.new
+		map.load_map(map_data)
+		
+		
+		game = War_game::Map.new(0,0)
+		
 		
 		#Current map will contain unit information, unit_data
-		get_current_map
+		#get_current_map
 		#Process moves
 		#require "rexml/document"
 		#include REXML
@@ -31,8 +40,16 @@ class FrontController < ApplicationController
 	
 	def get_map
 		g = Game.get_game(params[:game_uuid])
-		m = Map.get_map_data(g[:map_uuid])
-		@data = m
+		m = Map.get_data(g[:map_uuid])
+		
+		#p '!\n'
+		#p m
+		#p '!\n'
+		@data = Hash.new
+		@data[:data] = m[:data]
+		g = Game.get_unit_data(params[:game_uuid])
+		@data[:unit_data] = g[:unit_data]
+		
 		#@data = m[:data]
 		#@data["unit_data"] = m[:unit_data]
 		#@data = m

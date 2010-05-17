@@ -9,10 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100516023535) do
+ActiveRecord::Schema.define(:version => 20100517231504) do
 
   create_table "games", :force => true do |t|
-    t.string   "uuid"
     t.string   "owner_uuid"
     t.string   "player_uuid"
     t.datetime "turn_expiration"
@@ -22,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20100516023535) do
     t.integer  "turn_speed_minutes"
     t.string   "name"
     t.binary   "unit_data"
+    t.string   "uuid"
   end
 
   create_table "maps", :force => true do |t|

@@ -52,6 +52,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action'
   map.connect ':controller/:action/:game_uuid'
   
+  
   #Route /war_game to public/front/ etc
   #map.resources :
   #map.war_game '/war_game'

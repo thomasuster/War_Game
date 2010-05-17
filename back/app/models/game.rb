@@ -1,5 +1,7 @@
 class Game < ActiveRecord::Base
 	include UUIDHelper
+	set_primary_key :uuid
+
 	#validates_presence_of :turn_speed
 	#validates_presence_of :map
 
@@ -25,7 +27,7 @@ class Game < ActiveRecord::Base
 	
 	# Returns specific game information
 	def self.get_turn_data(uuid)
-		g = Game.find( :first, :select => 'map_uuid, map_uuid, unit_data', :conditions => {:uuid => uuid})
+		g = Game.find( :first, :select => 'uuid, map_uuid, map_uuid, unit_data', :conditions => {:uuid => uuid})
 	end
 	
 	# Returns basic game information

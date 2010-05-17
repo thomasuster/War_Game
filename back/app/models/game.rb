@@ -23,6 +23,11 @@ class Game < ActiveRecord::Base
 		g = Game.find( :first, :select => 'unit_data', :conditions => {:uuid => uuid})
 	end
 	
+	# Returns specific game information
+	def self.get_turn_data(uuid)
+		g = Game.find( :first, :select => 'map_uuid, map_uuid, unit_data', :conditions => {:uuid => uuid})
+	end
+	
 	# Returns basic game information
 	def self.get_games()
 		g = Game.find( :all, :select => 'uuid, name, map_uuid')

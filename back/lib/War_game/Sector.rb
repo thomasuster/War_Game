@@ -22,19 +22,19 @@ module War_game
 		end
 			
 		def get_infantry_moves() 
-			return @@stats[@sector_name]["infantry_moves"]
+			return @@stats[@sector_name]["infantry_moves"].to_i
 		end
 
 		def get_vehicle_moves() 
-			return @@stats[@sector_name]["vehicle_moves"]
+			return @@stats[@sector_name]["vehicle_moves"].to_i
 		end
 
 		def get_attacking() 
-			return @@stats[@sector_name]["attacking"]
+			return @@stats[@sector_name]["attacking"].to_i
 		end
 
 		def get_defending() 
-			return @@stats[@sector_name]["defending"]
+			return @@stats[@sector_name]["defending"].to_i
 		end
 
 		def to_s() 

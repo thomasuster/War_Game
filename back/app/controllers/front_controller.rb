@@ -8,20 +8,35 @@ class FrontController < ApplicationController
 	
 	def turn
 		#state information
+		g = Game.get_turn_data(params[:game_uuid])
 		map_data = Map.get_map_data(g[:map_uuid])[:data]
-		unit_data = Game.get_unit_data(params[:game_uuid])[:unit_data]
+		unit_data = g[:unit_data]
 		
 		#Load game
 		require 'War_game/Map'
 		require 'War_game/Location'
+		require 'War_game/Turn'
 		map = War_game::Map.new
 		map.load_map(map_data)
-		map = War_game::Units.new
-		map.load_map(map_data)
+		units = War_game::Units.new
+		units.load_units(unit_data)
+		
+		turn = War_game::Turn.new(map,units)
+		@data = Hash.new
 		
 		
-		game = War_game::Map.new(0,0)
+		@data[:units] = turn.process_turn(params[:turn_xml])
+		g.unit_data = units.export_units
+		@data[:output] = g.unit_data
 		
+		#g = Game.update( :first, :select => 'uuid, name, map_uuid', :conditions => {:uuid => uuid})
+		#games.update_attribute(name, value)
+		
+		if g.save
+			p "Updated"
+		else
+			p "Error"
+		end
 		
 		#Current map will contain unit information, unit_data
 		#get_current_map
@@ -33,7 +48,7 @@ class FrontController < ApplicationController
 		#location = War_game::Location.new(0,0)
 		#@data = (map.available_moves(location, 3).count == 3)
 		
-		@data = params[:turn_xml]
+		#@data = params[:turn_xml]
 		
 		render :layout => false
 	end

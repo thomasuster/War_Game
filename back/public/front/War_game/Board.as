@@ -197,10 +197,16 @@ package War_game
 				variables["turn_xml"] = turn_xml;
 				variables["authenticity_token"] = ExternalInterface.call("get_authenticity_token");
 				var request:Request = new Request(variables, "http://localhost:3000/front/turn", "POST", "text");
+				turn_xml = new XML("<turn></turn>");
+				hide();
 				request.addEventListener("complete", on_complete);
 				function on_complete(evt:Event):void
 				{
-					Alert.show("Response:\n" + request.get_response(), "Flash",0, Sprite(parentApplication));
+					
+					var response_variables:URLVariables = new URLVariables(request.get_response());
+					Alert.show("Response:\n" + response_variables.output, "Flash",0, Sprite(parentApplication));
+					units.reset();
+					units.load_units(new XML(response_variables.units));
 				}
 				request.load();
 				 
@@ -261,6 +267,20 @@ package War_game
 		}
 		
 		/**
+		* Unselects the active_unit
+		*/
+		private function screens_click(event:MouseEvent):void
+		{ 
+			hide();
+			screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
+		}
+		private function hide():void
+		{
+			screens.visible = false;
+			active_unit = null;
+		}
+			
+		/**
 		* Reveals secotors the unit is able to move to
 		*/
 		private function show_moves(unit:Unit):void
@@ -269,13 +289,7 @@ package War_game
 			
 			//Hide Screens on move
 			screens.visible = true;
-			screens.addEventListener(flash.events.MouseEvent.MOUSE_DOWN,hide);
-			function hide(event:MouseEvent):void
-			{
-				screens.visible = false;
-				active_unit = null;
-				screens.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hide);
-			}
+			screens.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, screens_click);
 			
 			//Calculate Moves
 			available_moves = map.available_moves(active_unit.location, int(Unit.unit_stats[active_unit.unit_name]["moves"]));

@@ -36,6 +36,14 @@ package War_game
 			units = new Object();
 		}
 		
+		public function reset():void
+		{
+			moves_xml = new XML("<moves></moves>");
+			
+			for each(var unit:Unit in units)
+				destroy_unit(unit.location);
+		}
+		
 		/**
 		* Loads the map from given xml
 		*/
@@ -50,7 +58,7 @@ package War_game
 				var l:Location = new Location(x, y);
 				make_unit(l, type, color);
 			}
-		}
+		}	
 		
 		/**
 		* Returns XML of the all current units

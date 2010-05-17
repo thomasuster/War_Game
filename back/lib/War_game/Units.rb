@@ -13,22 +13,33 @@ module War_game
 		def load_units(doc)
 			doc = Document.new doc
 			doc.elements.each("units/unit") do |unit|
-				l = Location.new(sector.attributes["x"].to_i, sector.attributes["y"].to_i)
+				l = Location.new(unit.attributes["x"].to_i, unit.attributes["y"].to_i)
 				color = unit.attributes["color"]
 				type = unit.text
 				make_unit(l, type, color);
 			end
 		end
 		
+		#Returns XML of the all current units
+		def export_units()
+			s = "<units>\n"
+			@units.each_value do |unit|
+				s += "\t<unit x='" + unit.location.x.to_s + "' y='" + unit.location.y.to_s + "' number='" + unit.get_number.to_s + "' color='" + unit.get_color + "'>" + unit.get_name + "</unit>\n";
+			end
+			s += "</units>\n"
+			return s
+		end
+		
 		def make_unit(location, type, color)
-			unit = Unit.new(type, color)
+			unit = Unit.new(type, color, location)
 			units[location.to_s] = unit
 		end
 		
 		def move_unit(unit, location)
-			#trace(location.x + " | " + location.y);
 			units[location.to_s] = unit
-			units.delete(unit.location)
+			p "deleting #{unit.location.to_s} " 
+			p "adding #{location.to_s} " 
+			units.delete(unit.location.to_s) { |el| "#{el} not found" }
 			unit.location = location
 		end
 		
@@ -37,7 +48,7 @@ module War_game
 		end
 		
 		def get_unit(location)
-			units[location]
+			units[location.to_s]
 		end
 		
 		

@@ -1,6 +1,6 @@
 require 'War_game/Location'
-require 'War_game/Sector.rb'
-require 'War_game/Hexagon_grid.rb'
+require 'War_game/Sector'
+require 'War_game/Hexagon_grid'
 require "rexml/document"
 include REXML
 
@@ -55,7 +55,7 @@ module War_game
 			
 			sector = @map[location.to_s];
 			difficulty = sector.get_infantry_moves()
-			new_distance = distance-difficulty.to_i;
+			new_distance = distance-difficulty;
 			
 			#Special unmovable case
 			return if (difficulty == -1)

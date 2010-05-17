@@ -10,6 +10,7 @@ module War_game
 			map.load_xml("../public/front/maps/river.xml")
 			location = Location.new(0,0)
 			assert_equal(3, map.available_moves(location, 3).count)
+			assert_equal(7, map.available_moves(location, 6).count)
 		end
 
 	end

@@ -12,6 +12,10 @@ module War_game
 			@map = Hash.new
 		end
 		
+		def get_sector(location)
+			return @map[location.to_s];
+		end
+		
 		#Loads the map xml file, calls load_map with files contents
 		def load_xml(xml_url)
 			file = File.new(xml_url)

@@ -19,7 +19,7 @@ module War_game
 			end
 			
 			#Dynamic Stats
-			@number = @@stats[unit_name]["number"];
+			@number = @@stats[unit_name]["number"].to_i;
 		end
 		
 		def get_name() return @unit_name end

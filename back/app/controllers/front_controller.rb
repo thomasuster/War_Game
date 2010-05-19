@@ -27,7 +27,7 @@ class FrontController < ApplicationController
 		
 		@data[:units] = turn.process_turn(params[:turn_xml])
 		g.unit_data = units.export_units
-		@data[:output] = g.unit_data
+		@data[:output] = params[:turn_xml]
 		
 		#g = Game.update( :first, :select => 'uuid, name, map_uuid', :conditions => {:uuid => uuid})
 		#games.update_attribute(name, value)

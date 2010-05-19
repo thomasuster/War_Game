@@ -8,7 +8,7 @@ module War_game
 			
 		end
 		
-		def distance(location_a, location_b)
+		def self.distance(location_a, location_b)
 			delta_x = (location_a.x - location_b.x).abs
 			delta_y = (location_a.y - location_b.y).abs
 			

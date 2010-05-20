@@ -54,9 +54,10 @@ package War_game
 				var x:int = Number(unit_data.@x);
 				var y:int = Number(unit_data.@y);
 				var color:String = String(unit_data.@color);
+				var number:int = int(unit_data.@number);
 				var type:String = String(unit_data);
 				var l:Location = new Location(x, y);
-				make_unit(l, type, color);
+				make_unit(l, type, color, number);
 			}
 		}	
 		
@@ -75,10 +76,10 @@ package War_game
 			return xml;
 		}
 		
-		public function make_unit(location:Location, type:String, color:String):void
+		public function make_unit(location:Location, type:String, color:String, number:int):void
 		{
 			//Add units
-			var unit:Unit = new Unit(type, color, image_resource.duplicate_image(type), location);
+			var unit:Unit = new Unit(type, color, number, image_resource.duplicate_image(type), location);
 			//trace("START");
 			units[location] = unit;
 			//trace("END");

@@ -16,7 +16,8 @@ module War_game
 				l = Location.new(unit.attributes["x"].to_i, unit.attributes["y"].to_i)
 				color = unit.attributes["color"]
 				type = unit.text
-				make_unit(l, type, color);
+				number = unit.attributes["number"]
+				make_unit(l, type, color, number);
 			end
 		end
 		
@@ -30,8 +31,8 @@ module War_game
 			return s
 		end
 		
-		def make_unit(location, type, color)
-			unit = Unit.new(type, color, location)
+		def make_unit(location, type, color, number)
+			unit = Unit.new(location, type, color, number)
 			units[location.to_s] = unit
 		end
 		

@@ -8,7 +8,7 @@ module War_game
 		attr_accessor :unit_name
 		STATS_XML = "C:/Users/thomasuster/War_game/back/public/front/stats/units.xml"
 		
-		def initialize(unit_name, color, location)
+		def initialize(location, unit_name, color, number)
 			super(location)
 			@unit_name = unit_name
 			@color = color
@@ -19,7 +19,8 @@ module War_game
 			end
 			
 			#Dynamic Stats
-			@number = @@stats[unit_name]["number"].to_i;
+			@number = number.to_i
+			#@number = @@stats[unit_name]["number"].to_i;
 		end
 		
 		def get_name() return @unit_name end

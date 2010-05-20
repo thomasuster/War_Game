@@ -8,7 +8,7 @@ module War_game
 		def test_sector_stats
 			unit_name = "engineer"
 			location = Location.new(0,0)
-			unit = Unit.new(unit_name, "red", location)
+			unit = Unit.new(unit_name, "red", location, 5)
 			p unit.get_name
 			p unit.get_number
 			p unit.get_type

@@ -29,7 +29,7 @@ package War_game
 		private var color:String;
 		private static var colors:Object;
 		
-		public function Unit(_unit_name:String="empty", _color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
+		public function Unit(_unit_name:String="empty", _color:String="red", _number:int=-1, new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);
 			unit_name = _unit_name;
@@ -77,7 +77,12 @@ package War_game
             bitmap.filters = filters;
 			
 			//Dynamic Stats
-			number = int(unit_stats[unit_name]["number"]);
+			if(_number == -1)
+				number = int(unit_stats[unit_name]["number"]);
+			else 
+			{
+				number = _number;
+			}
 			
 			//Text
 			number_label = new TextField();

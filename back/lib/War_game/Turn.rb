@@ -48,8 +48,8 @@ module War_game
 			tapped_units = Hash.new
 			
 			xml.elements.each("turn/combat") do |combat|
-				attacker_l = Location.new(combat.elements["attacker"].attributes["x"], combat.elements["attacker"].attributes["y"])
-				defender_l = Location.new(combat.elements["defender"].attributes["x"], combat.elements["defender"].attributes["y"])
+				attacker_l = Location.new(combat.elements["attacker"].attributes["x"].to_i, combat.elements["attacker"].attributes["y"].to_i)
+				defender_l = Location.new(combat.elements["defender"].attributes["x"].to_i, combat.elements["defender"].attributes["y"].to_i)
 				
 				attacker = @units.get_unit(attacker_l)
 				defender = @units.get_unit(defender_l)

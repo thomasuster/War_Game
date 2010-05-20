@@ -155,7 +155,7 @@ package War_game
 					break;
 				case "unit":
 					//make_unit(event.sector.location, tool);
-					units.make_unit(event.sector.location, tool, color_mode);
+					units.make_unit(event.sector.location, tool, color_mode, -1);
 					break;
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);

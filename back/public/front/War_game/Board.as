@@ -25,6 +25,7 @@ package War_game
 	import War_game.Location;
 	import War_game.Map;
 	import War_game.Units;
+	import War_game.Structures;
 	import War_game.Sector_event;
 	import War_game.Combat;
 	import flash.external.ExternalInterface;
@@ -50,6 +51,7 @@ package War_game
 		private var active_unit:Unit;
 		private var screens:Screens;
 		private var map:Map;
+		private var structures:Structures;
 		private var units:Units;
 		private var image_resource:Image_resource;
 		private var game_uuid:String;
@@ -88,6 +90,8 @@ package War_game
 			map.addEventListener(Sector_event.CLICKED, use_tool);
 			units = new Units(image_resource);
 			units.addEventListener(Unit_event.CLICKED, select_unit);
+			structures = new Structures(image_resource);
+			structures.addEventListener("clicked", select_structure);
 			screens = new Screens(sizeX, sizeY, image_resource);
 			
 			image_resource.addEventListener("loaded", completeHandler);
@@ -113,6 +117,7 @@ package War_game
 			}
 			
 			this.addChild(map);
+			this.addChild(structures);
 			this.addChild(units);
 			this.addChild(screens);
 		}
@@ -154,8 +159,10 @@ package War_game
 					}
 					break;
 				case "unit":
-					//make_unit(event.sector.location, tool);
 					units.make_unit(event.sector.location, tool, color_mode, -1);
+					break;
+				case "structure":
+					structures.make_structure(event.sector.location, tool, color_mode);
 					break;
 				case "move_unit":
 					//trace("Moved to " + x + " " + y);
@@ -174,6 +181,15 @@ package War_game
 			}
 		}
 		
+		/**
+		* Selects a structure, for building units
+		*/
+		private function select_structure(event:Unit_event):void
+		{
+			//init
+			var unit:Unit = event.unit;
+			Alert.show("What would you like to build?");
+		}
 		/**
 		* Selects a unit, for moving/attacking
 		*/

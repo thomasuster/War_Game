@@ -75,6 +75,18 @@ private var infantry_menu:XMLList =
 			<menuitem label="Sniper" data="sniper"/>
 		</menuitem>
 	</>;
+
+[Bindable]
+public var structure_collection:XMLListCollection;
+private var structure_menu:XMLList =
+	<>
+		<menuitem label="Structure Menu" data="top">
+			<menuitem label="Headquarters" data="headquarters"/>
+			<menuitem label="Barracks" data="barracks"/>
+			<menuitem label="Armory" data="armory"/>
+			<menuitem label="Tank Depot" data="tank_depot"/>
+		</menuitem>
+	</>;
 	
 [Bindable]
 public var vehicle_collection:XMLListCollection;
@@ -135,6 +147,7 @@ private function initCollections():void
 	game_collection = new XMLListCollection(game_menu);
 	map_collection = new XMLListCollection(map_menu);
 	color_collection = new XMLListCollection(color_menu);
+	structure_collection = new XMLListCollection(structure_menu);
 	infantry_collection = new XMLListCollection(infantry_menu);
 	vehicle_collection = new XMLListCollection(vehicle_menu);
 	temp_collection = new XMLListCollection(temp_menu);
@@ -167,6 +180,16 @@ private function color_menu_Handler(event:MenuEvent):void
 }
 
 /**
+* Event handler for the structure_menu control's itemClick event.
+*/
+private function structure_menu_Handler(event:MenuEvent):void 
+{
+	var s:String = event.item.@data;
+	board.mode = "structure";
+	board.tool = s;
+}
+
+/**
 * Event handler for the infantry_menu control's itemClick event.
 */
 private function unit_menu_Handler(event:MenuEvent):void 
@@ -174,7 +197,6 @@ private function unit_menu_Handler(event:MenuEvent):void
 	var s:String = event.item.@data;
 	board.mode = "unit";
 	board.tool = s;
-	board.tool
 }
 
 /**

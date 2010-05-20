@@ -31,6 +31,9 @@
 	
 	<mx:MenuBar labelField="@label" itemClick="color_menu_Handler(event);" 
 		dataProvider="{color_collection}" />
+	
+	<mx:MenuBar labelField="@label" itemClick="structure_menu_Handler(event);" 
+		dataProvider="{structure_collection}" />
 		
 	<mx:MenuBar labelField="@label" itemClick="unit_menu_Handler(event);" 
 		dataProvider="{infantry_collection}" />

@@ -1,5 +1,14 @@
 package War_game
 {	
+	import flash.geom.Matrix;
+	import flash.text.TextField;
+	import flash.utils.Dictionary;
+	import flash.display.BitmapData;
+	import flash.text.TextFormat;
+	import flash.filters.ColorMatrixFilter;
+	
+	import Standard.Conversion;
+	
 	import War_game.Board_object;
 	
 	public class Colored extends Board_object
@@ -8,7 +17,7 @@ package War_game
 		private var color:String;
 		private static var colors:Object;
 		
-		public function Unit(_color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
+		public function Colored(_color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(new_bitmapData, new_location);
 			color = _color;

@@ -12,6 +12,13 @@
 		<i name = "hill">hill.png</i>
 	</directory>
 	
+	<directory url = "images/structures/">
+		<i name = "headquarters">headquarters.png</i>
+		<i name = "barracks">barracks.png</i>
+		<i name = "armory">armory.png</i>
+		<i name = "tank_depot">tank_depot.png</i>
+	</directory>
+	
 	<directory url = "images/units/infantry/">
 		<i name = "engineer">engineer.png</i>
 		<i name = "at_team">at_team.png</i>

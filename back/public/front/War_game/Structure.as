@@ -1,5 +1,6 @@
 package War_game
 {	
+	import flash.display.BitmapData;
 	import War_game.Colored;
 	import War_game.Stats;
 	
@@ -13,7 +14,7 @@ package War_game
 		
 		public var structure_name:String;
 		
-		public function Unit(_structure_name:String="empty", _color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
+		public function Structure(_structure_name:String="empty", _color:String="red", new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
 			super(_color, new_bitmapData, new_location);
 			structure_name = _structure_name;

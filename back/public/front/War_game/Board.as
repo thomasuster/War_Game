@@ -107,6 +107,7 @@ package War_game
 					
 					var response_variables:URLVariables = new URLVariables(request.get_response());
 					map.load_map(XML(response_variables.data));
+					structures.load_structures(XML(response_variables.structure_data));
 					//Alert.show("Response:\n" + response_variables.unit_data);
 					//map.load_map(XML(response_variables["data"]));
 					units.load_units(XML(response_variables.unit_data));

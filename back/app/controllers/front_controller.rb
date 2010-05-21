@@ -64,6 +64,7 @@ class FrontController < ApplicationController
 		@data[:data] = m[:data]
 		g = Game.get_unit_data(params[:game_uuid])
 		@data[:unit_data] = g[:unit_data]
+		@data[:structure_data] = m[:structure_data]
 		
 		#@data = m[:data]
 		#@data["unit_data"] = m[:unit_data]

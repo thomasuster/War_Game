@@ -2,6 +2,7 @@ package War_game
 {
 	import adobe.utils.XMLUI;
 	import flash.display.Sprite;
+	import flash.ui.KeyLocation;
 	
 	import mx.core.UIComponent;
 	
@@ -27,6 +28,7 @@ package War_game
 	import War_game.Units;
 	import War_game.Structures;
 	import War_game.Sector_event;
+	import War_game.Location_event;
 	import War_game.Combat;
 	import flash.external.ExternalInterface;
 	import mx.controls.Alert;
@@ -91,7 +93,7 @@ package War_game
 			units = new Units(image_resource);
 			units.addEventListener(Unit_event.CLICKED, select_unit);
 			structures = new Structures(image_resource);
-			structures.addEventListener("clicked", select_structure);
+			structures.addEventListener(Location_event.CLICKED, select_structure);
 			screens = new Screens(sizeX, sizeY, image_resource);
 			
 			image_resource.addEventListener("loaded", completeHandler);
@@ -190,14 +192,15 @@ package War_game
 		/**
 		* Selects a structure, for building units
 		*/
-		private function select_structure(event:Event):void
+		private function select_structure(location_event:Location_event):void
 		{
 			//init
-			//var unit:Unit = event.unit;
+			var location:Location = location_event.location;
 			
 			if (active_unit != null)
 			{
 				Alert.show("Capture?");
+				units.move_unit(active_unit, location);
 			}
 			else
 			{

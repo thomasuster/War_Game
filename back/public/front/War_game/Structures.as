@@ -16,6 +16,7 @@ package War_game
 	import Standard.Image_resource;
 	
 	import War_game.Location;
+	import War_game.Location_event;
 	
 	import mx.controls.Alert;
 	
@@ -89,7 +90,7 @@ package War_game
 			structure.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, move);
 			function move(event:MouseEvent):void
 			{
-				dispatchEvent(new Event("clicked"));
+				dispatchEvent(new Location_event(location, Location_event.CLICKED));
 			}
 		}
 		

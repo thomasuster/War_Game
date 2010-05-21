@@ -1,18 +1,14 @@
 package War_game
 {
-	import flash.geom.Matrix;
-	import flash.text.TextField;
-	import flash.utils.Dictionary;
 	import flash.display.BitmapData;
-	import flash.text.TextFormat;
-	import flash.filters.ColorMatrixFilter;
-	
-	import Standard.Conversion;
-	
-	import War_game.Board_object;
+	import War_game.Colored;
 	import War_game.Stats;
 	
-	public class Unit extends Board_object
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+
+	
+	public class Unit extends Colored
 	{
 		//Static Stats
 		[Embed(source = "/stats/units.xml", mimeType="application/octet-stream")]
@@ -25,15 +21,10 @@ package War_game
 		private var number_label:TextField;
 		public var number:int;
 		
-		//Color
-		private var color:String;
-		private static var colors:Object;
-		
 		public function Unit(_unit_name:String="empty", _color:String="red", _number:int=-1, new_bitmapData:BitmapData = null, new_location:Location=null):void
 		{
-			super(new_bitmapData, new_location);
+			super(_color, new_bitmapData, new_location);
 			unit_name = _unit_name;
-			color = _color;
 			
 			//trace("unit_name = " + unit_name);
 			
@@ -43,38 +34,6 @@ package War_game
 				stats = new Stats(stats_xml);
 				unit_stats = stats.hash;
 			}
-			
-			//Colors
-			if (colors == null)
-			{
-				colors = new Object();
-				colors["red"] = 0xFF0000;
-				colors["purple"] = 0x9D00E4;
-				colors["orange"] = 0xFF7700;
-				colors["yellow"] = 0xFFFF00;
-				colors["green"] = 0x00FF00;
-				colors["teal"] = 0x00FFFF;
-				colors["blue"] = 0x0000FF;
-				colors["pink"] = 0xFF00FF;
-			}
-			//trace(Conversion.to_hex_string(0xFF0000));
-			//trace(Conversion.rgb_color(colors[color], "red"));
-			//trace(Conversion.rgb_color(colors[color], "green"));
-			//trace(Conversion.rgb_color(colors[color], "blue"));
-			//trace("color = " + color);
-			//var child:DisplayObject = DisplayObject(event.target.loader);
-			var matrix:Array = new Array();
-			var red:Number = Conversion.rgb_color(colors[color], "red")/255.0;
-			var green:Number = Conversion.rgb_color(colors[color], "green")/255.0;
-			var blue:Number = Conversion.rgb_color(colors[color], "blue")/255.0;
-            matrix = matrix.concat([red, 0, 0, 0, 0]); // red
-            matrix = matrix.concat([0, green, 0, 0, 0]); // green
-            matrix = matrix.concat([0, 0, blue, 0, 0]); // blue
-            matrix = matrix.concat([0, 0, 0, 1, 0]); // alpha
-			var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
-			var filters:Array = new Array();
-            filters.push(filter);
-            bitmap.filters = filters;
 			
 			//Dynamic Stats
 			if(_number == -1)
@@ -111,7 +70,6 @@ package War_game
 		
 		
 		public function get_number():int { return number; }
-		public function get_color():String { return color; }
 		
 		
 		public function get_name():String { return unit_name; }

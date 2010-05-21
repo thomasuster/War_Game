@@ -23,6 +23,7 @@ package War_game
 	public class Units extends Sprite
 	{	
 		private var units:Object;
+		private var moved_units:Dictionary;
 		private var image_resource:Image_resource;
 		
 		private var moves_xml:XML;
@@ -34,12 +35,13 @@ package War_game
 			
 			image_resource = _image_resource;
 			units = new Object();
+			moved_units = new Dictionary();
 		}
 		
 		public function reset():void
 		{
 			moves_xml = new XML("<moves></moves>");
-			
+			moved_units = new Dictionary();
 			for each(var unit:Unit in units)
 				destroy_unit(unit.location);
 		}
@@ -95,15 +97,23 @@ package War_game
 		
 		public function move_unit(unit:Unit, location:Location):void
 		{
-			var start:String = "<start x=\"" + unit.location.x + "\" y=\"" + unit.location.y + "\"></start>";
-			var end:String = "<end x=\"" + location.x + "\" y=\"" + location.y + "\"></end>";
-			moves_xml.appendChild(new XML("<move>"+start+end+"</move>"));
-			
-			//Alert.show(moves_xml);
-			trace(location.x + " | " + location.y);
-			units[location] = unit;
-			delete units[unit.location];
-			unit.set_location(location);
+			if (moved_units[unit] == null)
+			{
+				moved_units[unit] = unit;
+				var start:String = "<start x=\"" + unit.location.x + "\" y=\"" + unit.location.y + "\"></start>";
+				var end:String = "<end x=\"" + location.x + "\" y=\"" + location.y + "\"></end>";
+				moves_xml.appendChild(new XML("<move>"+start+end+"</move>"));
+				
+				//Alert.show(moves_xml);
+				trace(location.x + " | " + location.y);
+				units[location] = unit;
+				delete units[unit.location];
+				unit.set_location(location);
+			}
+			else
+			{
+				Alert.show("Already moved that unit this turn.")
+			}
 		}
 		
 		public function destroy_unit(location:Location):void

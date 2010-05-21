@@ -79,13 +79,15 @@ class FrontController < ApplicationController
 		params[:map][:players] = params["players"]
 		params[:map][:data] = params["data"]
 		params[:map][:unit_data] = params["unit_data"]
+		params[:map][:structure_data] = params["structure_data"]
 		
 		if true
 			@map = Map.new(params[:map])
 			
 			if @map.save
 				#@response = "Map added to database.";
-				@response = params[:map][:unit_data]
+				#@response = params[:map][:unit_data]
+				@response = params[:map][:structure_data]
 			else
 				@response = "Map failed to be added to database.";
 			end

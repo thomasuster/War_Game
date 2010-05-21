@@ -234,11 +234,18 @@ private function export_map_click(event:MouseEvent):void
 /**
 * Board Composition, Add an interface!
 */
+public function structures_xml():String
+{
+	return board.export_structures().toString(); 
+}
+
+/**
+* Board Composition, Add an interface!
+*/
 public function map_xml():String
 {
 	return board.export_map().toString(); 
 }
-
 /**
 * Board Composition, Add an interface!
 */

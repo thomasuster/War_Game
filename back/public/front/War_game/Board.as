@@ -132,6 +132,11 @@ package War_game
 			return units.export_units();
 		}
 		
+		public function export_structures():XML
+		{
+			return structures.export_structures();
+		}
+		
 		/**
 		* Let's the user place sectors, units, or move units
 		*/

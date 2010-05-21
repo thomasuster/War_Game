@@ -14,7 +14,7 @@ class Map < ActiveRecord::Base
 	end
 	
 	def self.get_map_data(uuid)
-		m = Map.find( :first,  :conditions => { :uuid => uuid}, :select => 'data, unit_data')
+		m = Map.find( :first,  :conditions => { :uuid => uuid}, :select => 'data, unit_data, map_data')
 	end
 	
 	def self.get_unit_data(uuid)

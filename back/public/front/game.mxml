@@ -17,7 +17,7 @@
 	
 	<mx:Label id="expiration" text="Expires in 23 hours"/>
 	
-	<mx:Button label="temp7"/>
+	<mx:Button label="temp 1"/>
 	
 	<mx:Button label="Export Map" click="export_map_click(event)"/>
 	

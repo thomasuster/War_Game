@@ -68,7 +68,7 @@ package War_game
 			var s:String = "<structures>\n";
 			
 			for each(var structure:Structure in structures)
-				s += "\t<structure x='" + structure.location.x + "' y='" + structure.location.y + "' ' color='" + structure.get_color() + "'>" + structure.get_name() + "</structure>\n";
+				s += "\t<structure x='" + structure.location.x + "' y='" + structure.location.y + "' color='" + structure.get_color() + "'>" + structure.get_name() + "</structure>\n";
 						
 			s += "</structures>\n";
 			var xml:XML = new XML(s);

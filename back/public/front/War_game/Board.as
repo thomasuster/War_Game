@@ -184,11 +184,19 @@ package War_game
 		/**
 		* Selects a structure, for building units
 		*/
-		private function select_structure(event:Unit_event):void
+		private function select_structure(event:Event):void
 		{
 			//init
-			var unit:Unit = event.unit;
-			Alert.show("What would you like to build?");
+			//var unit:Unit = event.unit;
+			
+			if (active_unit != null)
+			{
+				Alert.show("Capture?");
+			}
+			else
+			{
+				Alert.show("What would you like to build?");
+			}
 		}
 		/**
 		* Selects a unit, for moving/attacking

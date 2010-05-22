@@ -93,7 +93,7 @@ package War_game
 			units = new Units(image_resource);
 			units.addEventListener(Unit_event.CLICKED, select_unit);
 			structures = new Structures(image_resource);
-			structures.addEventListener(Location_event.CLICKED, select_structure);
+			//structures.addEventListener(Location_event.CLICKED, select_structure);
 			screens = new Screens(sizeX, sizeY, image_resource);
 			
 			image_resource.addEventListener("loaded", completeHandler);

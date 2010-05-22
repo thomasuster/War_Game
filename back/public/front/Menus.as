@@ -210,6 +210,7 @@ private function temp_menu_Handler(event:MenuEvent):void
 import mx.events.ModuleEvent;
 import mx.modules.ModuleManager;
 import mx.modules.IModuleInfo;
+import mx.modules.Module;
 
 public var info:IModuleInfo;
 
@@ -220,7 +221,6 @@ private function export_map_click(event:MouseEvent):void
 {
 	import flash.system.SecurityDomain;
 	
-	//info = ModuleManager.getModule("http://localhost:3000/front/modules/export_map.swf?map="+map);
 	info = ModuleManager.getModule("export_map.swf");
 	info.addEventListener(ModuleEvent.READY, show_export_map);
 	info.addEventListener(ModuleEvent.ERROR, export_error);
@@ -229,6 +229,20 @@ private function export_map_click(event:MouseEvent):void
 	function export_error(e:ModuleEvent):void {
 		Alert.show("Error: " + e.errorText);
 	}
+}
+
+/**
+* Popups export_map module
+*/
+private function show_export_map(e:ModuleEvent):void
+{
+	var prompt:Module = info.factory.create() as Module;
+	prompt.addEventListener(Module_event.COMPLETE, function():void {
+		PopUpManager.removePopUp(prompt);
+	});
+	
+	PopUpManager.addPopUp(prompt, this, true);
+	PopUpManager.centerPopUp(prompt);
 }
 
 /**
@@ -254,26 +268,6 @@ public function units_xml():String
 	return board.export_units().toString(); 
 }
 
-import mx.core.IFlexDisplayObject;
-import mx.containers.TitleWindow;
-import mx.core.Container;
-import mx.modules.Module;
 
-private var prompt:Module;
-
-/**
-* Popups export_map module
-*/
-private function show_export_map(e:ModuleEvent):void
-{
-	prompt = info.factory.create() as Module;
-	prompt.addEventListener(Module_event.COMPLETE, function():void {
-		PopUpManager.removePopUp(prompt);
-		
-	});
-	
-	PopUpManager.addPopUp(prompt, this, true);
-	PopUpManager.centerPopUp(prompt);
-}
 
 
